@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Humanoid Bridal Walk — Design Versions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-hi: #f0dca0;
+      --ink: #ece7da;
+      --bg: #0a0a0f;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .status-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+    }
+
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(236, 231, 218, 0.5);
+      margin-bottom: 3rem;
+    }
+
+    .gold-line {
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      margin: 2rem auto 3rem;
+    }
+
+    .versions {
+      display: grid;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .version-link {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem;
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .version-link:hover {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.03);
+    }
+
+    .version-link:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .version-link .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .version-link .name {
+      font-size: 1.6rem;
+      font-weight: 400;
+    }
+
+    .version-link .desc {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(236, 231, 218, 0.4);
+      margin-left: auto;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(236, 231, 218, 0.25);
+      text-align: center;
+      line-height: 2;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .reveal:nth-child(1) { animation-delay: 0s; }
+    .reveal:nth-child(2) { animation-delay: 0.1s; }
+    .reveal:nth-child(3) { animation-delay: 0.2s; }
+    .reveal:nth-child(4) { animation-delay: 0.3s; }
+    .reveal:nth-child(5) { animation-delay: 0.35s; }
+    .reveal:nth-child(6) { animation-delay: 0.4s; }
+    .reveal:nth-child(7) { animation-delay: 0.45s; }
+    .reveal:nth-child(8) { animation-delay: 0.5s; }
+    .reveal:nth-child(9) { animation-delay: 0.55s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .version-link {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.2rem 1.5rem;
+      }
+      .version-link .desc {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="status-bar">
+    <span>GENESIS NODE · FOREST CITY, MY</span>
+    <span>26.06.26 — 18:00 MYT</span>
+  </div>
+
+  <main style="text-align: center; width: 100%; max-width: 700px;">
+    <p class="kicker reveal">WORLD'S FIRST</p>
+    <h1 class="reveal">First Humanoid Bridal Walk</h1>
+    <p class="subtitle reveal">Humanoid Bride Escort & Aisle Walk</p>
+    <div class="gold-line reveal"></div>
+
+    <nav class="versions" aria-label="Design versions">
+      <a href="/v1/" class="version-link reveal">
+        <span class="num">V1</span>
+        <span class="name">Terminal-Luxury</span>
+        <span class="desc">Dark · Gold · Struck Metal</span>
+      </a>
+      <a href="/v2/" class="version-link reveal">
+        <span class="num">V2</span>
+        <span class="name">Editorial Mint</span>
+        <span class="desc">Warm Paper · Magazine Grid</span>
+      </a>
+      <a href="/v3/" class="version-link reveal">
+        <span class="num">V3</span>
+        <span class="name">Monument</span>
+        <span class="desc">Cinematic · Minimal · Hero Coin</span>
+      </a>
+      <a href="/v4/" class="version-link reveal">
+        <span class="num">V4</span>
+        <span class="name">Swiss Minimal</span>
+        <span class="desc">Grid · Rational · Red Accent</span>
+      </a>
+      <a href="/v5/" class="version-link reveal">
+        <span class="num">V5</span>
+        <span class="name">Holographic Future</span>
+        <span class="desc">Iridescent · Glass · Sci-Fi</span>
+      </a>
+    </nav>
+
+    <div class="footer reveal">
+      NETWORK SCHOOL · GENESIS NODE · BLOCK 0<br>
+      First Humanoid Bridal Walk — 26 June 2026
+    </div>
+  </main>
+</body>
+</html>
