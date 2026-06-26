@@ -287,6 +287,24 @@ body {
   margin: 0 auto;
 }
 
+.event-couple {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--ink-dim);
+  margin-top: 24px;
+}
+
+.event-couple a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-dim);
+  transition: border-color 0.3s ease;
+}
+
+.event-couple a:hover {
+  border-color: var(--gold);
+}
+
 /* Gold separator */
 .gold-rule {
   width: 80px;
@@ -492,7 +510,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 40px;
-  perspective: 1000px;
+  perspective: 800px;
 }
 
 .coin-3d {
@@ -500,19 +518,24 @@ body {
   height: 320px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
-  animation: coin-idle-wobble 6s ease-in-out infinite, coin-glow 5s ease infinite;
   border-radius: 50%;
+  /* Smooth but fast response to mouse — no animation fighting */
+  transition: transform 0.1s ease-out;
+  animation: coin-glow 5s ease infinite;
 }
 
-.coin-3d.flipped { transform: rotateY(180deg); animation: coin-glow 5s ease infinite; }
+/* Only slow transition when flipping on click */
+.coin-3d.flipping {
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
 .coin-3d-face {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -532,22 +555,32 @@ body {
   width: 100%; height: 100%;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
   mix-blend-mode: overlay;
   z-index: 2;
+  transition: background 0.1s ease-out;
+}
+
+/* Rim edge for thickness */
+.coin-3d::after {
+  content: '';
+  position: absolute;
+  top: 1%; left: 1%;
+  width: 98%; height: 98%;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.12);
+  pointer-events: none;
+  z-index: 3;
 }
 
 .coin-3d-shadow {
-  position: absolute;
-  bottom: -18px;
-  left: 10%;
-  width: 80%;
-  height: 24px;
-  background: radial-gradient(ellipse at center, rgba(0,212,255,0.12) 0%, transparent 70%);
+  width: 280px;
+  height: 20px;
+  margin-top: 20px;
+  background: radial-gradient(ellipse at center, rgba(0,212,255,0.15) 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(10px);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  z-index: -1;
+  filter: blur(12px);
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
 
 .coin-3d-label {
@@ -556,7 +589,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  margin-top: 28px;
+  margin-top: 16px;
   user-select: none;
 }
 
@@ -566,7 +599,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .coin-inscriptions {
@@ -779,6 +812,7 @@ footer .footer-title {
       <h1 class="event-title">First Humanoid<br>Bridal Walk</h1>
       <p class="event-subtitle">Humanoid Bride Escort & Aisle Walk</p>
       <p class="event-lede">"The first time in recorded history a humanoid robot escorted a bride down the aisle — standing in for the family who could not cross the distance."</p>
+      <p class="event-couple">At the wedding of <a href="https://krisandsonia.com" target="_blank" rel="noopener">Kris &amp; Sonia</a></p>
     </section>
 
     <div class="gold-rule reveal"></div>
@@ -863,6 +897,8 @@ footer .footer-title {
         <dd>FIRST HUMANOID / BRIDE ESCORT</dd>
         <dt>Reverse Ring</dt>
         <dd>K · GENESIS NODE · FIRST WEDDING · S · XXVI · VI · XXVI</dd>
+        <dt>K &amp; S</dt>
+        <dd><a href="https://krisandsonia.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dim)">Kris &amp; Sonia</a></dd>
       </dl>
 
       <div class="coin-specs">
@@ -944,71 +980,144 @@ footer .footer-title {
   tick();
   setInterval(tick, 1000);
 
-  // ── 3D COIN ──
+  // ── 3D COIN — fully interactive mouse tracking ──
   var coin3d = document.getElementById('coin3d');
   var coin3dShine = document.getElementById('coin3d-shine');
   var coin3dShadow = document.getElementById('coin3d-shadow');
   var coin3dFaceLabel = document.getElementById('coin3d-face-label');
   var coin3dFlipLabel = document.getElementById('coin3d-flip-label');
+  var coin3dContainer = document.getElementById('coin3d-container');
   var coinFlipped = false;
-  var coinTiltActive = true;
+  var isFlipping = false;
+  var mouseOver = false;
+  var currentTiltX = 0;
+  var currentTiltY = 0;
   var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
   if (isTouchDevice && coin3dFlipLabel) coin3dFlipLabel.textContent = 'Tap to flip';
 
+  // Set initial gentle idle tilt
+  var idleAngle = 0;
+  var idleRAF;
+  function idleWobble() {
+    if (mouseOver || isFlipping) return;
+    idleAngle += 0.008;
+    var wobbleX = Math.sin(idleAngle) * 5;
+    var wobbleY = Math.cos(idleAngle * 0.7) * 5;
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (base + wobbleY) + 'deg) rotateX(' + wobbleX + 'deg)';
+    // Subtle shadow movement
+    coin3dShadow.style.transform = 'translateX(' + (-wobbleY * 0.6) + 'px) scaleY(' + (0.8 + Math.abs(wobbleX) * 0.015) + ')';
+    idleRAF = requestAnimationFrame(idleWobble);
+  }
+  idleWobble();
+
+  // Click to flip
   window.flipCoin = function() {
     coinFlipped = !coinFlipped;
-    coin3d.classList.toggle('flipped', coinFlipped);
-    coin3d.style.animation = coinFlipped ? 'coin-glow 5s ease infinite' : 'coin-idle-wobble 6s ease-in-out infinite, coin-glow 5s ease infinite';
+    isFlipping = true;
+    cancelAnimationFrame(idleRAF);
+    // Add slow transition class for the flip animation
+    coin3d.classList.add('flipping');
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + base + 'deg) rotateX(0deg)';
     coin3dFaceLabel.textContent = coinFlipped ? 'Reverse' : 'Obverse';
-    coinTiltActive = false;
-    setTimeout(function() { coinTiltActive = true; }, 800);
+    // Remove flipping class after animation and resume
+    setTimeout(function() {
+      coin3d.classList.remove('flipping');
+      isFlipping = false;
+      if (!mouseOver) idleWobble();
+    }, 850);
   };
 
   coin3d.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipCoin(); }
   });
 
-  var coin3dContainer = document.getElementById('coin3d-container');
+  // Mouse move — instant 3D tilt tracking
+  coin3dContainer.addEventListener('mouseenter', function() {
+    mouseOver = true;
+    cancelAnimationFrame(idleRAF);
+  });
+
   coin3dContainer.addEventListener('mousemove', function(e) {
-    if (!coinTiltActive) return;
+    if (isFlipping) return;
     var rect = coin3d.getBoundingClientRect();
-    var cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
-    var mx = e.clientX - cx, my = e.clientY - cy, max = 15;
-    var tx = Math.max(-max, Math.min(max, -(my / (rect.height / 2)) * max));
-    var ty = Math.max(-max, Math.min(max, (mx / (rect.width / 2)) * max));
-    var base = coinFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
-    coin3d.style.transform = base + ' rotateX(' + tx + 'deg) rotateY(' + ty + 'deg)';
-    coin3d.style.animation = 'coin-glow 5s ease infinite';
-    var sx = ((mx / (rect.width / 2)) + 1) / 2 * 100;
-    var sy = ((my / (rect.height / 2)) + 1) / 2 * 100;
-    coin3dShine.style.background = 'radial-gradient(circle at ' + sx + '% ' + sy + '%, rgba(255,255,255,0.25) 0%, transparent 60%)';
-    coin3dShadow.style.transform = 'translateX(' + (-ty * 0.8) + 'px) scaleY(' + (0.6 + Math.abs(tx) * 0.02) + ')';
-    coin3dShadow.style.opacity = Math.min(0.4, 0.15 + Math.abs(tx + ty) * 0.005);
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var mx = e.clientX - cx;
+    var my = e.clientY - cy;
+    var maxTilt = 25; // More dramatic tilt
+
+    // Normalize to -1..1 range, then scale to degrees
+    var normX = mx / (rect.width / 2);
+    var normY = my / (rect.height / 2);
+    currentTiltX = -normY * maxTilt; // tilt up/down
+    currentTiltY = normX * maxTilt;  // tilt left/right
+
+    // Clamp
+    currentTiltX = Math.max(-maxTilt, Math.min(maxTilt, currentTiltX));
+    currentTiltY = Math.max(-maxTilt, Math.min(maxTilt, currentTiltY));
+
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (baseY + currentTiltY) + 'deg) rotateX(' + currentTiltX + 'deg)';
+
+    // Shine follows mouse — bright spot where mouse points
+    var shineX = (normX + 1) / 2 * 100;
+    var shineY = (normY + 1) / 2 * 100;
+    coin3dShine.style.background = 'radial-gradient(circle at ' + shineX + '% ' + shineY + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+
+    // Shadow reacts to tilt
+    coin3dShadow.style.transform = 'translateX(' + (-currentTiltY * 1.2) + 'px) scaleY(' + (0.5 + Math.abs(currentTiltX) * 0.025) + ')';
+    coin3dShadow.style.opacity = String(Math.min(0.5, 0.1 + (Math.abs(currentTiltX) + Math.abs(currentTiltY)) * 0.008));
   });
 
   coin3dContainer.addEventListener('mouseleave', function() {
-    if (!coinTiltActive) return;
-    coin3d.style.transform = coinFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
-    coin3d.style.animation = coinFlipped ? 'coin-glow 5s ease infinite' : 'coin-idle-wobble 6s ease-in-out infinite, coin-glow 5s ease infinite';
-    coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%)';
+    mouseOver = false;
+    if (isFlipping) return;
+    // Smooth return: temporarily add transition
+    coin3d.style.transition = 'transform 0.5s ease-out';
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+    coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
     coin3dShadow.style.transform = 'translateX(0) scaleY(1)';
     coin3dShadow.style.opacity = '0.15';
+    // After return animation, switch back to fast transition and start idle
+    setTimeout(function() {
+      coin3d.style.transition = 'transform 0.1s ease-out';
+      if (!mouseOver && !isFlipping) idleWobble();
+    }, 500);
   });
 
+  // Touch: tilt on drag
   if (isTouchDevice) {
     coin3dContainer.addEventListener('touchmove', function(e) {
-      if (!coinTiltActive) return;
-      var t = e.touches[0], rect = coin3d.getBoundingClientRect();
-      var cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
-      var mx = t.clientX - cx, my = t.clientY - cy, max = 15;
-      var tx = Math.max(-max, Math.min(max, -(my / (rect.height / 2)) * max));
-      var ty = Math.max(-max, Math.min(max, (mx / (rect.width / 2)) * max));
-      coin3d.style.transform = (coinFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)') + ' rotateX(' + tx + 'deg) rotateY(' + ty + 'deg)';
-      coin3d.style.animation = 'coin-glow 5s ease infinite';
-      var sx = ((mx / (rect.width / 2)) + 1) / 2 * 100;
-      var sy = ((my / (rect.height / 2)) + 1) / 2 * 100;
-      coin3dShine.style.background = 'radial-gradient(circle at ' + sx + '% ' + sy + '%, rgba(255,255,255,0.25) 0%, transparent 60%)';
+      if (isFlipping) return;
+      mouseOver = true;
+      cancelAnimationFrame(idleRAF);
+      var t = e.touches[0];
+      var rect = coin3d.getBoundingClientRect();
+      var normX = (t.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      var normY = (t.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      var maxTilt = 25;
+      var tx = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+      var ty = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transform = 'rotateY(' + (baseY + ty) + 'deg) rotateX(' + tx + 'deg)';
+      var sx = (normX + 1) / 2 * 100;
+      var sy = (normY + 1) / 2 * 100;
+      coin3dShine.style.background = 'radial-gradient(circle at ' + sx + '% ' + sy + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
     }, { passive: true });
+    coin3dContainer.addEventListener('touchend', function() {
+      mouseOver = false;
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transition = 'transform 0.5s ease-out';
+      coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+      coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+      setTimeout(function() {
+        coin3d.style.transition = 'transform 0.1s ease-out';
+        if (!mouseOver && !isFlipping) idleWobble();
+      }, 500);
+    });
   }
 
   // ── REVEAL ──
