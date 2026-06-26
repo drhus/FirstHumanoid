@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The First Walk — 26 June 2026</title>
+<meta name="description" content="The world's first humanoid robot bridal escort. Genesis Node, Forest City, Malaysia. 26 June 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-hi: #f0dca0;
+    --ink: #ece7da;
+    --bg: #080808;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* ── Reveal animations ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform 1.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+  .reveal-delay-5 { transition-delay: 0.75s; }
+  .reveal-delay-6 { transition-delay: 0.9s; }
+
+  /* ── Focus states ── */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+  }
+
+  /* ── Status bar ── */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.2);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .hero-kicker {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 15vw, 14rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-family: var(--serif);
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(236, 231, 218, 0.55);
+    margin-bottom: 2rem;
+  }
+
+  .hero-lede {
+    max-width: 38rem;
+    font-family: var(--serif);
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(236, 231, 218, 0.45);
+    margin-bottom: 3rem;
+  }
+
+  .gold-line {
+    width: 120px;
+    height: 1px;
+    background: var(--gold);
+    border: none;
+    margin: 0 auto;
+  }
+
+  /* ── Event meta ── */
+  .event-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 4rem 2rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.35);
+    text-align: center;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .meta-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    color: rgba(236, 231, 218, 0.2);
+  }
+
+  .meta-value {
+    color: rgba(236, 231, 218, 0.5);
+  }
+
+  .meta-divider {
+    width: 1px;
+    height: 2rem;
+    background: rgba(236, 231, 218, 0.1);
+  }
+
+  /* ── Countdown ── */
+  .countdown-section {
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .countdown-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.2);
+    margin-bottom: 2rem;
+  }
+
+  .countdown-display {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 5rem;
+  }
+
+  .countdown-number {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .countdown-unit-label {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.2);
+    margin-top: 0.5rem;
+  }
+
+  .countdown-separator {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 300;
+    color: rgba(236, 231, 218, 0.15);
+    align-self: flex-start;
+    margin-top: 0.3rem;
+  }
+
+  .countdown-sealed {
+    font-family: var(--mono);
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    letter-spacing: 0.2em;
+    color: var(--gold);
+  }
+
+  /* ── Narrative ── */
+  .narrative {
+    max-width: 34rem;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .narrative-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+  }
+
+  .narrative-text {
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(236, 231, 218, 0.6);
+  }
+
+  /* ── Coin section ── */
+  .coin-section {
+    padding: 8rem 2rem;
+    text-align: center;
+  }
+
+  .coin-section-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4rem;
+  }
+
+  .coin-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+
+  .coin-face {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .coin-face img {
+    width: clamp(220px, 35vw, 400px);
+    height: auto;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 60px rgba(201, 168, 76, 0.08));
+    transition: filter 0.6s ease;
+  }
+
+  .coin-face img:hover {
+    filter: drop-shadow(0 0 80px rgba(201, 168, 76, 0.15));
+  }
+
+  .coin-label {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.25);
+  }
+
+  .coin-inscription {
+    max-width: 32rem;
+    margin: 0 auto 3rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    line-height: 2;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.3);
+  }
+
+  .coin-specs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.2);
+  }
+
+  /* ── Personalization ── */
+  .personalization {
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .reserved-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.2);
+    margin-bottom: 1rem;
+  }
+
+  .reserved-name {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: var(--gold-hi);
+    margin-bottom: 1.5rem;
+  }
+
+  .edition-number {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+  }
+
+  /* ── Footer ── */
+  .site-footer {
+    padding: 6rem 2rem 3rem;
+    text-align: center;
+    border-top: 1px solid rgba(236, 231, 218, 0.05);
+  }
+
+  .footer-line {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(236, 231, 218, 0.15);
+    line-height: 2.2;
+  }
+
+  .footer-title {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(236, 231, 218, 0.25);
+    margin-top: 1.5rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .status-bar {
+      flex-direction: column;
+      gap: 0.3rem;
+      text-align: center;
+    }
+
+    .event-meta {
+      gap: 1.5rem;
+    }
+
+    .meta-divider {
+      display: none;
+    }
+
+    .countdown-display {
+      gap: 0.5rem;
+    }
+
+    .countdown-separator {
+      display: none;
+    }
+
+    .coin-display {
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .hero { padding: 3rem 1.25rem; }
+    .countdown-section { padding: 4rem 1.25rem; }
+    .narrative { padding: 4rem 1.25rem; }
+    .coin-section { padding: 5rem 1.25rem; }
+    .personalization { padding: 4rem 1.25rem; }
+
+    .coin-face img {
+      width: 200px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Status bar -->
+  <header class="status-bar" role="banner">
+    <span class="reveal">Genesis Node · Forest City, MY</span>
+    <span class="reveal reveal-delay-1">26.06.26 — 18:00 MYT</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Hero">
+    <p class="hero-kicker reveal reveal-delay-1">World's First</p>
+    <h1 class="hero-title reveal reveal-delay-2">The First Walk</h1>
+    <p class="hero-subtitle reveal reveal-delay-3">Humanoid Bride Escort &amp; Aisle Walk</p>
+    <p class="hero-lede reveal reveal-delay-4">The first time in recorded history a humanoid robot escorted a bride down the aisle — standing in for the family who could not cross the distance.</p>
+    <hr class="gold-line reveal reveal-delay-5" aria-hidden="true">
+  </section>
+
+  <!-- Event meta -->
+  <section class="event-meta reveal" aria-label="Event details">
+    <div class="meta-item">
+      <span class="meta-label">Occasion</span>
+      <span class="meta-value">First NS Wedding</span>
+    </div>
+    <div class="meta-divider" aria-hidden="true"></div>
+    <div class="meta-item">
+      <span class="meta-label">Date</span>
+      <span class="meta-value">26·06·26</span>
+    </div>
+    <div class="meta-divider" aria-hidden="true"></div>
+    <div class="meta-item">
+      <span class="meta-label">Hour</span>
+      <span class="meta-value">6:00 PM</span>
+    </div>
+    <div class="meta-divider" aria-hidden="true"></div>
+    <div class="meta-item">
+      <span class="meta-label">Place</span>
+      <span class="meta-value">Network School</span>
+    </div>
+  </section>
+
+  <!-- Countdown -->
+  <section class="countdown-section" aria-label="Countdown" aria-live="polite">
+    <p class="countdown-label reveal">Countdown</p>
+    <div id="countdown" class="countdown-display reveal reveal-delay-1"></div>
+  </section>
+
+  <!-- Narrative -->
+  <section class="narrative" aria-label="The Moment">
+    <p class="narrative-label reveal">The Moment</p>
+    <p class="narrative-text reveal reveal-delay-1">Her father and grandparents could not make the crossing. So at Network School — the genesis node — something this community helped bring to life took their place, and walked the bride to meet her groom. Not a spectacle. A stand-in for love that distance kept away.</p>
+  </section>
+
+  <!-- Commemorative coin -->
+  <section class="coin-section" aria-label="Commemorative Coin">
+    <p class="coin-section-label reveal">The Commemorative Coin</p>
+    <div class="coin-display">
+      <figure class="coin-face reveal reveal-delay-1">
+        <img src="/public/coin-obverse.png" alt="Coin obverse: First Humanoid Bride Escort" width="400" height="400" loading="lazy">
+        <figcaption class="coin-label">Obverse</figcaption>
+      </figure>
+      <figure class="coin-face reveal reveal-delay-2">
+        <img src="/public/coin-reverse.png" alt="Coin reverse: K · Genesis Node · First Wedding · S · XXVI · VI · XXVI" width="400" height="400" loading="lazy">
+        <figcaption class="coin-label">Reverse</figcaption>
+      </figure>
+    </div>
+    <div class="coin-inscription reveal reveal-delay-3">
+      <p>Obverse: First Humanoid · Bride Escort</p>
+      <p>Reverse: K · Genesis Node · First Wedding · S · XXVI · VI · XXVI</p>
+    </div>
+    <div class="coin-specs reveal reveal-delay-4">
+      <span>Limited &amp; Numbered</span>
+      <span>Struck Once, Never Reissued</span>
+      <span>Serialized</span>
+      <span>Personalized</span>
+    </div>
+  </section>
+
+  <!-- Personalization -->
+  <section class="personalization" aria-label="Personalization">
+    <p class="reserved-label reveal">Reserved for</p>
+    <p class="reserved-name reveal reveal-delay-1" id="reservedName">[ your name ]</p>
+    <p class="edition-number reveal reveal-delay-2" id="editionNumber">No. 001 / 100</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <p class="footer-line reveal">Network School · Genesis Node · Block 0</p>
+    <p class="footer-line reveal reveal-delay-1">1.4143°N 103.6253°E · Forest City · Malaysia</p>
+    <p class="footer-title reveal reveal-delay-2">The First Walk — 26 June 2026</p>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Personalization ──
+  var EDITION_SIZE = 100;
+  var params = new URLSearchParams(window.location.search);
+  var name = params.get('name');
+  var n = params.get('n');
+
+  if (name) {
+    document.getElementById('reservedName').textContent = name;
+  }
+  var serial = n ? String(n).padStart(3, '0') : '001';
+  document.getElementById('editionNumber').textContent = 'No. ' + serial + ' / ' + EDITION_SIZE;
+
+  // ── Countdown ──
+  var EVENT_TIME = new Date('2026-06-26T18:00:00+08:00').getTime();
+  var EVENT_END = EVENT_TIME + (6 * 60 * 60 * 1000); // 6 hours after
+  var countdownEl = document.getElementById('countdown');
+
+  function padTwo(n) { return n < 10 ? '0' + n : String(n); }
+
+  function renderCountdown() {
+    var now = Date.now();
+
+    if (now >= EVENT_TIME && now < EVENT_END) {
+      countdownEl.innerHTML = '<span class="countdown-sealed">Happening now</span>';
+      return;
+    }
+
+    if (now >= EVENT_END) {
+      countdownEl.innerHTML = '<span class="countdown-sealed">26·06·2026 — Sealed</span>';
+      return;
+    }
+
+    var diff = EVENT_TIME - now;
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    countdownEl.innerHTML =
+      '<div class="countdown-unit"><span class="countdown-number">' + padTwo(days) + '</span><span class="countdown-unit-label">Days</span></div>' +
+      '<span class="countdown-separator" aria-hidden="true">:</span>' +
+      '<div class="countdown-unit"><span class="countdown-number">' + padTwo(hours) + '</span><span class="countdown-unit-label">Hours</span></div>' +
+      '<span class="countdown-separator" aria-hidden="true">:</span>' +
+      '<div class="countdown-unit"><span class="countdown-number">' + padTwo(minutes) + '</span><span class="countdown-unit-label">Minutes</span></div>' +
+      '<span class="countdown-separator" aria-hidden="true">:</span>' +
+      '<div class="countdown-unit"><span class="countdown-number">' + padTwo(seconds) + '</span><span class="countdown-unit-label">Seconds</span></div>';
+
+    requestAnimationFrame(renderCountdown);
+  }
+
+  renderCountdown();
+  // Also tick every second for reliability
+  setInterval(renderCountdown, 1000);
+
+  // ── Intersection Observer for reveals ──
+  var reveals = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(function (el) {
+      observer.observe(el);
+    });
+  } else {
+    // Fallback: show everything
+    reveals.forEach(function (el) {
+      el.classList.add('visible');
+    });
+  }
+
+})();
+</script>
+</body>
+</html>

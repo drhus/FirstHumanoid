@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The First Walk — 26 June 2026</title>
+<meta name="description" content="The world's first humanoid robot bridal escort. Forest City, Malaysia. 26 June 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ─── CUSTOM PROPERTIES ─── */
+  :root {
+    --gold: #c9a84c;
+    --gold-hi: #f0dca0;
+    --ink: #ece7da;
+    --bg: #0a0a0f;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+  }
+
+  /* ─── RESET ─── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ─── BASE ─── */
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* ─── UTILITY ─── */
+  .mono {
+    font-family: var(--mono);
+    font-weight: 400;
+  }
+  .tracked {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .gold { color: var(--gold); }
+  .gold-hi { color: var(--gold-hi); }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ─── HAIRLINE ─── */
+  .rule {
+    border: none;
+    border-top: 1px solid rgba(201, 168, 76, 0.2);
+    margin: 0;
+  }
+
+  /* ─── FADE-UP REVEALS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children */
+  .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0s; }
+  .reveal-stagger > .reveal:nth-child(2) { transition-delay: 0.1s; }
+  .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.2s; }
+  .reveal-stagger > .reveal:nth-child(4) { transition-delay: 0.3s; }
+  .reveal-stagger > .reveal:nth-child(5) { transition-delay: 0.4s; }
+  .reveal-stagger > .reveal:nth-child(6) { transition-delay: 0.5s; }
+
+  /* ─── FOCUS ─── */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+  }
+
+  /* ═══════════════════════════════
+     SECTION: STATUS BAR
+     ═══════════════════════════════ */
+  .status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 15, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    padding: 12px 0;
+  }
+  .status-bar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .status-bar__text {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* ═══════════════════════════════
+     SECTION: HERO
+     ═══════════════════════════════ */
+  .hero {
+    padding: 100px 0 72px;
+    text-align: center;
+  }
+  .hero__kicker {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero__title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero__subtitle {
+    font-family: var(--mono);
+    font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 40px;
+  }
+  .hero__lede {
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(236, 231, 218, 0.75);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* ═══════════════════════════════
+     SECTION: EVENT META
+     ═══════════════════════════════ */
+  .meta-section {
+    padding: 48px 0;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+  }
+  .meta-cell {
+    padding: 24px 16px;
+    text-align: center;
+    border-right: 1px solid rgba(201, 168, 76, 0.2);
+  }
+  .meta-cell:last-child { border-right: none; }
+  .meta-cell__label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .meta-cell__value {
+    font-family: var(--serif);
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* ═══════════════════════════════
+     SECTION: COUNTDOWN
+     ═══════════════════════════════ */
+  .countdown-section {
+    padding: 56px 0;
+    text-align: center;
+  }
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: clamp(24px, 6vw, 56px);
+    flex-wrap: wrap;
+  }
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .countdown-unit__number {
+    font-family: var(--mono);
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    font-weight: 300;
+    color: var(--gold-hi);
+    line-height: 1;
+    min-width: 2ch;
+  }
+  .countdown-unit__label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 8px;
+  }
+  .countdown-sealed {
+    font-family: var(--mono);
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ═══════════════════════════════
+     SECTION: NARRATIVE
+     ═══════════════════════════════ */
+  .narrative-section {
+    padding: 64px 0;
+  }
+  .narrative-section__label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .narrative-section__text {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2.8vw, 1.35rem);
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(236, 231, 218, 0.82);
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* ═══════════════════════════════
+     SECTION: COIN
+     ═══════════════════════════════ */
+  .coin-section {
+    padding: 72px 0;
+  }
+  .coin-section__label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .coin-pair {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(24px, 5vw, 56px);
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .coin-face {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 320px;
+    flex: 1;
+    min-width: 240px;
+  }
+  .coin-face img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 50%;
+    filter: drop-shadow(0 8px 32px rgba(201, 168, 76, 0.15));
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                filter 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .coin-face img:hover {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 14px 40px rgba(201, 168, 76, 0.25));
+  }
+  .coin-face__caption {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 20px;
+    text-align: center;
+  }
+  .coin-text {
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+  .coin-text__heading {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .coin-text__inscription {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 20px;
+    padding-left: 16px;
+    border-left: 1px solid rgba(201, 168, 76, 0.3);
+  }
+  .coin-specs {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .coin-specs__heading {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .coin-specs dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 20px;
+  }
+  .coin-specs dt {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .coin-specs dd {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(236, 231, 218, 0.82);
+  }
+
+  /* ═══════════════════════════════
+     SECTION: PERSONALIZATION
+     ═══════════════════════════════ */
+  .personal-section {
+    padding: 56px 0;
+    text-align: center;
+  }
+  .personal-section__label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .personal-section__name {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .personal-section__edition {
+    font-family: var(--mono);
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+
+  /* ═══════════════════════════════
+     SECTION: FOOTER
+     ═══════════════════════════════ */
+  .site-footer {
+    padding: 64px 0 48px;
+    text-align: center;
+  }
+  .site-footer__line {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 76, 0.6);
+    margin-bottom: 8px;
+    line-height: 1.8;
+  }
+  .site-footer__signature {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    margin-top: 20px;
+  }
+
+  /* ═══════════════════════════════
+     RESPONSIVE: 2-col meta on small
+     ═══════════════════════════════ */
+  @media (max-width: 600px) {
+    .meta-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .meta-cell:nth-child(2) { border-right: none; }
+    .meta-cell:nth-child(1),
+    .meta-cell:nth-child(2) {
+      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    }
+    .meta-cell:nth-child(3) { border-right: 1px solid rgba(201, 168, 76, 0.2); }
+    .hero { padding: 72px 0 48px; }
+    .coin-face { min-width: 200px; }
+  }
+
+  @media (max-width: 360px) {
+    .status-bar__inner {
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+    }
+    .container { padding: 0 16px; }
+    .countdown-grid { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ─── STATUS BAR ─── -->
+  <header class="status-bar" role="banner">
+    <div class="container status-bar__inner">
+      <span class="status-bar__text">Genesis Node &middot; Forest City, MY</span>
+      <span class="status-bar__text">26.06.26 — 18:00 MYT</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- ─── HERO ─── -->
+    <section class="hero container reveal-stagger" aria-label="Hero">
+      <p class="hero__kicker reveal">World's First</p>
+      <h1 class="hero__title reveal">The First Walk</h1>
+      <p class="hero__subtitle reveal">Humanoid Bride Escort &amp; Aisle Walk</p>
+      <p class="hero__lede reveal">The first time in recorded history a humanoid robot escorted a bride down the aisle — standing in for the family who could not cross the distance.</p>
+    </section>
+
+    <hr class="rule container">
+
+    <!-- ─── EVENT META ─── -->
+    <section class="meta-section container reveal" aria-label="Event details">
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-cell__label">Occasion</div>
+          <div class="meta-cell__value">First NS Wedding</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-cell__label">Date</div>
+          <div class="meta-cell__value">26&middot;06&middot;26</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-cell__label">Hour</div>
+          <div class="meta-cell__value">6:00 PM</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-cell__label">Place</div>
+          <div class="meta-cell__value">Network School</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule container">
+
+    <!-- ─── COUNTDOWN ─── -->
+    <section class="countdown-section container reveal" aria-label="Countdown" id="countdown">
+      <div class="countdown-grid" id="countdown-grid">
+        <div class="countdown-unit">
+          <span class="countdown-unit__number" id="cd-days">--</span>
+          <span class="countdown-unit__label">Days</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-unit__number" id="cd-hours">--</span>
+          <span class="countdown-unit__label">Hours</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-unit__number" id="cd-min">--</span>
+          <span class="countdown-unit__label">Min</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-unit__number" id="cd-sec">--</span>
+          <span class="countdown-unit__label">Sec</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule container">
+
+    <!-- ─── THE MOMENT ─── -->
+    <section class="narrative-section container reveal-stagger" aria-label="The Moment">
+      <p class="narrative-section__label reveal">The Moment</p>
+      <p class="narrative-section__text reveal">Her father and grandparents could not make the crossing. So at Network School — the genesis node — something this community helped bring to life took their place, and walked the bride to meet her groom. Not a spectacle. A stand-in for love that distance kept away.</p>
+    </section>
+
+    <hr class="rule container">
+
+    <!-- ─── COMMEMORATIVE COIN ─── -->
+    <section class="coin-section container reveal-stagger" aria-label="Commemorative Coin">
+      <p class="coin-section__label reveal">The Commemorative Coin</p>
+
+      <div class="coin-pair reveal">
+        <figure class="coin-face">
+          <img src="/public/coin-obverse.png"
+               alt="Obverse face of the commemorative coin showing a humanoid robot escorting a bride, ringed by the inscription FIRST HUMANOID BRIDE ESCORT"
+               loading="lazy">
+          <figcaption class="coin-face__caption">Obverse</figcaption>
+        </figure>
+        <figure class="coin-face">
+          <img src="/public/coin-reverse.png"
+               alt="Reverse face of the commemorative coin showing the Genesis Node emblem, ringed by the inscription K GENESIS NODE FIRST WEDDING S XXVI VI XXVI"
+               loading="lazy">
+          <figcaption class="coin-face__caption">Reverse</figcaption>
+        </figure>
+      </div>
+
+      <div class="coin-text reveal">
+        <p class="coin-text__heading">Obverse Rim</p>
+        <p class="coin-text__inscription">FIRST HUMANOID / BRIDE ESCORT</p>
+        <p class="coin-text__heading">Reverse Ring</p>
+        <p class="coin-text__inscription">K &middot; GENESIS NODE &middot; FIRST WEDDING &middot; S &middot; XXVI &middot; VI &middot; XXVI</p>
+      </div>
+
+      <div class="coin-specs reveal">
+        <p class="coin-specs__heading">Specifications</p>
+        <dl>
+          <dt>Edition</dt>
+          <dd>Limited &amp; numbered — struck once, never reissued</dd>
+          <dt>Serialized</dt>
+          <dd>Unique sequence number on the rim</dd>
+          <dt>Personalized</dt>
+          <dd>Engraved with the attendee's name</dd>
+        </dl>
+      </div>
+    </section>
+
+    <hr class="rule container">
+
+    <!-- ─── PERSONALIZATION ─── -->
+    <section class="personal-section container reveal-stagger" aria-label="Your reservation">
+      <p class="personal-section__label reveal">Reserved for</p>
+      <p class="personal-section__name reveal" id="attendee-name">[ your name ]</p>
+      <p class="personal-section__edition reveal" id="attendee-edition">No. 001 / 100</p>
+    </section>
+  </main>
+
+  <hr class="rule container">
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="site-footer container reveal-stagger" role="contentinfo">
+    <p class="site-footer__line reveal">Network School &middot; Genesis Node &middot; Block 0</p>
+    <p class="site-footer__line reveal">1.4143&deg;N&ensp;103.6253&deg;E &middot; Forest City &middot; Malaysia</p>
+    <p class="site-footer__signature reveal">The First Walk — 26 June 2026</p>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── CONSTANTS ─── */
+  var EDITION_SIZE = 100;
+  var TARGET = new Date('2026-06-26T18:00:00+08:00').getTime();
+  var HAPPENING_WINDOW = 6 * 60 * 60 * 1000; // 6 hours in ms
+
+  /* ─── URL PARAMS → PERSONALIZATION ─── */
+  var params = new URLSearchParams(window.location.search);
+  var nameParam = params.get('name');
+  var numParam = params.get('n');
+
+  if (nameParam) {
+    document.getElementById('attendee-name').textContent = nameParam;
+  }
+  var seqNum = numParam ? String(numParam).padStart(3, '0') : '001';
+  document.getElementById('attendee-edition').textContent =
+    'No. ' + seqNum + ' / ' + EDITION_SIZE;
+
+  /* ─── COUNTDOWN ─── */
+  var cdDays = document.getElementById('cd-days');
+  var cdHours = document.getElementById('cd-hours');
+  var cdMin = document.getElementById('cd-min');
+  var cdSec = document.getElementById('cd-sec');
+  var cdGrid = document.getElementById('countdown-grid');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    var now = Date.now();
+    var diff = TARGET - now;
+
+    if (diff > 0) {
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      cdDays.textContent = pad(d);
+      cdHours.textContent = pad(h);
+      cdMin.textContent = pad(m);
+      cdSec.textContent = pad(s);
+    } else if (diff > -HAPPENING_WINDOW) {
+      cdGrid.innerHTML = '<p class="countdown-sealed">Happening now</p>';
+    } else {
+      cdGrid.innerHTML = '<p class="countdown-sealed">26&middot;06&middot;2026 — Sealed</p>';
+    }
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  /* ─── INTERSECTION OBSERVER: FADE-UP REVEALS ─── */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(function (el) { observer.observe(el); });
+  } else {
+    /* Fallback: show everything */
+    reveals.forEach(function (el) { el.classList.add('visible'); });
+  }
+})();
+</script>
+
+</body>
+</html>
