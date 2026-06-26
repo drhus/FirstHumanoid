@@ -3,25 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>First Humanoid Bridal Walk — 26 June 2026</title>
-<meta name="description" content="The world's first humanoid robot bridal escort. Genesis Node, Forest City, Malaysia. 26 June 2026.">
+<title>First Humanoid Bridal Walk — 26.06.26 · Network School</title>
+<meta name="description" content="The world's first humanoid robot bridal escort. 26 June 2026, 6:00 PM at Network School, Forest City, Malaysia.">
+<meta property="og:title" content="First Humanoid Bridal Walk — 26.06.26">
+<meta property="og:description" content="The world's first humanoid robot escorted a bride down the aisle. Network School, Forest City, Malaysia.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --gold: #c9a84c;
   --gold-hi: #f0dca0;
+  --gold-dim: rgba(201,168,76,0.3);
   --ink: #e8e8f0;
+  --ink-dim: rgba(232,232,240,0.5);
+  --ink-faint: rgba(232,232,240,0.25);
   --bg: #0b0e17;
+  --bg-elevated: #101420;
   --cyan: #00d4ff;
   --magenta: #ff00aa;
-  --glass: rgba(255,255,255,0.05);
-  --glass-border: rgba(255,255,255,0.1);
-  --font-display: 'Cormorant Garamond', 'Georgia', serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --mono: 'JetBrains Mono', monospace;
 }
 
 html { scroll-behavior: smooth; }
@@ -29,20 +36,22 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--serif);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Utility ── */
 .sr-only {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-/* ── Holographic shimmer keyframes ── */
+/* ══════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════ */
+
 @keyframes holo-shift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -54,26 +63,23 @@ body {
   100% { --angle: 360deg; }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.3), 0 0 40px rgba(255,0,170,0.15); }
-  33%      { box-shadow: 0 0 25px rgba(255,0,170,0.35), 0 0 50px rgba(201,168,76,0.2); }
-  66%      { box-shadow: 0 0 22px rgba(201,168,76,0.3), 0 0 45px rgba(0,212,255,0.2); }
+  0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.2), 0 0 40px rgba(255,0,170,0.1); }
+  33%      { box-shadow: 0 0 25px rgba(255,0,170,0.25), 0 0 50px rgba(201,168,76,0.15); }
+  66%      { box-shadow: 0 0 22px rgba(201,168,76,0.2), 0 0 45px rgba(0,212,255,0.15); }
 }
 
 @keyframes coin-glow {
-  0%, 100% { box-shadow: 0 0 30px rgba(0,212,255,0.4), 0 0 60px rgba(255,0,170,0.2), 0 0 90px rgba(201,168,76,0.1); }
-  33%      { box-shadow: 0 0 35px rgba(255,0,170,0.4), 0 0 70px rgba(201,168,76,0.25), 0 0 100px rgba(0,212,255,0.1); }
-  66%      { box-shadow: 0 0 32px rgba(201,168,76,0.4), 0 0 65px rgba(0,212,255,0.25), 0 0 95px rgba(255,0,170,0.1); }
+  0%, 100% { box-shadow: 0 0 30px rgba(0,212,255,0.35), 0 0 60px rgba(255,0,170,0.15), 0 0 90px rgba(201,168,76,0.08); }
+  33%      { box-shadow: 0 0 35px rgba(255,0,170,0.35), 0 0 70px rgba(201,168,76,0.2), 0 0 100px rgba(0,212,255,0.08); }
+  66%      { box-shadow: 0 0 32px rgba(201,168,76,0.35), 0 0 65px rgba(0,212,255,0.2), 0 0 95px rgba(255,0,170,0.08); }
 }
 
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes coin-idle-wobble {
+  0%, 100% { transform: rotateY(0deg) rotateX(0deg); }
+  25%      { transform: rotateY(6deg) rotateX(2deg); }
+  50%      { transform: rotateY(0deg) rotateX(-2deg); }
+  75%      { transform: rotateY(-6deg) rotateX(1deg); }
 }
 
 @keyframes gradient-text {
@@ -82,7 +88,18 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* ── Reveal animation ── */
+@keyframes date-glow {
+  0%, 100% { text-shadow: 0 0 30px rgba(201,168,76,0.4); }
+  50%      { text-shadow: 0 0 60px rgba(201,168,76,0.6), 0 0 120px rgba(201,168,76,0.2); }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ── Reveal ── */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -94,7 +111,7 @@ body {
 }
 
 /* ── Glass card ── */
-.glass-card {
+.glass {
   background: var(--glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -103,86 +120,155 @@ body {
   position: relative;
 }
 
-/* Animated gradient border overlay */
-.glass-card::before {
+.glass-glow::before {
   content: '';
   position: absolute;
   inset: -1px;
   border-radius: 13px;
   padding: 1px;
-  background: linear-gradient(
-    var(--angle, 0deg),
-    var(--cyan),
-    var(--magenta),
-    var(--gold),
-    var(--cyan)
-  );
+  background: linear-gradient(var(--angle, 0deg), var(--cyan), var(--magenta), var(--gold), var(--cyan));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: border-rotate 6s linear infinite;
-  opacity: 0.4;
+  opacity: 0.35;
   pointer-events: none;
 }
 
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-/* ── STATUS BAR ── */
+/* ══════════════════════════════════
+   STATUS BAR
+   ══════════════════════════════════ */
 .status-bar {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 24px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
+  justify-content: center;
+  gap: 32px;
+  padding: 10px 24px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.5);
-  background: rgba(11,14,23,0.85);
+  color: var(--ink-faint);
+  background: rgba(11,14,23,0.9);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
-.status-bar span {
-  transition: all 0.4s ease;
-  cursor: default;
-}
-
-.status-bar span:hover {
-  background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--gold));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: holo-shift 3s ease infinite;
-}
-
-/* ── MAIN CONTAINER ── */
-main {
-  max-width: 860px;
+/* ══════════════════════════════════
+   MAIN
+   ══════════════════════════════════ */
+.container {
+  max-width: 900px;
   margin: 0 auto;
-  padding: 100px 24px 60px;
+  padding: 0 24px;
 }
 
-/* ── HERO ── */
-.hero {
+/* ══════════════════════════════════
+   NS LOGO HEADER
+   ══════════════════════════════════ */
+.ns-header {
   text-align: center;
-  padding: 60px 0 40px;
+  padding: 100px 0 20px;
 }
 
-.hero-kicker {
-  font-family: var(--font-mono);
+.ns-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.ns-logo:hover { color: var(--gold); }
+
+.ns-logo-mark {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gold);
+  position: relative;
+}
+
+.ns-logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 10px;
+  border: 1px solid var(--gold-dim);
+}
+
+.ns-tagline {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 8px;
+}
+
+/* ══════════════════════════════════
+   DATE HERO — THE CENTERPIECE
+   ══════════════════════════════════ */
+.date-hero {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.date-big {
+  font-family: var(--mono);
+  font-size: clamp(4rem, 15vw, 10rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  line-height: 1;
+  animation: date-glow 4s ease-in-out infinite;
+  margin-bottom: 8px;
+}
+
+.date-sub {
+  font-family: var(--mono);
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--ink-dim);
+  margin-bottom: 40px;
+}
+
+.date-sub strong {
+  color: var(--gold-hi);
+  font-weight: 500;
+}
+
+.event-title {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.event-kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   margin-bottom: 20px;
   background: linear-gradient(90deg, var(--gold), var(--cyan), var(--magenta), var(--gold));
@@ -193,37 +279,100 @@ main {
   animation: gradient-text 6s ease infinite;
 }
 
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 5.5rem);
-  font-weight: 300;
-  line-height: 1.1;
-  color: var(--ink);
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
-}
-
-.hero-subtitle {
-  font-family: var(--font-mono);
-  font-size: 13px;
+.event-subtitle {
+  font-family: var(--mono);
+  font-size: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.5);
+  color: var(--ink-dim);
   margin-bottom: 32px;
 }
 
-.hero-lede {
-  font-family: var(--font-display);
+.event-lede {
+  font-family: var(--serif);
   font-size: clamp(1.1rem, 2.5vw, 1.35rem);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.7;
-  color: rgba(232,232,240,0.7);
-  max-width: 600px;
+  line-height: 1.8;
+  color: rgba(232,232,240,0.65);
+  max-width: 580px;
   margin: 0 auto;
 }
 
-/* ── EVENT META ROW ── */
+/* Gold separator */
+.gold-rule {
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+  margin: 48px auto;
+  opacity: 0.6;
+}
+
+/* ══════════════════════════════════
+   COUNTDOWN
+   ══════════════════════════════════ */
+.countdown-section {
+  text-align: center;
+  margin: 40px 0 56px;
+}
+
+.countdown-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 20px;
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.countdown-box {
+  padding: 20px 18px;
+  min-width: 85px;
+  text-align: center;
+  animation: glow-pulse 4s ease infinite;
+}
+
+.countdown-box .num {
+  font-family: var(--mono);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.countdown-box .unit {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 6px;
+}
+
+.countdown-sealed {
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 24px;
+  background: linear-gradient(90deg, var(--gold), var(--cyan), var(--magenta));
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-text 4s ease infinite;
+}
+
+/* ══════════════════════════════════
+   EVENT META
+   ══════════════════════════════════ */
 .meta-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -237,123 +386,119 @@ main {
 }
 
 .meta-card .label {
-  font-family: var(--font-mono);
-  font-size: 10px;
+  font-family: var(--mono);
+  font-size: 9px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.4);
+  color: var(--ink-faint);
   margin-bottom: 8px;
 }
 
 .meta-card .value {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-family: var(--serif);
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--ink);
 }
 
-/* ── COUNTDOWN ── */
-.countdown-section {
+/* ══════════════════════════════════
+   NETWORK SCHOOL SECTION
+   ══════════════════════════════════ */
+.ns-section {
+  margin: 56px 0;
   text-align: center;
-  margin: 48px 0;
 }
 
-.countdown-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(232,232,240,0.4);
-  margin-bottom: 20px;
+.ns-panel {
+  padding: 48px 32px;
 }
 
-.countdown-grid {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.countdown-box {
-  padding: 20px 16px;
-  min-width: 80px;
-  text-align: center;
-  animation: glow-pulse 4s ease infinite;
-}
-
-.countdown-box .num {
-  font-family: var(--font-mono);
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1;
-}
-
-.countdown-box .unit {
-  font-family: var(--font-mono);
+.ns-panel-title {
+  font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.4);
-  margin-top: 6px;
+  color: var(--gold);
+  margin-bottom: 24px;
 }
 
-.countdown-sealed {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 24px;
-  background: linear-gradient(90deg, var(--gold), var(--cyan), var(--magenta));
-  background-size: 300% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-text 4s ease infinite;
+.ns-panel-text {
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.9;
+  color: rgba(232,232,240,0.7);
+  max-width: 580px;
+  margin: 0 auto 24px;
 }
 
-/* ── NARRATIVE ── */
+.ns-panel-text em { color: var(--gold-hi); font-style: italic; }
+
+.ns-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.ns-link:hover {
+  background: rgba(201,168,76,0.08);
+  border-color: var(--gold);
+}
+
+/* ══════════════════════════════════
+   THE MOMENT — NARRATIVE
+   ══════════════════════════════════ */
 .narrative-section {
-  margin: 48px 0;
+  margin: 56px 0;
 }
 
 .narrative-panel {
-  padding: 40px 32px;
+  padding: 44px 36px;
 }
 
 .narrative-panel h2 {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.25em;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 24px;
 }
 
 .narrative-panel p {
-  font-family: var(--font-display);
+  font-family: var(--serif);
   font-size: clamp(1.1rem, 2.2vw, 1.3rem);
-  line-height: 1.8;
-  color: rgba(232,232,240,0.75);
+  line-height: 1.9;
+  color: rgba(232,232,240,0.7);
   font-style: italic;
 }
 
-/* ── COIN SECTION ── */
+/* ══════════════════════════════════
+   3D COIN
+   ══════════════════════════════════ */
 .coin-section {
   margin: 64px 0;
   text-align: center;
 }
 
 .coin-section-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.25em;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 40px;
 }
 
-/* 3D Coin */
 .coin-3d-container {
   display: flex;
   flex-direction: column;
@@ -361,9 +506,10 @@ main {
   margin-bottom: 40px;
   perspective: 1000px;
 }
+
 .coin-3d {
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -371,7 +517,9 @@ main {
   animation: coin-idle-wobble 6s ease-in-out infinite, coin-glow 5s ease infinite;
   border-radius: 50%;
 }
+
 .coin-3d.flipped { transform: rotateY(180deg); animation: coin-glow 5s ease infinite; }
+
 .coin-3d-face {
   position: absolute;
   top: 0; left: 0;
@@ -380,13 +528,16 @@ main {
   border-radius: 50%;
   overflow: hidden;
 }
+
 .coin-3d-face img {
   width: 100%; height: 100%;
   object-fit: cover;
   border-radius: 50%;
   display: block;
 }
+
 .coin-3d-back { transform: rotateY(180deg); }
+
 .coin-3d-shine {
   position: absolute;
   top: 0; left: 0;
@@ -397,64 +548,83 @@ main {
   mix-blend-mode: overlay;
   z-index: 2;
 }
+
 .coin-3d-shadow {
   position: absolute;
   bottom: -18px;
   left: 10%;
   width: 80%;
   height: 24px;
-  background: radial-gradient(ellipse at center, rgba(0,212,255,0.15) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(0,212,255,0.12) 0%, transparent 70%);
   border-radius: 50%;
   filter: blur(10px);
   transition: transform 0.3s ease, opacity 0.3s ease;
   z-index: -1;
 }
+
 .coin-3d-label {
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.4);
+  color: var(--ink-faint);
   margin-top: 28px;
-  text-align: center;
   user-select: none;
 }
+
 .coin-3d-face-label {
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.4);
+  color: var(--ink-faint);
   margin-top: 16px;
-  text-align: center;
 }
-@keyframes coin-idle-wobble {
-  0%, 100% { transform: rotateY(0deg) rotateX(0deg); }
-  25% { transform: rotateY(6deg) rotateX(2deg); }
-  50% { transform: rotateY(0deg) rotateX(-2deg); }
-  75% { transform: rotateY(-6deg) rotateX(1deg); }
+
+.coin-inscriptions {
+  margin: 32px auto;
+  max-width: 520px;
+}
+
+.coin-inscriptions dt {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+  margin-top: 16px;
+}
+
+.coin-inscriptions dd {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ink-dim);
 }
 
 .coin-specs {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 16px;
   flex-wrap: wrap;
   margin-top: 24px;
 }
 
 .coin-spec {
-  font-family: var(--font-mono);
-  font-size: 10px;
+  font-family: var(--mono);
+  font-size: 9px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.35);
-  padding: 8px 16px;
-  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--ink-faint);
+  padding: 8px 14px;
+  border: 1px solid rgba(255,255,255,0.05);
   border-radius: 6px;
 }
 
-/* ── PERSONALIZATION ── */
+/* ══════════════════════════════════
+   PERSONALIZATION
+   ══════════════════════════════════ */
 .personalization {
   margin: 64px 0;
   text-align: center;
@@ -465,16 +635,16 @@ main {
 }
 
 .reserved-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.4);
+  color: var(--ink-faint);
   margin-bottom: 12px;
 }
 
 .reserved-name {
-  font-family: var(--font-display);
+  font-family: var(--serif);
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 300;
   line-height: 1.2;
@@ -488,95 +658,114 @@ main {
 }
 
 .edition-number {
-  font-family: var(--font-mono);
-  font-size: 14px;
+  font-family: var(--mono);
+  font-size: 13px;
   letter-spacing: 0.15em;
-  color: rgba(232,232,240,0.5);
+  color: var(--ink-dim);
 }
 
-/* ── FOOTER ── */
+/* ══════════════════════════════════
+   FOOTER
+   ══════════════════════════════════ */
 footer {
   margin-top: 80px;
-  padding: 40px 24px;
+  padding: 48px 24px;
   text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.footer-ns {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.footer-ns-mark {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--gold-dim);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold-dim);
+}
+
+.footer-ns-text {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 footer p {
-  font-family: var(--font-mono);
-  font-size: 10px;
+  font-family: var(--mono);
+  font-size: 9px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(232,232,240,0.3);
-  line-height: 2.2;
+  color: var(--ink-faint);
+  line-height: 2.4;
 }
 
 footer .footer-title {
-  font-family: var(--font-display);
+  font-family: var(--serif);
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: rgba(232,232,240,0.5);
+  color: var(--ink-dim);
   text-transform: none;
   margin-top: 8px;
 }
 
-/* ── FOCUS STATES ── */
+.versions-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.versions-link:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+/* ══════════════════════════════════
+   FOCUS & RESPONSIVE
+   ══════════════════════════════════ */
 :focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 4px;
 }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .status-bar {
-    font-size: 9px;
-    padding: 10px 16px;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  main {
-    padding: 90px 16px 40px;
-  }
-
-  .meta-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .coin-3d {
-    width: 250px;
-    height: 250px;
-  }
-
-  .narrative-panel {
-    padding: 28px 20px;
-  }
-
-  .personalization-panel {
-    padding: 32px 20px;
-  }
+  .status-bar { font-size: 8px; padding: 8px 16px; gap: 16px; }
+  .ns-header { padding-top: 80px; }
+  .date-big { font-size: clamp(3rem, 12vw, 6rem); }
+  .meta-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .coin-3d { width: 260px; height: 260px; }
+  .narrative-panel, .ns-panel { padding: 28px 20px; }
+  .personalization-panel { padding: 32px 20px; }
 }
 
-@media (max-width: 360px) {
-  .meta-row {
-    grid-template-columns: 1fr;
-  }
-
-  .countdown-box {
-    min-width: 64px;
-    padding: 14px 10px;
-  }
-
-  .coin-3d {
-    width: 200px;
-    height: 200px;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
+@media (max-width: 400px) {
+  .status-bar { flex-direction: column; gap: 2px; }
+  .meta-row { grid-template-columns: 1fr; }
+  .countdown-box { min-width: 64px; padding: 14px 10px; }
+  .coin-3d { width: 220px; height: 220px; }
+  .date-big { font-size: 3rem; }
 }
 </style>
 </head>
@@ -584,117 +773,150 @@ footer .footer-title {
 
 <!-- ── STATUS BAR ── -->
 <header class="status-bar" role="banner">
-  <span>Genesis Node &middot; Forest City, MY</span>
-  <span>26.06.26 &mdash; 18:00 MYT</span>
+  <span>Network School · Genesis Node</span>
+  <span>Forest City, Malaysia</span>
+  <span>26.06.26 · 6:00 PM MYT</span>
 </header>
 
-<main role="main">
+<div class="container">
 
-  <!-- ── HERO ── -->
-  <section class="hero reveal" aria-label="Hero">
-    <p class="hero-kicker" aria-label="World's First">World&rsquo;s First</p>
-    <h1 class="hero-title">First Humanoid Bridal Walk</h1>
-    <p class="hero-subtitle">Humanoid Bride Escort &amp; Aisle Walk</p>
-    <p class="hero-lede">The first time in recorded history a humanoid robot escorted a bride down the aisle&thinsp;&mdash;&thinsp;standing in for the family who could not cross the distance.</p>
-  </section>
+  <!-- ── NETWORK SCHOOL HEADER ── -->
+  <div class="ns-header reveal">
+    <a href="https://ns.com" target="_blank" rel="noopener" class="ns-logo" aria-label="Network School">
+      <span class="ns-logo-mark">NS</span>
+      <span>Network School</span>
+    </a>
+    <p class="ns-tagline">Forest City · Malaysia · Genesis Node</p>
+  </div>
 
-  <!-- ── EVENT META ── -->
-  <section class="meta-row reveal" aria-label="Event details" style="transition-delay:0.15s">
-    <div class="meta-card glass-card">
-      <div class="label">Occasion</div>
-      <div class="value">First NS Wedding</div>
-    </div>
-    <div class="meta-card glass-card">
-      <div class="label">Date</div>
-      <div class="value">26&middot;06&middot;26</div>
-    </div>
-    <div class="meta-card glass-card">
-      <div class="label">Hour</div>
-      <div class="value">6:00 PM</div>
-    </div>
-    <div class="meta-card glass-card">
-      <div class="label">Place</div>
-      <div class="value">Network School</div>
-    </div>
-  </section>
+  <main role="main">
 
-  <!-- ── COUNTDOWN ── -->
-  <section class="countdown-section reveal" aria-label="Countdown" style="transition-delay:0.3s">
-    <p class="countdown-label">Countdown</p>
-    <div id="countdown" aria-live="polite">
-      <div class="countdown-grid">
-        <div class="countdown-box glass-card">
-          <div class="num" id="cd-days">--</div>
-          <div class="unit">Days</div>
-        </div>
-        <div class="countdown-box glass-card">
-          <div class="num" id="cd-hours">--</div>
-          <div class="unit">Hours</div>
-        </div>
-        <div class="countdown-box glass-card">
-          <div class="num" id="cd-mins">--</div>
-          <div class="unit">Min</div>
-        </div>
-        <div class="countdown-box glass-card">
-          <div class="num" id="cd-secs">--</div>
-          <div class="unit">Sec</div>
+    <!-- ── DATE HERO ── -->
+    <section class="date-hero reveal" aria-label="Event date">
+      <p class="date-big" aria-label="26 June 2026">26·06·26</p>
+      <p class="date-sub"><strong>6:00 PM</strong> &nbsp;MYT</p>
+
+      <p class="event-kicker">World's First</p>
+      <h1 class="event-title">First Humanoid<br>Bridal Walk</h1>
+      <p class="event-subtitle">Humanoid Bride Escort & Aisle Walk</p>
+      <p class="event-lede">"The first time in recorded history a humanoid robot escorted a bride down the aisle — standing in for the family who could not cross the distance."</p>
+    </section>
+
+    <div class="gold-rule reveal"></div>
+
+    <!-- ── COUNTDOWN ── -->
+    <section class="countdown-section reveal" aria-label="Countdown" style="transition-delay:0.1s">
+      <p class="countdown-label">Countdown to History</p>
+      <div id="countdown" aria-live="polite">
+        <div class="countdown-grid">
+          <div class="countdown-box glass glass-glow"><div class="num" id="cd-days">--</div><div class="unit">Days</div></div>
+          <div class="countdown-box glass glass-glow"><div class="num" id="cd-hours">--</div><div class="unit">Hours</div></div>
+          <div class="countdown-box glass glass-glow"><div class="num" id="cd-mins">--</div><div class="unit">Min</div></div>
+          <div class="countdown-box glass glass-glow"><div class="num" id="cd-secs">--</div><div class="unit">Sec</div></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── NARRATIVE ── -->
-  <section class="narrative-section reveal" aria-label="The Moment" style="transition-delay:0.1s">
-    <div class="narrative-panel glass-card">
-      <h2>The Moment</h2>
-      <p>Her father and grandparents could not make the crossing. So at Network School&thinsp;&mdash;&thinsp;the genesis node&thinsp;&mdash;&thinsp;something this community helped bring to life took their place, and walked the bride to meet her groom. Not a spectacle. A stand-in for love that distance kept away.</p>
-    </div>
-  </section>
-
-  <!-- ── COMMEMORATIVE COIN ── -->
-  <section class="coin-section reveal" aria-label="Commemorative coin" style="transition-delay:0.15s">
-    <h2 class="coin-section-title">The Commemorative Coin</h2>
-
-    <div class="coin-3d-container reveal" id="coin3d-container" style="transition-delay:0.1s">
-      <div class="coin-3d" id="coin3d" onclick="flipCoin()" role="button" tabindex="0" aria-label="Interactive 3D coin — click to flip between obverse and reverse">
-        <div class="coin-3d-face coin-3d-front">
-          <img src="../public/coin-obverse.png" alt="Coin obverse face showing humanoid bride escort design" loading="lazy">
-        </div>
-        <div class="coin-3d-face coin-3d-back">
-          <img src="../public/coin-reverse.png" alt="Coin reverse face with inscription K, Genesis Node, First Wedding, S, XXVI VI XXVI" loading="lazy">
-        </div>
-        <div class="coin-3d-shine" id="coin3d-shine"></div>
+    <!-- ── EVENT META ── -->
+    <section class="meta-row reveal" aria-label="Event details" style="transition-delay:0.15s">
+      <div class="meta-card glass">
+        <div class="label">Occasion</div>
+        <div class="value">First NS Wedding</div>
       </div>
-      <div class="coin-3d-shadow" id="coin3d-shadow"></div>
-      <p class="coin-3d-face-label" id="coin3d-face-label">Obverse</p>
-      <p class="coin-3d-label" id="coin3d-flip-label">Click to flip</p>
+      <div class="meta-card glass">
+        <div class="label">Date</div>
+        <div class="value">26·06·26</div>
+      </div>
+      <div class="meta-card glass">
+        <div class="label">Hour</div>
+        <div class="value">6:00 PM</div>
+      </div>
+      <div class="meta-card glass">
+        <div class="label">Place</div>
+        <div class="value">Network School</div>
+      </div>
+    </section>
+
+    <!-- ── NETWORK SCHOOL SECTION ── -->
+    <section class="ns-section reveal" aria-label="About Network School" style="transition-delay:0.1s">
+      <div class="ns-panel glass glass-glow">
+        <p class="ns-panel-title">The Venue · The Community</p>
+        <p class="ns-panel-text">
+          <em>Network School</em> — a global community of builders, technologists, and pioneers,
+          gathered in Forest City, Malaysia. The first wedding in its history. The genesis node.
+          Where a community that builds the future also celebrates the most human of moments.
+        </p>
+        <a href="https://ns.com" target="_blank" rel="noopener" class="ns-link">
+          Visit Network School →
+        </a>
+      </div>
+    </section>
+
+    <!-- ── THE MOMENT ── -->
+    <section class="narrative-section reveal" aria-label="The Moment" style="transition-delay:0.1s">
+      <div class="narrative-panel glass glass-glow">
+        <h2>The Moment</h2>
+        <p>Her father and grandparents could not make the crossing. So at Network School — the genesis node — something this community helped bring to life took their place, and walked the bride to meet her groom. Not a spectacle. A stand-in for love that distance kept away.</p>
+      </div>
+    </section>
+
+    <!-- ── 3D COIN ── -->
+    <section class="coin-section reveal" aria-label="Commemorative coin" style="transition-delay:0.15s">
+      <h2 class="coin-section-title">The Commemorative Coin</h2>
+
+      <div class="coin-3d-container" id="coin3d-container">
+        <div class="coin-3d" id="coin3d" onclick="flipCoin()" role="button" tabindex="0" aria-label="Interactive 3D coin — click to flip">
+          <div class="coin-3d-face coin-3d-front">
+            <img src="public/coin-obverse.png" alt="Obverse: humanoid robot bride escort engraving" loading="lazy">
+          </div>
+          <div class="coin-3d-face coin-3d-back">
+            <img src="public/coin-reverse.png" alt="Reverse: Swiss cross with K · Genesis Node · First Wedding · S · XXVI · VI · XXVI" loading="lazy">
+          </div>
+          <div class="coin-3d-shine" id="coin3d-shine"></div>
+        </div>
+        <div class="coin-3d-shadow" id="coin3d-shadow"></div>
+        <p class="coin-3d-face-label" id="coin3d-face-label">Obverse</p>
+        <p class="coin-3d-label" id="coin3d-flip-label">Click to flip</p>
+      </div>
+
+      <dl class="coin-inscriptions">
+        <dt>Obverse Rim</dt>
+        <dd>FIRST HUMANOID / BRIDE ESCORT</dd>
+        <dt>Reverse Ring</dt>
+        <dd>K · GENESIS NODE · FIRST WEDDING · S · XXVI · VI · XXVI</dd>
+      </dl>
+
+      <div class="coin-specs">
+        <span class="coin-spec">Limited & Numbered</span>
+        <span class="coin-spec">Struck Once</span>
+        <span class="coin-spec">Serialized</span>
+        <span class="coin-spec">Personalized</span>
+      </div>
+    </section>
+
+    <!-- ── PERSONALIZATION ── -->
+    <section class="personalization reveal" aria-label="Personalization" style="transition-delay:0.1s">
+      <div class="personalization-panel glass glass-glow">
+        <p class="reserved-label">Reserved for</p>
+        <p class="reserved-name" id="reserved-name">[ your name ]</p>
+        <p class="edition-number">No. <span id="edition-num">001</span> / <span id="edition-size">100</span></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer role="contentinfo">
+    <div class="footer-ns">
+      <span class="footer-ns-mark">NS</span>
+      <span class="footer-ns-text">Network School · Genesis Node · Block 0</span>
     </div>
+    <p>1.4143°N 103.6253°E · Forest City · Malaysia</p>
+    <p class="footer-title">First Humanoid Bridal Walk — 26 June 2026</p>
+    <a href="/versions/" class="versions-link">View all design versions</a>
+  </footer>
 
-    <div class="coin-specs">
-      <span class="coin-spec">Limited &amp; Numbered</span>
-      <span class="coin-spec">Struck Once, Never Reissued</span>
-      <span class="coin-spec">Serialized</span>
-      <span class="coin-spec">Personalized</span>
-    </div>
-  </section>
-
-  <!-- ── PERSONALIZATION ── -->
-  <section class="personalization reveal" aria-label="Personalization" style="transition-delay:0.1s">
-    <div class="personalization-panel glass-card">
-      <p class="reserved-label">Reserved for</p>
-      <p class="reserved-name" id="reserved-name">[ your name ]</p>
-      <p class="edition-number">No. <span id="edition-num">001</span> / <span id="edition-size">100</span></p>
-    </div>
-  </section>
-
-</main>
-
-<!-- ── FOOTER ── -->
-<footer role="contentinfo">
-  <p>Network School &middot; Genesis Node &middot; Block 0</p>
-  <p>1.4143&deg;N 103.6253&deg;E &middot; Forest City &middot; Malaysia</p>
-  <p class="footer-title">First Humanoid Bridal Walk &mdash; 26 June 2026</p>
-</footer>
+</div>
 
 <!-- TODO: MEDIA GALLERY — Photos & videos from the event (post-wedding) -->
 <!-- <section id="gallery" aria-label="Event Gallery">
@@ -707,17 +929,12 @@ footer .footer-title {
   'use strict';
 
   // ── PERSONALIZATION ──
-  var EDITION_SIZE = 100;
+  var EDITION_SIZE = 100; /* TODO: confirm final edition count */
   var params = new URLSearchParams(window.location.search);
   var name = params.get('name');
   var n = params.get('n');
-
-  if (name) {
-    document.getElementById('reserved-name').textContent = name;
-  }
-  if (n) {
-    document.getElementById('edition-num').textContent = String(n).padStart(3, '0');
-  }
+  if (name) document.getElementById('reserved-name').textContent = name;
+  if (n) document.getElementById('edition-num').textContent = String(n).padStart(3, '0');
   document.getElementById('edition-size').textContent = String(EDITION_SIZE);
 
   // ── COUNTDOWN ──
@@ -730,31 +947,25 @@ footer .footer-title {
   function tick() {
     var now = Date.now();
     var diff = TARGET - now;
-
     if (diff > 0) {
-      // Still counting down
       var d = Math.floor(diff / 86400000);
       var h = Math.floor((diff % 86400000) / 3600000);
       var m = Math.floor((diff % 3600000) / 60000);
       var s = Math.floor((diff % 60000) / 1000);
-
       document.getElementById('cd-days').textContent = pad(d);
       document.getElementById('cd-hours').textContent = pad(h);
       document.getElementById('cd-mins').textContent = pad(m);
       document.getElementById('cd-secs').textContent = pad(s);
     } else if (diff > -SIX_HOURS) {
-      // Happening now (within 6 hours after)
       countdownEl.innerHTML = '<p class="countdown-sealed">Happening now</p>';
     } else {
-      // Sealed
-      countdownEl.innerHTML = '<p class="countdown-sealed">26&middot;06&middot;2026 &mdash; Sealed</p>';
+      countdownEl.innerHTML = '<p class="countdown-sealed">26·06·2026 — Sealed</p>';
     }
   }
-
   tick();
   setInterval(tick, 1000);
 
-  // ── 3D COIN INTERACTION ──
+  // ── 3D COIN ──
   var coin3d = document.getElementById('coin3d');
   var coin3dShine = document.getElementById('coin3d-shine');
   var coin3dShadow = document.getElementById('coin3d-shadow');
@@ -799,8 +1010,7 @@ footer .footer-title {
   coin3dContainer.addEventListener('mouseleave', function() {
     if (!coinTiltActive) return;
     coin3d.style.transform = coinFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
-    if (!coinFlipped) coin3d.style.animation = 'coin-idle-wobble 6s ease-in-out infinite, coin-glow 5s ease infinite';
-    else coin3d.style.animation = 'coin-glow 5s ease infinite';
+    coin3d.style.animation = coinFlipped ? 'coin-glow 5s ease infinite' : 'coin-idle-wobble 6s ease-in-out infinite, coin-glow 5s ease infinite';
     coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%)';
     coin3dShadow.style.transform = 'translateX(0) scaleY(1)';
     coin3dShadow.style.opacity = '0.15';
@@ -814,8 +1024,7 @@ footer .footer-title {
       var mx = t.clientX - cx, my = t.clientY - cy, max = 15;
       var tx = Math.max(-max, Math.min(max, -(my / (rect.height / 2)) * max));
       var ty = Math.max(-max, Math.min(max, (mx / (rect.width / 2)) * max));
-      var base = coinFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
-      coin3d.style.transform = base + ' rotateX(' + tx + 'deg) rotateY(' + ty + 'deg)';
+      coin3d.style.transform = (coinFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)') + ' rotateX(' + tx + 'deg) rotateY(' + ty + 'deg)';
       coin3d.style.animation = 'coin-glow 5s ease infinite';
       var sx = ((mx / (rect.width / 2)) + 1) / 2 * 100;
       var sy = ((my / (rect.height / 2)) + 1) / 2 * 100;
@@ -823,22 +1032,20 @@ footer .footer-title {
     }, { passive: true });
   }
 
-  // ── INTERSECTION OBSERVER REVEAL ──
+  // ── REVEAL ──
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-    reveals.forEach(function (el) { observer.observe(el); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(function(el) { observer.observe(el); });
   } else {
-    // Fallback: show everything
-    reveals.forEach(function (el) { el.classList.add('visible'); });
+    reveals.forEach(function(el) { el.classList.add('visible'); });
   }
 })();
 </script>
