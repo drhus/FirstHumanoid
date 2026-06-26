@@ -189,27 +189,15 @@ body {
 
 .ns-logo:hover { color: var(--gold); }
 
-.ns-logo-mark {
-  width: 36px;
-  height: 36px;
-  border: 2px solid var(--gold);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--mono);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--gold);
-  position: relative;
+.ns-logo-img {
+  height: 32px;
+  width: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
 }
 
-.ns-logo-mark::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 10px;
-  border: 1px solid var(--gold-dim);
+.ns-logo:hover .ns-logo-img {
+  opacity: 1;
 }
 
 .ns-tagline {
@@ -681,18 +669,10 @@ footer {
   margin-bottom: 16px;
 }
 
-.footer-ns-mark {
-  width: 28px;
-  height: 28px;
-  border: 1.5px solid var(--gold-dim);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--gold-dim);
+.footer-ns-logo {
+  height: 22px;
+  width: auto;
+  opacity: 0.35;
 }
 
 .footer-ns-text {
@@ -783,8 +763,7 @@ footer .footer-title {
   <!-- ── NETWORK SCHOOL HEADER ── -->
   <div class="ns-header reveal">
     <a href="https://ns.com" target="_blank" rel="noopener" class="ns-logo" aria-label="Network School">
-      <span class="ns-logo-mark">NS</span>
-      <span>Network School</span>
+      <img src="https://assets.ns.com/static/about/network-state-and-network-school-logos/ns-com-logos/ns-com-logo-white.svg" alt="Network School logo" class="ns-logo-img">
     </a>
     <p class="ns-tagline">Forest City · Malaysia · Genesis Node</p>
   </div>
@@ -842,8 +821,8 @@ footer .footer-title {
       <div class="ns-panel glass glass-glow">
         <p class="ns-panel-title">The Venue · The Community</p>
         <p class="ns-panel-text">
-          <em>Network School</em> — a global community of builders, technologists, and pioneers,
-          gathered in Forest City, Malaysia. The first wedding in its history. The genesis node.
+          <em>Network School</em> — a community turning internet communities into physical startup societies.
+          Learn, Burn, and Earn in Forest City, Malaysia. The first wedding in its history. The genesis node.
           Where a community that builds the future also celebrates the most human of moments.
         </p>
         <a href="https://ns.com" target="_blank" rel="noopener" class="ns-link">
@@ -908,8 +887,8 @@ footer .footer-title {
   <!-- ── FOOTER ── -->
   <footer role="contentinfo">
     <div class="footer-ns">
-      <span class="footer-ns-mark">NS</span>
-      <span class="footer-ns-text">Network School · Genesis Node · Block 0</span>
+      <img src="https://assets.ns.com/static/about/network-state-and-network-school-logos/ns-com-logos/ns-com-logo-white.svg" alt="Network School" class="footer-ns-logo">
+      <span class="footer-ns-text">Genesis Node · Block 0</span>
     </div>
     <p>1.4143°N 103.6253°E · Forest City · Malaysia</p>
     <p class="footer-title">First Humanoid Bridal Walk — 26 June 2026</p>
