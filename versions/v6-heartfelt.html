@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The World's First Humanoid Bridal Walk</title>
+<meta name="description" content="When Sonia's grandfather couldn't cross the ocean to walk her down the aisle, a community built something the world had never seen. 26 June 2026, Network School, Forest City, Malaysia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0f0d0b;
+  --bg-warm: #171310;
+  --text: #f5efe6;
+  --text-dim: #9e9589;
+  --rose: #d4a0a0;
+  --rose-glow: rgba(212,160,160,0.25);
+  --gold: #c9a84c;
+  --gold-glow: rgba(201,168,76,0.25);
+  --cream: #f5efe6;
+  --cream-dim: rgba(245,239,230,0.08);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #2a2420 var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ===== TIMELINE SPINE ===== */
+.timeline-spine {
+  position: fixed;
+  left: 40px;
+  top: 0;
+  width: 2px;
+  height: 100vh;
+  background: #1e1a16;
+  z-index: 100;
+}
+
+.timeline-spine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--scroll-progress, 0%);
+  background: linear-gradient(180deg, var(--gold), var(--rose), var(--gold));
+  transition: height 0.1s linear;
+  box-shadow: 0 0 12px var(--gold-glow), 0 0 24px var(--rose-glow);
+}
+
+@media (max-width: 768px) {
+  .timeline-spine { left: 16px; }
+}
+
+/* ===== CHAPTER LAYOUT ===== */
+.chapter {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10vh 5vw 10vh calc(80px + 3vw);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .chapter { padding: 8vh 6vw 8vh calc(40px + 4vw); }
+}
+
+.chapter-inner {
+  max-width: 760px;
+  width: 100%;
+}
+
+/* ===== CHAPTER MARKER ===== */
+.chapter-marker {
+  position: absolute;
+  left: 31px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--accent, var(--rose));
+  background: var(--bg);
+  z-index: 101;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chapter-marker.active {
+  background: var(--accent, var(--rose));
+  box-shadow: 0 0 20px var(--accent-glow, var(--rose-glow)), 0 0 40px var(--accent-glow, var(--rose-glow));
+  transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+  .chapter-marker { left: 7px; }
+}
+
+/* ===== CHAPTER NUMBER ===== */
+.chapter-num {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent, var(--rose));
+  margin-bottom: 1rem;
+  font-style: italic;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+.reveal-delay-5 { transition-delay: 0.75s; }
+.reveal-delay-6 { transition-delay: 0.9s; }
+
+.chapter.in-view .chapter-num {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  font-style: italic;
+  color: var(--cream);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-style: normal;
+}
+
+p {
+  margin-bottom: 1.3rem;
+  color: var(--text-dim);
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
+p.lead {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--cream);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+p.emotional {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--rose);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+a:hover {
+  border-bottom-color: var(--gold);
+  color: #e8d5a0;
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  filter: blur(2px);
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg,
+    rgba(15,13,11,0.3) 0%,
+    rgba(15,13,11,0.6) 40%,
+    rgba(15,13,11,0.95) 85%,
+    var(--bg) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-overline {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-weight: 300;
+  font-style: italic;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--rose) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.hero h1 span {
+  display: block;
+  font-weight: 500;
+  font-size: clamp(3.2rem, 9vw, 7.5rem);
+  font-style: normal;
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  max-width: 500px;
+}
+
+.hero-date {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: var(--text-dim);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 0.8rem 2rem;
+  display: inline-block;
+  border-radius: 40px;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: pulse-down 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+.scroll-hint span {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.scroll-hint svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-dim);
+}
+
+@keyframes pulse-down {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(8px); }
+}
+
+/* ===== SECTION ACCENTS ===== */
+.chapter[data-accent="rose"] { --accent: var(--rose); --accent-glow: var(--rose-glow); }
+.chapter[data-accent="gold"] { --accent: var(--gold); --accent-glow: var(--gold-glow); }
+
+/* ===== DIVIDER ===== */
+.section-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent, var(--rose)), transparent);
+  margin: 1.5rem 0 2rem;
+}
+
+/* ===== STORY PHOTO ===== */
+.story-photo {
+  margin: 2.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s;
+}
+
+.story-photo:hover {
+  transform: scale(1.015);
+  box-shadow: 0 12px 50px rgba(0,0,0,0.5), 0 0 30px var(--rose-glow);
+}
+
+.story-photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.story-photo.portrait img {
+  max-height: 520px;
+}
+
+.story-photo.landscape img {
+  max-height: 450px;
+}
+
+.story-photo-caption {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 1rem 1rem 0.5rem;
+}
+
+/* ===== PHOTO GRID ===== */
+.photo-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: 2.5rem 0;
+}
+
+.photo-pair .story-photo {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .photo-pair { grid-template-columns: 1fr; }
+}
+
+/* ===== GALLERY MASONRY ===== */
+.gallery-grid {
+  columns: 2;
+  column-gap: 1.2rem;
+  margin: 2.5rem 0;
+}
+
+.gallery-grid .story-photo {
+  margin: 0 0 1.2rem;
+  break-inside: avoid;
+}
+
+@media (max-width: 600px) {
+  .gallery-grid { columns: 1; }
+}
+
+/* ===== CREDITS ===== */
+.credits-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.credit-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--cream-dim);
+  border: 1px solid rgba(212,160,160,0.08);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.credit-item:hover {
+  background: rgba(245,239,230,0.1);
+  border-color: rgba(212,160,160,0.15);
+}
+
+.credit-role {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 0.4rem;
+  font-style: italic;
+}
+
+.credit-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 0.3rem;
+}
+
+.credit-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.credit-links a {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  transition: color 0.3s;
+}
+
+.credit-links a:hover {
+  color: var(--rose);
+}
+
+/* ===== 3D COIN ===== */
+.coin-3d-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2.5rem auto;
+  perspective: 800px;
+}
+
+.coin-3d {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.1s ease-out;
+  animation: coin-glow 5s ease infinite;
+}
+
+.coin-3d.flipping {
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.coin-3d-face {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.coin-3d-face img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.coin-3d-back {
+  transform: rotateY(180deg);
+}
+
+.coin-3d-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
+  mix-blend-mode: overlay;
+  z-index: 2;
+  transition: background 0.1s ease-out;
+}
+
+.coin-3d::after {
+  content: '';
+  position: absolute;
+  top: 1%; left: 1%;
+  width: 98%; height: 98%;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.12);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.coin-3d-shadow {
+  width: 260px;
+  height: 20px;
+  margin-top: 20px;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(12px);
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+@keyframes coin-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(201,168,76,0.35), 0 0 60px rgba(212,160,160,0.15); }
+  50% { box-shadow: 0 0 40px rgba(201,168,76,0.5), 0 0 80px rgba(212,160,160,0.25); }
+}
+
+.coin-face-label {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.coin-flip-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+  text-align: center;
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .coin-3d { width: 240px; height: 240px; }
+  .coin-3d-shadow { width: 200px; }
+}
+
+/* ===== PHOTO OF COIN IN HAND ===== */
+.coin-photo-holder {
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ===== CTA ===== */
+.cta-box {
+  text-align: center;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(212,160,160,0.15);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.04), rgba(212,160,160,0.04));
+  margin-top: 2rem;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-bottom: none;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--rose-glow), 0 4px 20px var(--gold-glow);
+  border-bottom: none;
+  color: var(--bg);
+}
+
+/* ===== CLOSING ===== */
+.closing {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem 6rem;
+  position: relative;
+}
+
+.closing-photo {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+
+.closing-photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.closing-line {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.closing-line + .closing-line {
+  margin-top: 0.5rem;
+}
+
+.closing-heart {
+  color: var(--rose);
+  font-size: 1.5rem;
+  margin: 1.5rem auto;
+  opacity: 0.7;
+  animation: heart-beat 2s ease-in-out infinite;
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* ===== AMBIENT PARTICLES ===== */
+.particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: float-particle linear infinite;
+}
+
+@keyframes float-particle {
+  0% { opacity: 0; transform: translateY(100vh) translateX(0); }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(-10vh) translateX(30px); }
+}
+
+/* ===== FULL-WIDTH HERO PHOTO SECTION ===== */
+.hero-photo-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 3rem auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 60px rgba(0,0,0,0.5), 0 0 40px var(--rose-glow);
+}
+
+.hero-photo-section img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ===== VENUE SECTION ===== */
+.venue-photo {
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.venue-photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .credit-name { font-size: 1.15rem; }
+  p { font-size: 1rem; }
+  p.lead { font-size: 1.3rem; }
+  p.emotional { font-size: 1.15rem; }
+  .hero-photo-section { border-radius: 8px; margin: 2rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- TIMELINE SPINE -->
+<div class="timeline-spine" aria-hidden="true"></div>
+
+<!-- AMBIENT PARTICLES -->
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="ch0">
+  <div class="hero-bg">
+    <img src="../public/photos/PXL_20260626_103410037.jpg" alt="The bridal party with the humanoid robot">
+  </div>
+  <div class="hero-content">
+    <div class="hero-overline reveal">A Love Story in Technology</div>
+    <h1 class="reveal reveal-delay-1">The Walk<span>She Wished For</span></h1>
+    <p class="hero-subtitle reveal reveal-delay-2">When her grandfather couldn't cross the ocean, a community built something the world had never seen.</p>
+    <div class="hero-date reveal reveal-delay-3">26 June 2026 &middot; Forest City, Malaysia</div>
+    <div class="scroll-hint">
+      <span>Begin the story</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 1: EVERY BRIDE'S WISH ===== -->
+<section class="chapter" data-accent="rose" id="ch1">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">Chapter I</div>
+    <h2 class="reveal">Every Bride's Wish</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">There is a moment every bride imagines long before the dress, the flowers, or the rings.</p>
+    <p class="reveal reveal-delay-2">The music begins. The doors open. And there, beside her, is the person who held her hand when she first learned to walk &mdash; now walking her toward the rest of her life.</p>
+    <p class="reveal reveal-delay-3">For Sonia, that person had always been her grandfather. The man who lifted her onto his shoulders, who told her stories before sleep, who promised &mdash; with the certainty only a grandparent can have &mdash; that he would be there when the day came.</p>
+    <p class="emotional reveal reveal-delay-4">She never doubted it. Not once.</p>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 2: AN OCEAN BETWEEN THEM ===== -->
+<section class="chapter" data-accent="rose" id="ch2">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">Chapter II</div>
+    <h2 class="reveal">An Ocean Between Them</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">But life, as it sometimes does, had other plans.</p>
+    <p class="reveal reveal-delay-2">Her grandfather couldn't make the crossing. Age, health, the sheer vastness of the world between them &mdash; some distances feel impossible to bridge. The dream of walking beside her seemed destined to remain just that: a beautiful, heartbreaking dream.</p>
+    <p class="emotional reveal reveal-delay-3">How do you tell someone you love that the moment they promised you &mdash; the moment you both imagined a thousand times &mdash; might not happen?</p>
+    <p class="reveal reveal-delay-4">And yet, in a small corner of Malaysia, a group of people who barely knew Sonia were about to prove that love doesn't care about distance.</p>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 3: WHAT IF WE COULD BRIDGE IT? ===== -->
+<section class="chapter" data-accent="gold" id="ch3">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">Chapter III</div>
+    <h2 class="reveal">What If We Could Bridge It?</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">It started the way all impossible things start &mdash; with someone asking a question no one had asked before.</p>
+    <p class="reveal reveal-delay-2">At <a href="https://ns.com" target="_blank">Network School</a> in Forest City, Malaysia, there lives a community of builders, dreamers, and engineers who share meals, share workshops, and share a stubborn belief that technology should serve the most human moments of all.</p>
+    <p class="reveal reveal-delay-3">When they heard Sonia's story, they didn't say "that's too bad." They said something else entirely:</p>
+    <p class="emotional reveal reveal-delay-4">"What if her grandfather could still walk her down the aisle &mdash; through a humanoid robot he controls from across the world?"</p>
+
+    <div class="story-photo landscape reveal reveal-delay-5">
+      <img src="../public/photos/PXL_20260625_083727700.jpg" alt="The humanoid robot with glowing cyan face in the lab">
+      <div class="story-photo-caption">The idea takes shape. A face that glows &mdash; waiting for a soul to fill it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 4: A COMMUNITY ANSWERED ===== -->
+<section class="chapter" data-accent="gold" id="ch4">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">Chapter IV</div>
+    <h2 class="reveal">A Community Answered</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">No one was asked to help. They just showed up.</p>
+    <p class="reveal reveal-delay-2">Engineers stayed up late calibrating motors and testing video feeds. Someone found fabric for a suit. Someone else designed a boutonniere. They argued over camera angles and connection speeds and whether the robot's bow tie should be black or navy.</p>
+    <p class="reveal reveal-delay-3">It was messy and late and beautiful &mdash; the way all acts of love are.</p>
+
+    <div class="photo-pair reveal reveal-delay-3">
+      <div class="story-photo">
+        <img src="../public/photos/PXL_20260625_035436967.jpg" alt="Dressing the robot in a suit in the lab">
+        <div class="story-photo-caption">Late night in the lab. Dressing a robot for a wedding.</div>
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/PXL_20260625_090942268.jpg" alt="Sara styling the robot's suit">
+        <div class="story-photo-caption">Sara making sure every detail was perfect.</div>
+      </div>
+    </div>
+
+    <div class="story-photo landscape reveal reveal-delay-4">
+      <img src="../public/photos/PXL_20260626_095934375.jpg" alt="Team selfie with the suited robot showing the iPad video feed and rose boutonniere">
+      <div class="story-photo-caption">The team, the robot, and a rose boutonniere. Almost ready.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 5: THE MOMENT THAT CHANGED EVERYTHING ===== -->
+<section class="chapter" data-accent="rose" id="ch5">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">Chapter V</div>
+    <h2 class="reveal">The Moment That Changed Everything</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">26 June 2026. The golden hour. Forest City, Malaysia.</p>
+    <p class="reveal reveal-delay-2">The music began. Guests turned. And there, walking beside the bride in a tailored suit, was a humanoid robot &mdash; carrying her grandfather's face on its screen, his voice in its speakers, his tears streaming through a live connection across the ocean.</p>
+    <p class="emotional reveal reveal-delay-3">He was there. Not in body, but in every way that mattered.</p>
+
+    <div class="story-photo landscape reveal reveal-delay-3">
+      <img src="../public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign reading Sonia and Kris">
+      <div class="story-photo-caption">Sonia & Kris. The day they'd been dreaming of.</div>
+    </div>
+
+    <div class="story-photo landscape reveal reveal-delay-4">
+      <img src="../public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="The ceremony at the altar">
+      <div class="story-photo-caption">The ceremony &mdash; where love and technology met at the altar.</div>
+    </div>
+
+    <div class="hero-photo-section reveal reveal-delay-5">
+      <img src="../public/photos/PXL_20260626_103410037.jpg" alt="Sonia with the robot carrying her grandfather's image, surrounded by friends under palm trees">
+    </div>
+    <p class="emotional reveal reveal-delay-5" style="text-align: center; margin-top: 1.5rem;">Sonia, her grandfather, and the community that made it possible.</p>
+
+    <div class="story-photo landscape reveal reveal-delay-6">
+      <img src="../public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party group photo under the flower arch">
+      <div class="story-photo-caption">Under the flower arch. Everyone together &mdash; no matter the distance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 6: A KEEPSAKE, STRUCK IN LOVE ===== -->
+<section class="chapter" data-accent="gold" id="ch6">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">Chapter VI</div>
+    <h2 class="reveal">A Keepsake, Struck in Love</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">Some moments deserve to be held in your hands.</p>
+    <p class="reveal reveal-delay-2">To mark the day that love refused to accept distance as an answer, a commemorative coin was designed and 3D printed &mdash; a small, tangible reminder that the impossible happened here.</p>
+
+    <!-- 3D Interactive Coin -->
+    <div class="coin-3d-container reveal reveal-delay-3" id="coin3d-container">
+      <div class="coin-3d" id="coin3d" onclick="flipCoin()" tabindex="0" role="button" aria-label="Flip the commemorative coin">
+        <div class="coin-3d-face coin-3d-front">
+          <img src="../public/coin-obverse.png" alt="Commemorative coin obverse">
+        </div>
+        <div class="coin-3d-face coin-3d-back">
+          <img src="../public/coin-reverse.png" alt="Commemorative coin reverse">
+        </div>
+        <div class="coin-3d-shine" id="coin3d-shine"></div>
+      </div>
+      <div class="coin-3d-shadow" id="coin3d-shadow"></div>
+      <div class="coin-face-label" id="coin3d-face-label">Obverse</div>
+      <div class="coin-flip-label" id="coin3d-flip-label">Click to flip</div>
+    </div>
+
+    <div class="story-photo reveal reveal-delay-4">
+      <img src="../public/photos/PXL_20260626_094810823.PORTRAIT.jpg" alt="3D printed commemorative coin held in hand" style="max-height: 400px; object-fit: cover;">
+      <div class="story-photo-caption">The coin, held in the hand that helped make it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 7: THEIR DAY ===== -->
+<section class="chapter" data-accent="rose" id="ch7">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">Chapter VII</div>
+    <h2 class="reveal">Their Day</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">Kris & Sonia.</p>
+    <p class="reveal reveal-delay-2">At the center of all this &mdash; past the circuits and the code, past the late nights and the last-minute fixes &mdash; are two people who simply wanted their wedding to include everyone they love. No matter the distance. No matter what it took.</p>
+    <p class="reveal reveal-delay-3">Their love inspired a community to build something the world had never seen. And it all started because one couple dared to believe that being together doesn't always mean being in the same room.</p>
+    <p class="reveal reveal-delay-4"><a href="https://krisandsonia.com" target="_blank" style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic;">Visit krisandsonia.com</a></p>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 8: THE PLACE THAT MADE IT POSSIBLE ===== -->
+<section class="chapter" data-accent="gold" id="ch8">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">Chapter VIII</div>
+    <h2 class="reveal">The Place That Made It Possible</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">Network School.</p>
+    <p class="reveal reveal-delay-2">Not a corporation. Not a research lab. A community &mdash; the kind of place where someone shares a seemingly impossible idea over dinner and wakes up to find a team already working on it.</p>
+    <p class="reveal reveal-delay-3">Builders, dreamers, and engineers living side by side in Forest City, Malaysia. Building the future not in boardrooms, but in kitchens and workshops and late-night conversations that start with "what if?"</p>
+    <p class="reveal reveal-delay-4">This is where the world's first humanoid bridal walk was born. Because this is the kind of place where love and technology aren't opposites &mdash; they're the same thing.</p>
+    <p class="reveal reveal-delay-5"><a href="https://ns.com" target="_blank" style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic;">ns.com</a></p>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 9: THE HEARTS BEHIND THE WALK ===== -->
+<section class="chapter" data-accent="rose" id="ch9">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">With Gratitude</div>
+    <h2 class="reveal">The Hearts Behind the Walk</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="lead reveal reveal-delay-1">None of this was a job. All of it was a gift.</p>
+
+    <div class="credits-grid">
+      <div class="credit-item reveal reveal-delay-2">
+        <div class="credit-role">Conceived & Directed</div>
+        <div class="credit-name">Husam Abboud</div>
+        <div class="credit-links">
+          <a href="https://ns.com/hus" target="_blank">ns.com/hus</a>
+          <a href="https://instagram.com/hus" target="_blank">Instagram</a>
+        </div>
+      </div>
+
+      <div class="credit-item reveal reveal-delay-2">
+        <div class="credit-role">NS Robotics Lab Lead</div>
+        <div class="credit-name">Tony Park</div>
+        <div class="credit-links">
+          <a href="https://ns.com/tonymfer" target="_blank">ns.com/tonymfer</a>
+          <a href="https://instagram.com/tonylifeforce" target="_blank">Instagram</a>
+        </div>
+      </div>
+
+      <div class="credit-item reveal reveal-delay-3">
+        <div class="credit-role">Robotics Engineering</div>
+        <div class="credit-name">Andy, Clarence & Roy</div>
+        <div class="credit-links">
+          <a href="https://ns.com/theteatoast" target="_blank">ns.com/theteatoast</a>
+          <a href="https://instagram.com/virtualsio" target="_blank">Virtuals</a>
+          <a href="https://instagram.com/eastworlds_io" target="_blank">Eastworlds</a>
+          <a href="https://x.com/virtuals_io" target="_blank">X/Virtuals</a>
+          <a href="https://x.com/eastworlds_io" target="_blank">X/Eastworlds</a>
+        </div>
+      </div>
+
+      <div class="credit-item reveal reveal-delay-4">
+        <div class="credit-role">Robot Styling</div>
+        <div class="credit-name">Sara Landi Tortoli</div>
+        <div class="credit-links">
+          <a href="https://ns.com/sarawondertech" target="_blank">ns.com/sarawondertech</a>
+          <a href="https://instagram.com/sarainwondertech" target="_blank">Instagram</a>
+        </div>
+      </div>
+
+      <div class="credit-item reveal reveal-delay-5">
+        <div class="credit-role">Memorial Coin</div>
+        <div class="credit-name">Vinayak Vancheeswaran</div>
+        <div class="credit-links">
+          <a href="https://ns.com/vinayvancheeswa" target="_blank">ns.com/vinayvancheeswa</a>
+          <a href="https://avely.me/vanchee_kai" target="_blank">avely.me</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 10: BE PART OF SOMETHING BEAUTIFUL ===== -->
+<section class="chapter" data-accent="gold" id="ch10">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner">
+    <div class="chapter-num">What's Next</div>
+    <h2 class="reveal">Be Part of Something Beautiful</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+    <p class="reveal reveal-delay-2">The humanoid bridal walk was just one story. Network School is full of them &mdash; moments where people come together to build things that matter, for people who matter.</p>
+    <p class="emotional reveal reveal-delay-3">The next chapter could be yours.</p>
+
+    <div class="cta-box reveal reveal-delay-4">
+      <p style="color: var(--cream); font-family: var(--font-display); font-size: 1.2rem; font-style: italic; margin-bottom: 1.5rem;">Come build the future with us.</p>
+      <a href="https://ns.com/hus/apply" target="_blank" class="cta-button">Apply to Network School</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="chapter" data-accent="rose" id="gallery">
+  <div class="chapter-marker"></div>
+  <div class="chapter-inner" style="max-width: 900px;">
+    <div class="chapter-num">Gallery</div>
+    <h2 class="reveal">Moments That Matter</h2>
+    <div class="section-divider reveal reveal-delay-1"></div>
+
+    <div class="gallery-grid reveal reveal-delay-2">
+      <div class="story-photo">
+        <img src="../public/photos/PXL_20260625_083727700.jpg" alt="Humanoid robot with glowing cyan face">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/PXL_20260625_035436967.jpg" alt="Dressing the robot in a suit">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/PXL_20260625_090942268.jpg" alt="Sara styling the robot">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/PXL_20260626_095934375.jpg" alt="Team with the robot">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/PXL_20260626_094810823.PORTRAIT.jpg" alt="Coin in hand">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="The ceremony">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/PXL_20260626_103410037.jpg" alt="The full group photo">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party under arch">
+      </div>
+      <div class="story-photo">
+        <img src="../public/photos/Screenshot-from-2026-06-28-07-36-21.png" alt="Sparklers celebration">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLOSING ===== -->
+<section class="closing" id="closing">
+  <div class="closing-photo reveal">
+    <img src="../public/photos/Screenshot-from-2026-06-28-07-36-21.png" alt="Sparklers and confetti celebration">
+  </div>
+  <div class="closing-heart reveal reveal-delay-1">&hearts;</div>
+  <div class="closing-line reveal reveal-delay-2">The World's First Humanoid Bridal Walk</div>
+  <div class="closing-line reveal reveal-delay-3">Forest City &middot; Malaysia</div>
+  <div class="closing-line reveal reveal-delay-4" style="margin-top: 1rem; color: var(--gold);">26 June 2026</div>
+</section>
+
+<script>
+(function() {
+  // ===== SCROLL PROGRESS =====
+  var spine = document.querySelector('.timeline-spine');
+  function updateProgress() {
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = Math.min((scrollTop / docHeight) * 100, 100);
+    spine.style.setProperty('--scroll-progress', progress + '%');
+  }
+
+  // ===== INTERSECTION OBSERVER FOR REVEALS =====
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+  // ===== CHAPTER IN-VIEW =====
+  var chapters = document.querySelectorAll('.chapter');
+  var chapterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var marker = entry.target.querySelector('.chapter-marker');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        if (marker) marker.classList.add('active');
+      } else {
+        entry.target.classList.remove('in-view');
+        if (marker) marker.classList.remove('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  chapters.forEach(function(ch) { chapterObserver.observe(ch); });
+
+  // ===== POSITION CHAPTER MARKERS =====
+  function positionMarkers() {
+    chapters.forEach(function(ch) {
+      var marker = ch.querySelector('.chapter-marker');
+      if (!marker) return;
+      var chapterTop = ch.offsetTop;
+      var chapterCenter = chapterTop + ch.offsetHeight / 2;
+      marker.style.top = chapterCenter + 'px';
+    });
+  }
+
+  // ===== PARTICLES =====
+  function createParticles() {
+    var container = document.getElementById('particles');
+    var colors = ['var(--rose)', 'var(--gold)', 'var(--cream)'];
+    for (var i = 0; i < 25; i++) {
+      var p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = (18 + Math.random() * 28) + 's';
+      p.style.animationDelay = (Math.random() * 20) + 's';
+      p.style.width = (1 + Math.random() * 2) + 'px';
+      p.style.height = p.style.width;
+      container.appendChild(p);
+    }
+  }
+
+  // ===== 3D COIN =====
+  var coin3d = document.getElementById('coin3d');
+  var coin3dShine = document.getElementById('coin3d-shine');
+  var coin3dShadow = document.getElementById('coin3d-shadow');
+  var coin3dFaceLabel = document.getElementById('coin3d-face-label');
+  var coin3dFlipLabel = document.getElementById('coin3d-flip-label');
+  var coin3dContainer = document.getElementById('coin3d-container');
+  var coinFlipped = false;
+  var isFlipping = false;
+  var mouseOver = false;
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (isTouchDevice && coin3dFlipLabel) coin3dFlipLabel.textContent = 'Tap to flip';
+
+  // Idle wobble
+  var idleAngle = 0;
+  var idleRAF;
+  function idleWobble() {
+    if (mouseOver || isFlipping) return;
+    idleAngle += 0.008;
+    var wobbleX = Math.sin(idleAngle) * 5;
+    var wobbleY = Math.cos(idleAngle * 0.7) * 5;
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (base + wobbleY) + 'deg) rotateX(' + wobbleX + 'deg)';
+    if (coin3dShadow) {
+      coin3dShadow.style.transform = 'translateX(' + (-wobbleY * 0.6) + 'px) scaleY(' + (0.8 + Math.abs(wobbleX) * 0.015) + ')';
+    }
+    idleRAF = requestAnimationFrame(idleWobble);
+  }
+  idleWobble();
+
+  // Click to flip
+  window.flipCoin = function() {
+    coinFlipped = !coinFlipped;
+    isFlipping = true;
+    cancelAnimationFrame(idleRAF);
+    coin3d.classList.add('flipping');
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + base + 'deg) rotateX(0deg)';
+    coin3dFaceLabel.textContent = coinFlipped ? 'Reverse' : 'Obverse';
+    setTimeout(function() {
+      coin3d.classList.remove('flipping');
+      isFlipping = false;
+      if (!mouseOver) idleWobble();
+    }, 850);
+  };
+
+  coin3d.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipCoin(); }
+  });
+
+  // Mouse move tilt
+  coin3dContainer.addEventListener('mouseenter', function() {
+    mouseOver = true;
+    cancelAnimationFrame(idleRAF);
+  });
+
+  coin3dContainer.addEventListener('mousemove', function(e) {
+    if (isFlipping) return;
+    var rect = coin3d.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var mx = e.clientX - cx;
+    var my = e.clientY - cy;
+    var maxTilt = 25;
+    var normX = mx / (rect.width / 2);
+    var normY = my / (rect.height / 2);
+    var tiltX = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+    var tiltY = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (baseY + tiltY) + 'deg) rotateX(' + tiltX + 'deg)';
+
+    // Shine follows mouse
+    var shineX = (normX + 1) / 2 * 100;
+    var shineY = (normY + 1) / 2 * 100;
+    coin3dShine.style.background = 'radial-gradient(circle at ' + shineX + '% ' + shineY + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+
+    // Shadow reacts
+    coin3dShadow.style.transform = 'translateX(' + (-tiltY * 1.2) + 'px) scaleY(' + (0.5 + Math.abs(tiltX) * 0.025) + ')';
+    coin3dShadow.style.opacity = String(Math.min(0.5, 0.1 + (Math.abs(tiltX) + Math.abs(tiltY)) * 0.008));
+  });
+
+  coin3dContainer.addEventListener('mouseleave', function() {
+    mouseOver = false;
+    if (isFlipping) return;
+    coin3d.style.transition = 'transform 0.5s ease-out';
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+    coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+    coin3dShadow.style.transform = 'translateX(0) scaleY(1)';
+    coin3dShadow.style.opacity = '0.15';
+    setTimeout(function() {
+      coin3d.style.transition = 'transform 0.1s ease-out';
+      if (!mouseOver && !isFlipping) idleWobble();
+    }, 500);
+  });
+
+  // Touch support
+  if (isTouchDevice) {
+    coin3dContainer.addEventListener('touchmove', function(e) {
+      if (isFlipping) return;
+      mouseOver = true;
+      cancelAnimationFrame(idleRAF);
+      var t = e.touches[0];
+      var rect = coin3d.getBoundingClientRect();
+      var normX = (t.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      var normY = (t.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      var maxTilt = 25;
+      var tx = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+      var ty = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transform = 'rotateY(' + (baseY + ty) + 'deg) rotateX(' + tx + 'deg)';
+      var sx = (normX + 1) / 2 * 100;
+      var sy = (normY + 1) / 2 * 100;
+      coin3dShine.style.background = 'radial-gradient(circle at ' + sx + '% ' + sy + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+    }, { passive: true });
+    coin3dContainer.addEventListener('touchend', function() {
+      mouseOver = false;
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transition = 'transform 0.5s ease-out';
+      coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+      coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+      setTimeout(function() {
+        coin3d.style.transition = 'transform 0.1s ease-out';
+        if (!mouseOver && !isFlipping) idleWobble();
+      }, 500);
+    });
+  }
+
+  // ===== INIT =====
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', positionMarkers);
+
+  updateProgress();
+  positionMarkers();
+  createParticles();
+
+  // Reveal hero elements on load
+  setTimeout(function() {
+    document.querySelectorAll('.hero .reveal').forEach(function(el) { el.classList.add('visible'); });
+  }, 300);
+})();
+</script>
+
+</body>
+</html>

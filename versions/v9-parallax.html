@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The World's First Humanoid Bridal Walk</title>
+<meta name="description" content="A grandfather couldn't walk his granddaughter down the aisle. So we sent a humanoid robot in his place. Genesis Node, Forest City, 26 June 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════
+   RESET & FOUNDATIONS
+   ══════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #080808;
+  --gold: #c9a84c;
+  --gold-dim: rgba(201,168,76,0.4);
+  --white: #f0ede6;
+  --white-soft: rgba(240,237,230,0.7);
+  --white-faint: rgba(240,237,230,0.35);
+  --sans: 'Space Grotesk', sans-serif;
+  --serif: 'Crimson Pro', serif;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: var(--gold); text-decoration: none; transition: opacity 0.3s; }
+a:hover { opacity: 0.75; }
+
+/* ══════════════════════════════════
+   SECTION BASE
+   ══════════════════════════════════ */
+.chapter {
+  position: relative;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Video / image backgrounds */
+.chapter-bg-video,
+.chapter-bg-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.chapter-bg-img {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@supports (-webkit-touch-callout: none) {
+  /* iOS doesn't support background-attachment: fixed */
+  .chapter-bg-img { background-attachment: scroll; }
+}
+
+.chapter-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.chapter-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.5s; }
+.reveal-delay-4 { transition-delay: 0.7s; }
+
+/* ══════════════════════════════════
+   TYPOGRAPHY
+   ══════════════════════════════════ */
+.kicker {
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.4vw, 14px);
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.headline {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(36px, 8vw, 96px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.headline-serif {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(28px, 5.5vw, 72px);
+  line-height: 1.2;
+  color: var(--white);
+}
+
+.body-text {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--white-soft);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.date-display {
+  font-family: var(--sans);
+  font-size: clamp(12px, 1.6vw, 16px);
+  letter-spacing: 0.5em;
+  color: var(--gold-dim);
+  margin-top: 32px;
+}
+
+/* ══════════════════════════════════
+   1. HERO
+   ══════════════════════════════════ */
+#hero .chapter-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(8,8,8,0.4) 0%,
+    rgba(8,8,8,0.6) 50%,
+    rgba(8,8,8,0.85) 100%
+  );
+}
+
+.scroll-arrow {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: float 2.5s ease-in-out infinite;
+}
+.scroll-arrow svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--gold-dim);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 1; }
+}
+
+/* ══════════════════════════════════
+   2. THE DREAM
+   ══════════════════════════════════ */
+#dream .chapter-bg-img {
+  background-image: url('../public/photos/Screenshot-from-2026-06-28-07-29-19.png');
+}
+
+#dream .chapter-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(8,8,8,0.75) 0%,
+    rgba(8,8,8,0.55) 100%
+  );
+}
+
+/* ══════════════════════════════════
+   3. THE DISTANCE
+   ══════════════════════════════════ */
+#distance {
+  background: var(--bg);
+}
+
+#distance .headline-serif {
+  font-size: clamp(30px, 6vw, 80px);
+  max-width: 900px;
+}
+
+/* ══════════════════════════════════
+   4. THE IDEA
+   ══════════════════════════════════ */
+#idea .chapter-bg-img {
+  background-image: url('../public/photos/PXL_20260625_083727700.jpg');
+}
+
+#idea .chapter-overlay {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8,8,8,0.5) 0%,
+    rgba(8,8,8,0.8) 100%
+  );
+}
+
+/* ══════════════════════════════════
+   5. THE BUILD
+   ══════════════════════════════════ */
+#build {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0;
+}
+
+#build .chapter-overlay {
+  background: rgba(8,8,8,0.75);
+}
+
+.build-photos {
+  display: flex;
+  gap: 16px;
+  margin: 40px auto;
+  max-width: 900px;
+  overflow-x: auto;
+  padding: 0 24px;
+}
+
+.build-photos img {
+  width: 280px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  filter: brightness(0.85);
+  transition: filter 0.4s;
+}
+
+.build-photos img:hover { filter: brightness(1); }
+
+.credits {
+  margin-top: 48px;
+  max-width: 700px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+.credit-item {
+  margin-bottom: 20px;
+}
+
+.credit-role {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.credit-name {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--white-soft);
+  line-height: 1.5;
+}
+
+.credit-name a {
+  border-bottom: 1px solid var(--gold-dim);
+}
+
+.credit-links {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--white-faint);
+  margin-top: 2px;
+}
+
+/* ══════════════════════════════════
+   6. THE WALK
+   ══════════════════════════════════ */
+#walk {
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 60px 0;
+}
+
+#walk .chapter-overlay {
+  background: rgba(8,8,8,0.3);
+}
+
+.walk-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 960px;
+  width: 100%;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+.walk-media video,
+.walk-media img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .walk-media { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════
+   7. THE COIN
+   ══════════════════════════════════ */
+#coin-section {
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 60px 0;
+}
+
+.coin-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+/* 3D Coin */
+.coin-3d-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 800px;
+}
+
+.coin-3d {
+  width: 280px;
+  height: 280px;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.1s ease-out;
+  animation: coin-glow 5s ease infinite;
+}
+
+@keyframes coin-glow {
+  0%, 100% { filter: drop-shadow(0 0 15px rgba(201,168,76,0.15)); }
+  50% { filter: drop-shadow(0 0 30px rgba(201,168,76,0.3)); }
+}
+
+.coin-3d.flipping {
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.coin-3d-face {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.coin-3d-face img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.coin-3d-back { transform: rotateY(180deg); }
+
+.coin-3d-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
+  mix-blend-mode: overlay;
+  z-index: 2;
+  transition: background 0.1s ease-out;
+}
+
+.coin-3d::after {
+  content: '';
+  position: absolute;
+  top: 1%; left: 1%;
+  width: 98%; height: 98%;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.12);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.coin-3d-shadow {
+  width: 240px;
+  height: 18px;
+  margin-top: 20px;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(12px);
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.coin-3d-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  margin-top: 12px;
+  user-select: none;
+}
+
+.coin-right {
+  max-width: 360px;
+}
+
+.coin-right video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.coin-right img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .coin-showcase { gap: 40px; }
+  .coin-3d { width: 220px; height: 220px; }
+  .coin-right { max-width: 300px; }
+}
+
+/* ══════════════════════════════════
+   8. THE CELEBRATION
+   ══════════════════════════════════ */
+#celebration .chapter-overlay {
+  background: rgba(8,8,8,0.45);
+}
+
+.celebration-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 900px;
+  width: 100%;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+.celebration-grid video,
+.celebration-grid img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .celebration-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════
+   9. CLOSING
+   ══════════════════════════════════ */
+#closing {
+  background: var(--bg);
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+.closing-names {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(40px, 7vw, 80px);
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.closing-link {
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: var(--white-faint);
+  margin-bottom: 48px;
+}
+
+.closing-ns {
+  font-family: var(--sans);
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 500;
+  color: var(--white-soft);
+  margin-bottom: 12px;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 0.3s, color 0.3s;
+  margin-bottom: 48px;
+}
+
+.cta-btn:hover {
+  background: var(--gold);
+  color: var(--bg);
+  opacity: 1;
+}
+
+.closing-location {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+/* ══════════════════════════════════
+   UTILITY
+   ══════════════════════════════════ */
+.separator {
+  width: 60px;
+  height: 1px;
+  background: var(--gold-dim);
+  margin: 24px auto;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 3px; }
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .build-photos img { width: 220px; height: 160px; }
+  .walk-media video, .walk-media img { height: 200px; }
+  .celebration-grid video, .celebration-grid img { height: 200px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     1. HERO
+     ═══════════════════════════════════ -->
+<section id="hero" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline>
+    <source src="../public/clips/the-aisle-walk.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content">
+    <p class="kicker reveal">The World's First</p>
+    <h1 class="headline reveal reveal-delay-1">HUMANOID<br>BRIDAL WALK</h1>
+    <div class="separator reveal reveal-delay-2"></div>
+    <p class="date-display reveal reveal-delay-3">XXVI &middot; VI &middot; XXVI</p>
+  </div>
+  <div class="scroll-arrow">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     2. THE DREAM
+     ═══════════════════════════════════ -->
+<section id="dream" class="chapter">
+  <div class="chapter-bg-img"></div>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content">
+    <p class="kicker reveal">The Dream</p>
+    <p class="headline-serif reveal reveal-delay-1" style="margin-bottom: 32px;">
+      "Every bride dreams of this moment."
+    </p>
+    <div class="separator reveal reveal-delay-2"></div>
+    <p class="body-text reveal reveal-delay-3">
+      Sonia's grandfather had always promised he would walk her down the aisle.
+      It was the kind of promise made with absolute certainty &mdash; the way only
+      grandparents can. But time, distance, and the weight of years had other plans.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     3. THE DISTANCE
+     ═══════════════════════════════════ -->
+<section id="distance" class="chapter">
+  <div class="chapter-content">
+    <p class="headline-serif reveal" style="color: var(--white-soft);">
+      But an ocean stood<br>between them.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     4. THE IDEA
+     ═══════════════════════════════════ -->
+<section id="idea" class="chapter">
+  <div class="chapter-bg-img"></div>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content">
+    <p class="kicker reveal">The Idea</p>
+    <p class="headline-serif reveal reveal-delay-1" style="margin-bottom: 24px;">
+      "What if we could<br>bring him there?"
+    </p>
+    <div class="separator reveal reveal-delay-2"></div>
+    <p class="body-text reveal reveal-delay-3">
+      Not a screen. Not a recording. A presence &mdash; standing, walking,
+      carrying his spirit down the aisle in his place.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     5. THE BUILD
+     ═══════════════════════════════════ -->
+<section id="build" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline>
+    <source src="../public/clips/prep-ipad-test.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Build</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px); margin-bottom: 16px;">
+      72 Hours to Make It Real
+    </h2>
+    <p class="body-text reveal reveal-delay-2">
+      A team of roboticists, designers, and dreamers working against the clock
+      in a Network School lab at Forest City.
+    </p>
+
+    <div class="build-photos reveal reveal-delay-3">
+      <img src="../public/photos/PXL_20260625_090942268.jpg" alt="Robot dressing">
+      <img src="../public/photos/PXL_20260625_035436967.jpg" alt="Team preparation">
+      <img src="../public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Sara styling the robot">
+    </div>
+
+    <div class="credits reveal reveal-delay-4">
+      <div class="credit-item">
+        <div class="credit-role">Conceived &amp; Directed</div>
+        <div class="credit-name">Husam Abboud</div>
+        <div class="credit-links">
+          <a href="https://ns.com/hus" target="_blank">ns.com/hus</a> &middot;
+          <a href="https://instagram.com/hus" target="_blank">instagram.com/hus</a>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">NS Robotics Lab Lead</div>
+        <div class="credit-name">Tony Park</div>
+        <div class="credit-links">
+          <a href="https://ns.com/tonymfer" target="_blank">ns.com/tonymfer</a> &middot;
+          <a href="https://instagram.com/tonylifeforce" target="_blank">instagram.com/tonylifeforce</a>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Robotics Engineering</div>
+        <div class="credit-name">Andy, Clarence, Roy &mdash; Virtuals / Eastworlds</div>
+        <div class="credit-links">
+          <a href="https://ns.com/theteatoast" target="_blank">ns.com/theteatoast</a> &middot;
+          <a href="https://instagram.com/virtualsio" target="_blank">IG @virtualsio</a> &middot;
+          <a href="https://instagram.com/eastworlds_io" target="_blank">IG @eastworlds_io</a> &middot;
+          <a href="https://x.com/virtuals_io" target="_blank">X @virtuals_io</a> &middot;
+          <a href="https://x.com/eastworlds_io" target="_blank">X @eastworlds_io</a>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Robot Styling</div>
+        <div class="credit-name">Sara Landi Tortoli</div>
+        <div class="credit-links">
+          <a href="https://ns.com/sarawondertech" target="_blank">ns.com/sarawondertech</a> &middot;
+          <a href="https://instagram.com/sarainwondertech" target="_blank">instagram.com/sarainwondertech</a>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Memorial Coin</div>
+        <div class="credit-name">Vinayak Vancheeswaran</div>
+        <div class="credit-links">
+          <a href="https://ns.com/vinayvancheeswa" target="_blank">ns.com/vinayvancheeswa</a> &middot;
+          <a href="https://avely.me/vanchee_kai" target="_blank">avely.me/vanchee_kai</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     6. THE WALK
+     ═══════════════════════════════════ -->
+<section id="walk" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline style="opacity: 0.25;">
+    <source src="../public/clips/the-aisle-walk.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay" style="background: rgba(8,8,8,0.6);"></div>
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Walk</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(32px, 6vw, 72px);">
+      The Moment
+    </h2>
+    <p class="body-text reveal reveal-delay-2" style="margin-bottom: 32px;">
+      A humanoid robot walked a bride down the aisle &mdash; carrying the love of a
+      grandfather who couldn't be there.
+    </p>
+    <div class="walk-media reveal reveal-delay-3">
+      <video autoplay muted loop playsinline>
+        <source src="../public/clips/the-aisle-walk.mp4" type="video/mp4">
+      </video>
+      <video autoplay muted loop playsinline>
+        <source src="../public/clips/bride-and-robot.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div style="margin-top: 16px; padding: 0 24px;" class="reveal reveal-delay-4">
+      <img src="../public/photos/PXL_20260626_103410037.jpg" alt="Group with bride and robot"
+           style="width: 100%; max-width: 960px; height: 320px; object-fit: cover; border-radius: 4px;">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     7. THE COIN
+     ═══════════════════════════════════ -->
+<section id="coin-section" class="chapter">
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Coin</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(24px, 4vw, 48px); margin-bottom: 8px;">
+      A Token of Memory
+    </h2>
+    <p class="body-text reveal reveal-delay-2" style="margin-bottom: 40px;">
+      Every guest received a memorial coin &mdash; a physical artifact to carry
+      the memory forward.
+    </p>
+
+    <div class="coin-showcase reveal reveal-delay-3">
+      <!-- 3D Interactive Coin -->
+      <div>
+        <div class="coin-3d-container" id="coin3d-container">
+          <div class="coin-3d" id="coin3d" onclick="flipCoin()" tabindex="0" role="button" aria-label="Flip coin">
+            <div class="coin-3d-face coin-3d-front">
+              <img src="../public/coin-obverse.png" alt="Coin obverse">
+            </div>
+            <div class="coin-3d-face coin-3d-back">
+              <img src="../public/coin-reverse.png" alt="Coin reverse">
+            </div>
+            <div class="coin-3d-shine" id="coin3d-shine"></div>
+          </div>
+          <div class="coin-3d-shadow" id="coin3d-shadow"></div>
+        </div>
+        <p class="coin-3d-label" id="coin3d-face-label">Obverse</p>
+        <p class="coin-3d-label" id="coin3d-flip-label" style="color: var(--gold-dim); margin-top: 6px;">Click to flip</p>
+      </div>
+
+      <!-- Coin media -->
+      <div class="coin-right">
+        <video autoplay muted loop playsinline>
+          <source src="../public/clips/coins-printing.mp4" type="video/mp4">
+        </video>
+        <img src="../public/photos/PXL_20260626_094810823.PORTRAIT.jpg" alt="Coin in hand">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     8. THE CELEBRATION
+     ═══════════════════════════════════ -->
+<section id="celebration" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline style="opacity: 0.35;">
+    <source src="../public/clips/robot-guest-moment.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay" style="background: rgba(8,8,8,0.55);"></div>
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Celebration</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px);">
+      Joy, Shared
+    </h2>
+    <div class="celebration-grid reveal reveal-delay-2">
+      <img src="../public/photos/PXL_20260626_103410037-_1_.jpg" alt="Group under arch">
+      <video autoplay muted loop playsinline>
+        <source src="../public/clips/robot-guest-moment.mp4" type="video/mp4">
+      </video>
+      <img src="../public/photos/PXL_20260626_095934375.jpg" alt="Celebration">
+      <img src="../public/photos/Screenshot-from-2026-06-28-07-36-21.png" alt="Sparklers and confetti">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     9. CLOSING
+     ═══════════════════════════════════ -->
+<section id="closing" class="chapter">
+  <div class="chapter-content">
+    <div class="separator reveal" style="margin-bottom: 40px;"></div>
+    <p class="closing-names reveal reveal-delay-1">Kris &amp; Sonia</p>
+    <p class="closing-link reveal reveal-delay-2">
+      <a href="https://krisandsonia.com" target="_blank">krisandsonia.com</a>
+    </p>
+    <p class="closing-ns reveal reveal-delay-3">
+      Made possible by <a href="https://ns.com" target="_blank" style="color: var(--gold);">Network School</a>
+    </p>
+    <a href="https://ns.com/hus/apply" target="_blank" class="cta-btn reveal reveal-delay-3">
+      Join Us
+    </a>
+    <p class="closing-location reveal reveal-delay-4">
+      Genesis Node &middot; Forest City &middot; 26 June 2026
+    </p>
+  </div>
+</section>
+
+<script>
+(function() {
+  // ── IntersectionObserver for reveals ──
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+
+  // ── 3D COIN — fully interactive mouse tracking ──
+  var coin3d = document.getElementById('coin3d');
+  var coin3dShine = document.getElementById('coin3d-shine');
+  var coin3dShadow = document.getElementById('coin3d-shadow');
+  var coin3dFaceLabel = document.getElementById('coin3d-face-label');
+  var coin3dFlipLabel = document.getElementById('coin3d-flip-label');
+  var coin3dContainer = document.getElementById('coin3d-container');
+  var coinFlipped = false;
+  var isFlipping = false;
+  var mouseOver = false;
+  var currentTiltX = 0;
+  var currentTiltY = 0;
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (isTouchDevice && coin3dFlipLabel) coin3dFlipLabel.textContent = 'Tap to flip';
+
+  var idleAngle = 0;
+  var idleRAF;
+  function idleWobble() {
+    if (mouseOver || isFlipping) return;
+    idleAngle += 0.008;
+    var wobbleX = Math.sin(idleAngle) * 5;
+    var wobbleY = Math.cos(idleAngle * 0.7) * 5;
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (base + wobbleY) + 'deg) rotateX(' + wobbleX + 'deg)';
+    coin3dShadow.style.transform = 'translateX(' + (-wobbleY * 0.6) + 'px) scaleY(' + (0.8 + Math.abs(wobbleX) * 0.015) + ')';
+    idleRAF = requestAnimationFrame(idleWobble);
+  }
+  idleWobble();
+
+  window.flipCoin = function() {
+    coinFlipped = !coinFlipped;
+    isFlipping = true;
+    cancelAnimationFrame(idleRAF);
+    coin3d.classList.add('flipping');
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + base + 'deg) rotateX(0deg)';
+    coin3dFaceLabel.textContent = coinFlipped ? 'Reverse' : 'Obverse';
+    setTimeout(function() {
+      coin3d.classList.remove('flipping');
+      isFlipping = false;
+      if (!mouseOver) idleWobble();
+    }, 850);
+  };
+
+  coin3d.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipCoin(); }
+  });
+
+  coin3dContainer.addEventListener('mouseenter', function() {
+    mouseOver = true;
+    cancelAnimationFrame(idleRAF);
+  });
+
+  coin3dContainer.addEventListener('mousemove', function(e) {
+    if (isFlipping) return;
+    var rect = coin3d.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var mx = e.clientX - cx;
+    var my = e.clientY - cy;
+    var maxTilt = 25;
+    var normX = mx / (rect.width / 2);
+    var normY = my / (rect.height / 2);
+    currentTiltX = -normY * maxTilt;
+    currentTiltY = normX * maxTilt;
+    currentTiltX = Math.max(-maxTilt, Math.min(maxTilt, currentTiltX));
+    currentTiltY = Math.max(-maxTilt, Math.min(maxTilt, currentTiltY));
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (baseY + currentTiltY) + 'deg) rotateX(' + currentTiltX + 'deg)';
+    var shineX = (normX + 1) / 2 * 100;
+    var shineY = (normY + 1) / 2 * 100;
+    coin3dShine.style.background = 'radial-gradient(circle at ' + shineX + '% ' + shineY + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+    coin3dShadow.style.transform = 'translateX(' + (-currentTiltY * 1.2) + 'px) scaleY(' + (0.5 + Math.abs(currentTiltX) * 0.025) + ')';
+    coin3dShadow.style.opacity = String(Math.min(0.5, 0.1 + (Math.abs(currentTiltX) + Math.abs(currentTiltY)) * 0.008));
+  });
+
+  coin3dContainer.addEventListener('mouseleave', function() {
+    mouseOver = false;
+    if (isFlipping) return;
+    coin3d.style.transition = 'transform 0.5s ease-out';
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+    coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+    coin3dShadow.style.transform = 'translateX(0) scaleY(1)';
+    coin3dShadow.style.opacity = '0.15';
+    setTimeout(function() {
+      coin3d.style.transition = 'transform 0.1s ease-out';
+      if (!mouseOver && !isFlipping) idleWobble();
+    }, 500);
+  });
+
+  if (isTouchDevice) {
+    coin3dContainer.addEventListener('touchmove', function(e) {
+      if (isFlipping) return;
+      mouseOver = true;
+      cancelAnimationFrame(idleRAF);
+      var t = e.touches[0];
+      var rect = coin3d.getBoundingClientRect();
+      var normX = (t.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      var normY = (t.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      var maxTilt = 25;
+      var tx = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+      var ty = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transform = 'rotateY(' + (baseY + ty) + 'deg) rotateX(' + tx + 'deg)';
+      var sx = (normX + 1) / 2 * 100;
+      var sy = (normY + 1) / 2 * 100;
+      coin3dShine.style.background = 'radial-gradient(circle at ' + sx + '% ' + sy + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+    }, { passive: true });
+    coin3dContainer.addEventListener('touchend', function() {
+      mouseOver = false;
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transition = 'transform 0.5s ease-out';
+      coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+      coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+      setTimeout(function() {
+        coin3d.style.transition = 'transform 0.1s ease-out';
+        if (!mouseOver && !isFlipping) idleWobble();
+      }, 500);
+    });
+  }
+
+  // ── Lazy-load videos: only play when in viewport ──
+  var allVideos = document.querySelectorAll('video');
+  var videoObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(function(){});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+
+  allVideos.forEach(function(v) { videoObserver.observe(v); });
+})();
+</script>
+</body>
+</html>
