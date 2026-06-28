@@ -4,7 +4,6 @@
 
 const now = Date.now();
 let entries = [
-  { id: '1', text: "I've never cried at a robot before.", name: 'Anonymous', handle: '', ts: now - 86400000 * 2 },
   { id: '2', text: "The moment he appeared on screen and she saw his face — that's when everyone lost it.", name: 'Guest', handle: '', ts: now - 86400000 },
   { id: '3', text: 'This is what happens when engineers have hearts.', name: 'Husam', handle: '@hus', ts: now - 3600000 * 6 },
   { id: '4', text: 'History. We were all part of history.', name: 'Guest', handle: '', ts: now - 3600000 * 2 },
