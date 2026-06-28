@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The World's First Humanoid Bridal Walk | FirstHumanoid.xyz</title>
+<meta name="description" content="At the wedding of Kris & Sonia, a humanoid robot walked the bride down the aisle — controlled remotely by her grandfather across the seas. The world's first humanoid bridal escort.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg-elevated: #111111;
+  --bg-card: #161616;
+  --text: #f0ece4;
+  --text-muted: #8a857d;
+  --text-dim: #5a5650;
+  --accent: #c9a96e;
+  --accent-light: #e4d4a5;
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ─── LOADING SCREEN ─── */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+#loader .loader-text {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+
+/* ─── NAVIGATION ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  transition: background 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+nav .logo {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+nav .nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+nav .nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+nav .nav-links a:hover {
+  color: var(--accent);
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 2rem;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,169,110,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(201,169,110,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero .kicker {
+  font-family: var(--sans);
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.5s forwards;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 10vw, 9rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1.2s ease 0.7s forwards;
+}
+.hero h1 .line-2 {
+  display: block;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+.hero .date-roman {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2.5vw, 1.8rem);
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  cursor: default;
+  position: relative;
+  opacity: 0;
+  animation: fadeUp 1s ease 1s forwards;
+  transition: color 0.4s ease;
+}
+.hero .date-roman:hover {
+  color: var(--accent-light);
+}
+.hero .date-roman .tooltip {
+  position: absolute;
+  bottom: -2.2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+.hero .date-roman:hover .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.hero .scroll-hint {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.5s forwards;
+}
+.hero .scroll-hint span {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.hero .scroll-hint .line {
+  width: 1px;
+  height: 40px;
+  background: var(--accent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  50.1% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── SECTION SHARED ─── */
+section {
+  padding: 8rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+section.wide {
+  max-width: 1400px;
+}
+section.full {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.section-label {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 2rem;
+  color: var(--text);
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.divider .line {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--text-dim), transparent);
+  opacity: 0.3;
+}
+
+/* ─── WHY SECTION ─── */
+.story-text {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+  line-height: 1.85;
+  color: var(--text-muted);
+  max-width: 700px;
+}
+.story-text p {
+  margin-bottom: 2rem;
+}
+.story-text em {
+  color: var(--text);
+  font-style: italic;
+}
+.story-text strong {
+  color: var(--accent-light);
+  font-weight: 500;
+}
+
+.pull-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--text);
+  padding: 3rem 0;
+  margin: 3rem 0;
+  border-top: 1px solid rgba(201,169,110,0.2);
+  border-bottom: 1px solid rgba(201,169,110,0.2);
+  position: relative;
+}
+.pull-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: 1rem;
+  left: -0.5rem;
+  font-size: 5rem;
+  color: var(--accent);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+/* ─── THE WALK / GALLERY ─── */
+.gallery-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 2rem 3rem 3rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.gallery-scroll::-webkit-scrollbar { display: none; }
+.gallery-card {
+  flex: 0 0 auto;
+  width: min(70vw, 600px);
+  aspect-ratio: 16/9;
+  background: var(--bg-card);
+  border-radius: 4px;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.gallery-card .placeholder-text {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.gallery-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201,169,110,0.03), transparent 60%);
+  pointer-events: none;
+}
+.walk-description {
+  max-width: 700px;
+  margin: 3rem auto 0;
+  padding: 0 2rem;
+}
+.walk-description p {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.85;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ─── CREDITS ─── */
+.credits-grid {
+  display: grid;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+.credit-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.credit-role {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 0.3rem;
+}
+.credit-name {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.credit-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+.credit-links a {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.credit-links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ─── COIN SECTION ─── */
+.coin-display {
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+.coin-item {
+  text-align: center;
+}
+.coin-img-wrapper {
+  width: clamp(180px, 25vw, 300px);
+  height: clamp(180px, 25vw, 300px);
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 60px rgba(201,169,110,0.15), 0 0 120px rgba(201,169,110,0.05);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+}
+.coin-img-wrapper:hover {
+  transform: scale(1.05) rotate(3deg);
+  box-shadow: 0 0 80px rgba(201,169,110,0.25), 0 0 160px rgba(201,169,110,0.1);
+}
+.coin-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.coin-label {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ─── VENUE & COUPLE ─── */
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 3rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.info-card h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.info-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.info-card a.card-link {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.info-card a.card-link:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ─── PRESS ─── */
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.press-placeholder {
+  background: var(--bg-card);
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 2.5rem;
+  text-align: center;
+}
+.press-placeholder .icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.4;
+}
+.press-placeholder p {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.press-placeholder a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ─── CTA ─── */
+.cta-section {
+  text-align: center;
+  background: linear-gradient(to bottom, var(--bg), var(--bg-elevated), var(--bg));
+  padding: 10rem 2rem;
+}
+.cta-section .section-title {
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+.cta-section p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+.cta-btn {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  text-decoration: none;
+  padding: 1.1rem 3rem;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(201,169,110,0.3);
+}
+.cta-btn:hover::before {
+  transform: translateX(100%);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+footer p {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 2;
+}
+footer .heart {
+  display: inline-block;
+  color: var(--accent);
+  animation: heartbeat 2s ease-in-out infinite;
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.15); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.15); }
+  56% { transform: scale(1); }
+}
+
+/* ─── PARALLAX GRAIN ─── */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* ─── TWO-COL LAYOUT ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  nav .nav-links { display: none; }
+  section { padding: 5rem 1.5rem; }
+  .credit-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .two-col {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+  .gallery-scroll { padding: 1.5rem; }
+  .gallery-card { width: 85vw; }
+  .coin-display { gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- FILM GRAIN OVERLAY -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <span class="loader-text">FirstHumanoid</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">FirstHumanoid</a>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#walk">The Walk</a></li>
+    <li><a href="#people">People</a></li>
+    <li><a href="#coin">Coin</a></li>
+    <li><a href="#couple">Couple</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="hero">
+  <p class="kicker">The World's First</p>
+  <h1>
+    Humanoid
+    <span class="line-2">Bridal Walk</span>
+  </h1>
+  <div class="date-roman">
+    XXVI &middot; VI &middot; XXVI
+    <span class="tooltip">26 June 2026</span>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</header>
+
+<!-- ═══════════════════ WHY THIS HAPPENED ═══════════════════ -->
+<section id="story">
+  <div class="reveal">
+    <div class="section-label">Why This Happened</div>
+  </div>
+  <div class="story-text">
+    <p class="reveal reveal-delay-1">
+      She always imagined his hand on her arm.<br>
+      The steady warmth of her grandfather,<br>
+      walking beside her toward the rest of her life.
+    </p>
+    <p class="reveal reveal-delay-2">
+      But the seas were too wide.<br>
+      The distance too far.<br>
+      And the body, too frail to cross it.
+    </p>
+    <div class="pull-quote reveal reveal-delay-2">
+      What if distance didn't have to mean absence?
+    </div>
+    <p class="reveal reveal-delay-3">
+      At <strong>Network School</strong> in Forest City, Malaysia,<br>
+      a community of builders heard the wish<br>
+      and answered it the only way they knew how &mdash;<br>
+      <em>by building something the world had never seen.</em>
+    </p>
+    <p class="reveal reveal-delay-3">
+      A humanoid robot, dressed and ready,<br>
+      standing where a grandfather would stand.<br>
+      His eyes seeing through its cameras.<br>
+      His voice carried through its speakers.<br>
+      His presence, <em>felt</em> &mdash; across oceans.
+    </p>
+    <p class="reveal reveal-delay-4">
+      On the evening of June 26th, 2026,<br>
+      a robot walked a bride down the aisle.<br>
+      But it was <em>love</em> that carried her.
+    </p>
+  </div>
+</section>
+
+<div class="divider reveal"><div class="line"></div></div>
+
+<!-- ═══════════════════ THE WALK ═══════════════════ -->
+<section id="walk" class="full">
+  <div style="max-width: 900px; margin: 0 auto; padding: 0 2rem;">
+    <div class="reveal">
+      <div class="section-label">The Walk</div>
+      <h2 class="section-title">Six o'clock. The sun low over the strait.</h2>
+    </div>
+  </div>
+
+  <div class="gallery-scroll reveal reveal-delay-1">
+    <div class="gallery-card"><span class="placeholder-text">Event Photo I</span></div>
+    <div class="gallery-card"><span class="placeholder-text">Event Photo II</span></div>
+    <div class="gallery-card"><span class="placeholder-text">Event Photo III</span></div>
+    <div class="gallery-card"><span class="placeholder-text">Event Photo IV</span></div>
+    <div class="gallery-card"><span class="placeholder-text">Event Photo V</span></div>
+  </div>
+
+  <div class="walk-description">
+    <p class="reveal reveal-delay-2">
+      The guests fell silent as the humanoid took its first step. Dressed for the occasion,
+      it moved with deliberate grace &mdash; each motion guided in real time by the grandfather
+      watching from a screen thousands of miles away.
+    </p>
+    <p class="reveal reveal-delay-3">
+      The bride held the robot's arm. Through its speakers, her grandfather's voice trembled:
+      a blessing, a joke only they would understand, and then &mdash; the words every bride wants to hear
+      from the man who held her first.
+    </p>
+    <p class="reveal reveal-delay-3">
+      The world's first humanoid bridal escort wasn't about technology.<br>
+      It was about <em>refusing to let love be limited by geography.</em>
+    </p>
+  </div>
+</section>
+
+<div class="divider reveal"><div class="line"></div></div>
+
+<!-- ═══════════════════ THE PEOPLE ═══════════════════ -->
+<section id="people">
+  <div class="reveal">
+    <div class="section-label">The People Behind It</div>
+    <h2 class="section-title">It takes a village to walk a bride.</h2>
+  </div>
+
+  <div class="credits-grid">
+    <!-- Husam -->
+    <div class="credit-item reveal">
+      <div class="credit-role">Conceived &amp; Directed</div>
+      <div>
+        <div class="credit-name">Husam Abboud</div>
+        <div class="credit-links">
+          <a href="https://ns.com/hus" target="_blank" rel="noopener">ns.com</a>
+          <a href="https://instagram.com/hus" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tony -->
+    <div class="credit-item reveal reveal-delay-1">
+      <div class="credit-role">NS Robotics Lab Lead</div>
+      <div>
+        <div class="credit-name">Tony Park</div>
+        <div class="credit-links">
+          <a href="https://ns.com/tonymfer" target="_blank" rel="noopener">ns.com</a>
+          <a href="https://instagram.com/tonylifeforce" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Engineering -->
+    <div class="credit-item reveal reveal-delay-2">
+      <div class="credit-role">Robotics Engineering</div>
+      <div>
+        <div class="credit-name">Andy, Clarence &amp; Roy</div>
+        <div class="credit-links">
+          <a href="https://ns.com/theteatoast" target="_blank" rel="noopener">Andy &middot; ns.com</a>
+          <a href="https://instagram.com/virtualsio" target="_blank" rel="noopener">Virtuals &middot; IG</a>
+          <a href="https://instagram.com/eastworlds_io" target="_blank" rel="noopener">Eastworlds &middot; IG</a>
+          <a href="https://x.com/virtuals_io" target="_blank" rel="noopener">Virtuals &middot; X</a>
+          <a href="https://x.com/eastworlds_io" target="_blank" rel="noopener">Eastworlds &middot; X</a>
+        </div>
+        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-dim);">Virtuals / Eastworlds</div>
+      </div>
+    </div>
+
+    <!-- Sara -->
+    <div class="credit-item reveal reveal-delay-3">
+      <div class="credit-role">Robot Styling</div>
+      <div>
+        <div class="credit-name">Sara Landi Tortoli</div>
+        <div class="credit-links">
+          <a href="https://ns.com/sarawondertech" target="_blank" rel="noopener">ns.com</a>
+          <a href="https://instagram.com/sarainwondertech" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vinayak -->
+    <div class="credit-item reveal reveal-delay-4">
+      <div class="credit-role">Memorial Coin</div>
+      <div>
+        <div class="credit-name">Vinayak Vancheeswaran</div>
+        <div class="credit-links">
+          <a href="https://ns.com/vinayvancheeswa" target="_blank" rel="noopener">ns.com</a>
+          <a href="https://avely.me/vanchee_kai" target="_blank" rel="noopener">Avely</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"><div class="line"></div></div>
+
+<!-- ═══════════════════ THE COIN ═══════════════════ -->
+<section id="coin">
+  <div class="reveal" style="text-align: center;">
+    <div class="section-label" style="justify-content: center;">
+      <span>The Coin</span>
+    </div>
+    <h2 class="section-title" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+      Struck to remember what the world witnessed.
+    </h2>
+    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 3rem; line-height: 1.7; font-size: 0.95rem;">
+      A commemorative coin minted for the occasion &mdash; one side bearing the humanoid, the other
+      marking the union it served. Carried by every guest as proof they were there.
+    </p>
+  </div>
+
+  <div class="coin-display reveal reveal-delay-1">
+    <div class="coin-item">
+      <div class="coin-img-wrapper">
+        <img src="/coin-obverse.png" alt="Commemorative coin &mdash; obverse" loading="lazy">
+      </div>
+      <span class="coin-label">Obverse</span>
+    </div>
+    <div class="coin-item">
+      <div class="coin-img-wrapper">
+        <img src="/coin-reverse.png" alt="Commemorative coin &mdash; reverse" loading="lazy">
+      </div>
+      <span class="coin-label">Reverse</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"><div class="line"></div></div>
+
+<!-- ═══════════════════ VENUE & COUPLE ═══════════════════ -->
+<div class="two-col" style="padding-top: 8rem; padding-bottom: 8rem;">
+  <!-- VENUE -->
+  <div id="venue" class="reveal">
+    <div class="info-card">
+      <div class="section-label" style="justify-content: center; margin-bottom: 1.5rem;">The Venue</div>
+      <h3>Network School</h3>
+      <p>
+        A new kind of institution in Forest City, Malaysia &mdash;
+        where builders, founders, and dreamers live and create together.
+        The place where this story became possible.
+      </p>
+      <a href="https://ns.com" target="_blank" rel="noopener" class="card-link">Visit ns.com</a>
+    </div>
+  </div>
+
+  <!-- COUPLE -->
+  <div id="couple" class="reveal reveal-delay-1">
+    <div class="info-card">
+      <div class="section-label" style="justify-content: center; margin-bottom: 1.5rem;">The Couple</div>
+      <h3>Kris &amp; Sonia</h3>
+      <p>
+        Two lives joined on a June evening by the sea,
+        surrounded by a community that turned an impossible wish
+        into the walk of a lifetime.
+      </p>
+      <a href="https://krisandsonia.com" target="_blank" rel="noopener" class="card-link">Their Story</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider reveal"><div class="line"></div></div>
+
+<!-- ═══════════════════ PRESS ═══════════════════ -->
+<section id="press">
+  <div class="reveal" style="text-align: center;">
+    <div class="section-label" style="justify-content: center;">Press &amp; Media</div>
+    <h2 class="section-title">The story is spreading.</h2>
+    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1rem; line-height: 1.7; font-size: 0.95rem;">
+      Media inquiries and coverage will appear here as they come in.
+    </p>
+  </div>
+  <div class="press-grid reveal reveal-delay-1">
+    <div class="press-placeholder">
+      <div class="icon">&#9998;</div>
+      <p>Media coverage coming soon.<br>
+      For press inquiries, reach out via<br>
+      <a href="https://ns.com/hus" target="_blank" rel="noopener">ns.com/hus</a></p>
+    </div>
+    <div class="press-placeholder">
+      <div class="icon">&#9654;</div>
+      <p>Video documentation<br>of the walk will be<br>published here.</p>
+    </div>
+    <div class="press-placeholder">
+      <div class="icon">&#128247;</div>
+      <p>Event photography<br>gallery coming soon.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"><div class="line"></div></div>
+
+<!-- ═══════════════════ CTA ═══════════════════ -->
+<section class="cta-section">
+  <div class="reveal">
+    <div class="section-label" style="justify-content: center;">What Comes Next</div>
+    <h2 class="section-title">Be part of what's next.</h2>
+    <p>
+      Network School is where impossible ideas become Wednesday afternoon projects.
+      If that sounds like your kind of place &mdash; we're building something.
+    </p>
+    <a href="https://ns.com/hus/apply" target="_blank" rel="noopener" class="cta-btn">Apply to Network School</a>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <p>
+    Network School <span class="heart">&hearts;</span> Genesis Node <span style="color: var(--accent); opacity: 0.4;">&middot;</span> Forest City, Malaysia
+  </p>
+  <p style="margin-top: 0.5rem;">
+    26 June 2026
+  </p>
+  <p style="margin-top: 2rem; color: rgba(255,255,255,0.15); font-size: 0.6rem; letter-spacing: 0.2em;">
+    FirstHumanoid.xyz
+  </p>
+</footer>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+// ─── Loader ───
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 800);
+});
+
+// ─── Nav scroll state ───
+const nav = document.querySelector('nav');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 80);
+  lastScroll = y;
+}, { passive: true });
+
+// ─── Scroll Reveal (IntersectionObserver) ───
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ─── Parallax on hero ───
+const hero = document.querySelector('.hero');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y < window.innerHeight) {
+    hero.style.transform = `translateY(${y * 0.3}px)`;
+    hero.style.opacity = 1 - (y / window.innerHeight) * 0.7;
+  }
+}, { passive: true });
+
+// ─── Smooth scroll for nav links ───
+document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>

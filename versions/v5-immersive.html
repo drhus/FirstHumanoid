@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FirstHumanoid.xyz — The World's First Humanoid Bridal Walk</title>
+<meta name="description" content="At the intersection of love and technology, a grandfather walked his granddaughter down the aisle — through a humanoid robot, across the seas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Sora:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #d4a853;
+  --gold-light: #f0d78c;
+  --cyan: #5ce0d8;
+  --cyan-light: #a0f0ea;
+  --bg: #0a0a0f;
+  --bg2: #0e0e18;
+  --text: #e8e4dd;
+  --text-muted: #9a9590;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) var(--bg);
+}
+
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas#particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.section {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+}
+
+.section-inner {
+  max-width: 900px;
+  width: 100%;
+}
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--bg), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-sub {
+  font-family: 'Sora', sans-serif;
+  font-weight: 200;
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeIn 2s ease forwards 0.5s;
+}
+
+.hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(3rem, 10vw, 8rem);
+  line-height: 1.05;
+  margin: 0.2em 0 0.3em;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: heroScale 2s ease forwards 1s;
+  background: linear-gradient(135deg, var(--text) 0%, var(--gold-light) 40%, var(--cyan-light) 70%, var(--text) 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: heroScale 2s ease forwards 1s, shimmer 8s ease-in-out infinite 3s;
+}
+
+.hero-date {
+  font-family: 'Sora', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  letter-spacing: 0.5em;
+  color: var(--text-muted);
+  opacity: 0;
+  animation: heroFadeIn 2s ease forwards 1.8s;
+}
+
+.hero-date .roman {
+  color: var(--gold);
+  animation: heartbeat 3s ease-in-out infinite 3s;
+  display: inline-block;
+}
+
+@keyframes heroFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroScale {
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes heartbeat {
+  0%, 100% { text-shadow: 0 0 10px transparent; transform: scale(1); }
+  15% { text-shadow: 0 0 30px rgba(212, 168, 83, 0.5); transform: scale(1.05); }
+  30% { text-shadow: 0 0 10px transparent; transform: scale(1); }
+  45% { text-shadow: 0 0 25px rgba(212, 168, 83, 0.4); transform: scale(1.03); }
+  60% { text-shadow: 0 0 10px transparent; transform: scale(1); }
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  opacity: 0;
+  animation: heroFadeIn 2s ease forwards 3s;
+}
+
+.scroll-hint span {
+  display: block;
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 0 auto;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ===== SECTION TYPOGRAPHY ===== */
+.section-label {
+  font-family: 'Sora', sans-serif;
+  font-weight: 200;
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+}
+
+.section-heading {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.15;
+  margin-bottom: 2rem;
+}
+
+.section-body {
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+
+.section-body em {
+  color: var(--text);
+  font-style: italic;
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.15em;
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-word.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== LOVE STORY ===== */
+#love-story {
+  background: radial-gradient(ellipse at 50% 0%, rgba(212, 168, 83, 0.06) 0%, transparent 60%);
+}
+
+.story-line {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 0.5em;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease, color 0.8s ease;
+}
+
+.story-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--text);
+}
+
+.story-line .highlight {
+  color: var(--gold);
+}
+
+.story-line .highlight-cyan {
+  color: var(--cyan);
+}
+
+/* ===== TEAM CARDS ===== */
+#building {
+  background: radial-gradient(ellipse at 30% 100%, rgba(92, 224, 216, 0.04) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 0%, rgba(212, 168, 83, 0.04) 0%, transparent 50%);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.team-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 168, 83, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 168, 83, 0.05);
+}
+
+.team-card:hover::before {
+  opacity: 1;
+}
+
+.card-role {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.75rem;
+}
+
+.card-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card-links a {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  transition: all 0.3s ease;
+}
+
+.card-links a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgba(212, 168, 83, 0.08);
+}
+
+/* ===== THE MOMENT / GALLERY ===== */
+#moment {
+  background: radial-gradient(ellipse at 50% 50%, rgba(212, 168, 83, 0.05) 0%, transparent 60%);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.gallery-placeholder {
+  aspect-ratio: 4/3;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.gallery-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 18px;
+  background: conic-gradient(from 0deg, transparent, var(--gold), var(--cyan), transparent);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: -1;
+  animation: rotate 4s linear infinite;
+}
+
+.gallery-placeholder:hover {
+  border-color: transparent;
+  box-shadow: 0 0 60px rgba(212, 168, 83, 0.1);
+}
+
+.gallery-placeholder:hover::before {
+  opacity: 0.3;
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.gallery-placeholder span {
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ===== COIN SECTION ===== */
+#coin {
+  background: radial-gradient(ellipse at 50% 50%, rgba(212, 168, 83, 0.08) 0%, transparent 50%);
+}
+
+.coin-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.coin-wrapper {
+  perspective: 800px;
+  width: 240px;
+  height: 240px;
+}
+
+.coin-img-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  border-radius: 50%;
+}
+
+.coin-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  filter: drop-shadow(0 0 40px rgba(212, 168, 83, 0.3));
+  transition: filter 0.5s ease;
+}
+
+.coin-wrapper:hover .coin-img-wrap img {
+  filter: drop-shadow(0 0 60px rgba(212, 168, 83, 0.5));
+}
+
+.coin-label {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ===== THE PLACE ===== */
+#place {
+  background: radial-gradient(ellipse at 50% 100%, rgba(92, 224, 216, 0.06) 0%, transparent 50%);
+}
+
+.place-atmosphere {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 2;
+  border-left: 2px solid var(--gold);
+  padding-left: 2rem;
+  margin: 2rem 0;
+}
+
+/* ===== THEIR DAY ===== */
+#theirday {
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 50%, rgba(212, 168, 83, 0.05) 0%, transparent 50%);
+}
+
+.names {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+}
+
+.names-link {
+  text-decoration: none;
+}
+
+/* ===== FUTURE ===== */
+#future {
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 30%, rgba(92, 224, 216, 0.06) 0%, transparent 60%);
+}
+
+.cta-btn {
+  display: inline-block;
+  margin-top: 2.5rem;
+  padding: 1rem 3rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border: none;
+  border-radius: 100px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-light));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 100px;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(212, 168, 83, 0.3);
+}
+
+.cta-btn:hover::before {
+  opacity: 1;
+}
+
+.cta-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== PRESS ===== */
+#press {
+  text-align: center;
+}
+
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.press-placeholder {
+  padding: 2rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.4s ease;
+}
+
+.press-placeholder:hover {
+  border-color: rgba(212, 168, 83, 0.2);
+}
+
+.press-placeholder span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ===== CLOSING ===== */
+#closing {
+  min-height: 60vh;
+  text-align: center;
+  position: relative;
+}
+
+.closing-text {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  line-height: 2.5;
+}
+
+.closing-text .gold {
+  color: var(--gold);
+}
+
+/* ===== BREATHING DIVIDERS ===== */
+.breathing-divider {
+  width: 100%;
+  height: 1px;
+  max-width: 200px;
+  margin: 0 auto 3rem;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.2; transform: scaleX(0.6); }
+  50% { opacity: 0.8; transform: scaleX(1); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .section { padding: 4rem 1.5rem; }
+  .team-grid { grid-template-columns: 1fr; }
+  .coin-display { gap: 2rem; }
+  .coin-wrapper { width: 180px; height: 180px; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .press-grid { grid-template-columns: 1fr; }
+  .place-atmosphere { padding-left: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="section">
+  <div class="hero-sub">The World's First</div>
+  <h1 class="hero-title">Humanoid<br>Bridal Walk</h1>
+  <div class="hero-date">
+    <span class="roman">XXVI &middot; VI &middot; MMXXVI</span>
+  </div>
+  <div class="scroll-hint"><span></span></div>
+</section>
+
+<!-- ===== LOVE STORY ===== -->
+<section id="love-story" class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">I</div>
+    <div class="story-lines">
+      <p class="story-line" data-delay="0">She always dreamed of one thing.</p>
+      <p class="story-line" data-delay="100">Not the dress. Not the flowers.</p>
+      <p class="story-line" data-delay="200">She dreamed of her <span class="highlight">grandfather's hand</span></p>
+      <p class="story-line" data-delay="300">guiding her down the aisle.</p>
+      <p class="story-line" data-delay="500">&nbsp;</p>
+      <p class="story-line" data-delay="600">But oceans stood between them.</p>
+      <p class="story-line" data-delay="700">Borders. Distance. Time.</p>
+      <p class="story-line" data-delay="800">The kind of separation that feels <em>permanent.</em></p>
+      <p class="story-line" data-delay="1000">&nbsp;</p>
+      <p class="story-line" data-delay="1100">So a community asked a simple question:</p>
+      <p class="story-line" data-delay="1200"><span class="highlight-cyan">What if distance didn't matter?</span></p>
+      <p class="story-line" data-delay="1400">&nbsp;</p>
+      <p class="story-line" data-delay="1500">They built a humanoid robot</p>
+      <p class="story-line" data-delay="1600">that a grandfather could <span class="highlight">pilot from across the world</span> &mdash;</p>
+      <p class="story-line" data-delay="1700">seeing through its eyes, speaking through its voice,</p>
+      <p class="story-line" data-delay="1800">walking beside her, step by step.</p>
+      <p class="story-line" data-delay="2000">&nbsp;</p>
+      <p class="story-line" data-delay="2100">On June 26, 2026, in Forest City, Malaysia,</p>
+      <p class="story-line" data-delay="2200">love found a way.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BUILDING THE IMPOSSIBLE ===== -->
+<section id="building" class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">II</div>
+    <h2 class="section-heading reveal">Building the Impossible</h2>
+    <p class="section-body reveal">
+      What began as a whispered wish became an act of collective will.
+      Engineers, designers, dreamers &mdash; a community at the edge of the world
+      turned <em>"what if"</em> into <em>"watch this."</em>
+    </p>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="card-role">Conceived &amp; Directed</div>
+        <div class="card-name">Husam Abboud</div>
+        <div class="card-links">
+          <a href="https://ns.com/hus" target="_blank">ns.com</a>
+          <a href="https://instagram.com/hus" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="card-role">NS Robotics Lab Lead</div>
+        <div class="card-name">Tony Park</div>
+        <div class="card-links">
+          <a href="https://ns.com/tonymfer" target="_blank">ns.com</a>
+          <a href="https://instagram.com/tonylifeforce" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="card-role">Robotics Engineering</div>
+        <div class="card-name">Andy</div>
+        <div class="card-links">
+          <a href="https://ns.com/theteatoast" target="_blank">ns.com</a>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="card-role">Robotics Engineering</div>
+        <div class="card-name">Clarence &amp; Roy</div>
+        <div class="card-links">
+          <a href="https://instagram.com/virtualsio" target="_blank">Virtuals IG</a>
+          <a href="https://instagram.com/eastworlds_io" target="_blank">Eastworlds IG</a>
+          <a href="https://x.com/virtuals_io" target="_blank">Virtuals X</a>
+          <a href="https://x.com/eastworlds_io" target="_blank">Eastworlds X</a>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="card-role">Robot Styling</div>
+        <div class="card-name">Sara Landi Tortoli</div>
+        <div class="card-links">
+          <a href="https://ns.com/sarawondertech" target="_blank">ns.com</a>
+          <a href="https://instagram.com/sarainwondertech" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="card-role">Memorial Coin</div>
+        <div class="card-name">Vinayak Vancheeswaran</div>
+        <div class="card-links">
+          <a href="https://ns.com/vinayvancheeswa" target="_blank">ns.com</a>
+          <a href="https://avely.me/vanchee_kai" target="_blank">avely.me</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE MOMENT ===== -->
+<section id="moment" class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">III</div>
+    <h2 class="section-heading reveal">The Moment</h2>
+    <p class="section-body reveal">
+      Some moments refuse to live only in memory. They insist on being felt &mdash;
+      again, and again, and again. This is one of those moments.
+    </p>
+    <div class="gallery-grid">
+      <div class="gallery-placeholder reveal"><span>Photo coming soon</span></div>
+      <div class="gallery-placeholder reveal"><span>Photo coming soon</span></div>
+      <div class="gallery-placeholder reveal"><span>Video coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COIN ===== -->
+<section id="coin" class="section">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label reveal">IV</div>
+    <h2 class="section-heading reveal">Struck in Memory</h2>
+    <p class="section-body reveal" style="max-width:600px; margin:0 auto;">
+      A commemorative coin &mdash; minted to mark the moment
+      when humanity chose <em>connection over distance</em>,
+      and love over limitation.
+    </p>
+    <div class="coin-display">
+      <div class="reveal">
+        <div class="coin-wrapper" data-tilt>
+          <div class="coin-img-wrap">
+            <img src="../public/coin-obverse.png" alt="Commemorative coin obverse">
+          </div>
+        </div>
+        <div class="coin-label">Obverse</div>
+      </div>
+      <div class="reveal">
+        <div class="coin-wrapper" data-tilt>
+          <div class="coin-img-wrap">
+            <img src="../public/coin-reverse.png" alt="Commemorative coin reverse">
+          </div>
+        </div>
+        <div class="coin-label">Reverse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE PLACE ===== -->
+<section id="place" class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">V</div>
+    <h2 class="section-heading reveal">The Place</h2>
+    <div class="place-atmosphere reveal">
+      On a man-made island in the Strait of Johor, between two nations,
+      there is a school that believes the future should be built, not waited for.
+      Network School. Where builders come to live at the edge of what's possible &mdash;
+      and sometimes, to push past it.
+    </div>
+    <p class="section-body reveal">
+      <a href="https://ns.com" target="_blank" style="color: var(--cyan); text-decoration: none; border-bottom: 1px solid rgba(92,224,216,0.3); transition: border-color 0.3s;">Network School</a>
+      &mdash; Forest City, Johor, Malaysia. A community of 200+ builders from 50 countries,
+      living and creating together at the Genesis Node.
+    </p>
+  </div>
+</section>
+
+<!-- ===== THEIR DAY ===== -->
+<section id="theirday" class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">VI</div>
+    <a href="https://krisandsonia.com" target="_blank" class="names-link">
+      <div class="names reveal">Kris &amp; Sonia</div>
+    </a>
+    <p class="section-body reveal" style="max-width: 550px; margin: 0 auto;">
+      Two people who chose each other &mdash; and in doing so,
+      gave the world a reason to build something extraordinary.
+    </p>
+    <div style="margin-top:2rem;" class="reveal">
+      <a href="https://krisandsonia.com" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.2em; border-bottom: 1px solid rgba(212,168,83,0.3);">krisandsonia.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE FUTURE ===== -->
+<section id="future" class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">VII</div>
+    <h2 class="section-heading reveal">The Future is Human</h2>
+    <p class="section-body reveal" style="max-width: 650px; margin: 0 auto;">
+      We didn't build a robot to replace a person.<br>
+      We built one to <em>carry the presence of a person</em><br>
+      where their body couldn't go.<br><br>
+      This is not a story about technology.<br>
+      It is a story about what we do<br>
+      when love demands more than what is possible.<br><br>
+      <em>We make it possible anyway.</em>
+    </p>
+    <a href="https://ns.com/hus/apply" target="_blank" class="cta-btn reveal">
+      <span>Join Network School</span>
+    </a>
+  </div>
+</section>
+
+<!-- ===== PRESS ===== -->
+<section id="press" class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">VIII</div>
+    <h2 class="section-heading reveal">Press</h2>
+    <p class="section-body reveal">Media coverage &amp; press inquiries coming soon.</p>
+    <div class="press-grid">
+      <div class="press-placeholder reveal"><span>Media feature</span></div>
+      <div class="press-placeholder reveal"><span>Media feature</span></div>
+      <div class="press-placeholder reveal"><span>Media feature</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLOSING ===== -->
+<section id="closing" class="section">
+  <div class="section-inner">
+    <div class="breathing-divider"></div>
+    <div class="closing-text reveal">
+      <span class="gold">Genesis Node</span> &middot; Forest City &middot; Malaysia<br>
+      <span class="gold">26 June 2026</span><br><br>
+      <a href="https://firsthumanoid.xyz" style="color: var(--text-muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); transition: color 0.3s;" target="_blank">firsthumanoid.xyz</a>
+    </div>
+  </div>
+</section>
+
+<script>
+// ===== PARTICLE SYSTEM =====
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let w, h;
+let mouseX = -1000, mouseY = -1000;
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight * Math.max(1, document.body.scrollHeight / window.innerHeight);
+}
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = (Math.random() - 0.5) * 0.2 - 0.1;
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.baseOpacity = this.opacity;
+    this.color = Math.random() > 0.5 ? 'gold' : 'cyan';
+    this.pulse = Math.random() * Math.PI * 2;
+    this.pulseSpeed = Math.random() * 0.02 + 0.005;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.pulse += this.pulseSpeed;
+    this.opacity = this.baseOpacity * (0.5 + 0.5 * Math.sin(this.pulse));
+
+    // Mouse interaction
+    const dx = this.x - mouseX;
+    const dy = this.y - (mouseY + window.scrollY);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 150) {
+      this.opacity = Math.min(1, this.baseOpacity + 0.4 * (1 - dist / 150));
+      this.x += dx * 0.01;
+      this.y += dy * 0.01;
+    }
+
+    if (this.x < -50 || this.x > w + 50 || this.y < -50 || this.y > h + 50) {
+      this.reset();
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    if (this.color === 'gold') {
+      ctx.fillStyle = `rgba(212, 168, 83, ${this.opacity})`;
+    } else {
+      ctx.fillStyle = `rgba(92, 224, 216, ${this.opacity})`;
+    }
+    ctx.fill();
+
+    // Glow
+    if (this.opacity > 0.3) {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+      if (this.color === 'gold') {
+        ctx.fillStyle = `rgba(212, 168, 83, ${this.opacity * 0.1})`;
+      } else {
+        ctx.fillStyle = `rgba(92, 224, 216, ${this.opacity * 0.1})`;
+      }
+      ctx.fill();
+    }
+  }
+}
+
+function initParticles() {
+  resize();
+  particles = [];
+  const count = Math.min(120, Math.floor((w * h) / 15000));
+  for (let i = 0; i < count; i++) {
+    particles.push(new Particle());
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, w, h);
+
+  // Draw connection lines between close particles
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        const alpha = (1 - dist / 120) * 0.06;
+        ctx.strokeStyle = `rgba(212, 168, 83, ${alpha})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  for (const p of particles) {
+    p.update();
+    p.draw();
+  }
+  requestAnimationFrame(animateParticles);
+}
+
+window.addEventListener('resize', () => {
+  resize();
+});
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+initParticles();
+animateParticles();
+
+// ===== SCROLL REVEAL =====
+const revealElements = document.querySelectorAll('.reveal');
+const storyLines = document.querySelectorAll('.story-line');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Story lines with staggered reveal
+const storyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.delay) || 0;
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, delay);
+      storyObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+storyLines.forEach(line => storyObserver.observe(line));
+
+// ===== 3D COIN TILT =====
+document.querySelectorAll('[data-tilt]').forEach(wrapper => {
+  const img = wrapper.querySelector('.coin-img-wrap');
+  wrapper.addEventListener('mousemove', (e) => {
+    const rect = wrapper.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    img.style.transform = `rotateY(${x * 30}deg) rotateX(${-y * 30}deg)`;
+  });
+  wrapper.addEventListener('mouseleave', () => {
+    img.style.transform = 'rotateY(0) rotateX(0)';
+    img.style.transition = 'transform 0.6s ease';
+    setTimeout(() => { img.style.transition = 'transform 0.1s ease-out'; }, 600);
+  });
+});
+
+// ===== RESIZE CANVAS ON SCROLL =====
+let resizeTimeout;
+window.addEventListener('scroll', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(resize, 200);
+}, { passive: true });
+</script>
+</body>
+</html>
