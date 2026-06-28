@@ -615,8 +615,8 @@ a:hover { opacity: 0.75; }
      1. HERO
      ═══════════════════════════════════ -->
 <section id="hero" class="chapter">
-  <video class="chapter-bg-video" autoplay muted loop playsinline preload="auto" poster="public/clips/the-aisle-walk-poster.jpg" data-hq="public/clips/the-aisle-walk-hq.mp4">
-    <source src="public/clips/the-aisle-walk-mid.mp4" type="video/mp4">
+  <video class="chapter-bg-video" autoplay muted loop playsinline preload="auto" poster="public/clips/the-aisle-walk-poster.jpg">
+    <source src="public/clips/the-aisle-walk-hq.mp4" type="video/mp4">
   </video>
   <div class="chapter-overlay"></div>
   <div class="chapter-content">
@@ -697,9 +697,10 @@ a:hover { opacity: 0.75; }
     </p>
 
     <div class="build-photos reveal reveal-delay-3">
-      <img src="public/photos/PXL_20260625_090942268.jpg" alt="Robot dressing">
-      <img src="public/photos/PXL_20260625_035436967.jpg" alt="Team preparation">
-      <img src="public/photos/PXL_20260626_095934375.jpg" alt="Team with robot">
+      <img src="public/photos/PXL_20260625_090942268.jpg" alt="Robot dressing" loading="lazy" decoding="async">
+      <img src="public/photos/sara-styling-boutonniere.jpg" alt="Sara styling boutonniere" loading="lazy" decoding="async">
+      <img src="public/photos/PXL_20260625_035436967.jpg" alt="Team preparation" loading="lazy" decoding="async">
+      <img src="public/photos/PXL_20260626_095934375.jpg" alt="Team with robot" loading="lazy" decoding="async">
     </div>
 
     <div class="credits reveal reveal-delay-4">
@@ -743,8 +744,10 @@ a:hover { opacity: 0.75; }
       A humanoid robot walked a bride down the aisle &mdash; carrying the love of a
       parents who couldn't be there.
     </p>
-    <div class="walk-media reveal reveal-delay-3">
+    <div class="walk-media reveal reveal-delay-3" style="grid-template-columns: 1fr 1fr 1fr;">
       <video muted loop playsinline preload="none" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
+      </video>
+      <video muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4">
       </video>
       <video muted loop playsinline preload="none" poster="public/clips/bride-and-robot-poster.jpg" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4">
       </video>
@@ -807,17 +810,22 @@ a:hover { opacity: 0.75; }
       Joy, Shared
     </h2>
     <div class="masonry reveal reveal-delay-2">
-      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign"></div>
-      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="Ceremony"></div>
+      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign" loading="lazy" decoding="async"></div>
       <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4"></video></div>
-      <div class="masonry-item"><img src="public/photos/PXL_20260626_103410037.jpg" alt="Bride and robot" loading="lazy"></div>
-      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party" loading="lazy"></div>
+      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="Ceremony" loading="lazy" decoding="async"></div>
+      <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4"></video></div>
+      <div class="masonry-item"><img src="public/photos/PXL_20260626_103410037.jpg" alt="Bride and robot" loading="lazy" decoding="async"></div>
+      <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/rehearsal-walk-poster.jpg" data-lazy="public/clips/rehearsal-walk-mid.mp4" data-hq="public/clips/rehearsal-walk-hq.mp4"></video></div>
+      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party" loading="lazy" decoding="async"></div>
       <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/bride-and-robot-poster.jpg" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4"></video></div>
-      <div class="masonry-item"><img src="public/photos/PXL_20260626_095934375.jpg" alt="Team selfie with robot" loading="lazy"></div>
-      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-36-21.png" alt="Sparklers and confetti" loading="lazy"></div>
+      <div class="masonry-item"><img src="public/photos/PXL_20260626_095934375.jpg" alt="Team selfie with robot" loading="lazy" decoding="async"></div>
+      <div class="masonry-item"><img src="public/photos/sparklers-rooftop.jpg" alt="Rooftop sparklers celebration" loading="lazy" decoding="async"></div>
       <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/robot-guest-moment-poster.jpg" data-lazy="public/clips/robot-guest-moment-mid.mp4" data-hq="public/clips/robot-guest-moment-hq.mp4"></video></div>
-      <div class="masonry-item"><img src="public/photos/PXL_20260625_090942268.jpg" alt="Styling the robot" loading="lazy"></div>
+      <div class="masonry-item"><img src="public/photos/sara-styling-boutonniere.jpg" alt="Sara styling boutonniere" loading="lazy" decoding="async"></div>
+      <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/lab-directing-poster.jpg" data-lazy="public/clips/lab-directing-mid.mp4" data-hq="public/clips/lab-directing-hq.mp4"></video></div>
+      <div class="masonry-item"><img src="public/photos/sparklers-wide.jpg" alt="Sparklers wide" loading="lazy" decoding="async"></div>
       <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/robot-walking-suited-poster.jpg" data-lazy="public/clips/robot-walking-suited-mid.mp4" data-hq="public/clips/robot-walking-suited-hq.mp4"></video></div>
+      <div class="masonry-item"><img src="public/photos/PXL_20260625_090942268.jpg" alt="Styling the robot" loading="lazy" decoding="async"></div>
     </div>
   </div>
 </section>
@@ -995,13 +1003,7 @@ a:hover { opacity: 0.75; }
     }, { once: true });
   }
 
-  // ── Hero: upgrade to HQ after mid plays ──
-  var heroVid = document.querySelector('#hero video');
-  if (heroVid) {
-    heroVid.addEventListener('canplay', function() {
-      upgradeToHq(heroVid);
-    }, { once: true });
-  }
+  // Hero loads HQ directly — no upgrade needed
 
   // ── Lazy videos: load when 1 screen away, play/pause on visibility ──
   var lazyVideos = document.querySelectorAll('video[data-lazy]');
