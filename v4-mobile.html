@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The World's First Humanoid Bridal Walk</title>
+<meta name="description" content="A robot walked her down the aisle. Her grandfather was inside it. The world's first humanoid bridal walk. Genesis Node, 26 June 2026.">
+
+<!-- OG Meta -->
+<meta property="og:title" content="The World's First Humanoid Bridal Walk">
+<meta property="og:description" content="A robot walked her down the aisle. Her grandfather was inside it. 48 hours to build. One chance to get it right.">
+<meta property="og:image" content="https://firsthumanoid.xyz/public/photos/PXL_20260626_103410037.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://firsthumanoid.xyz">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FirstHumanoid">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The World's First Humanoid Bridal Walk">
+<meta name="twitter:description" content="A robot walked her down the aisle. Her grandfather was inside it. 48 hours to build. One chance to get it right.">
+<meta name="twitter:image" content="https://firsthumanoid.xyz/public/photos/PXL_20260626_103410037.jpg">
+<meta name="twitter:site" content="@haboreh">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #c9a84c;
+  --gold-dim: rgba(201,168,76,0.4);
+  --white: #f0ede6;
+  --white-soft: rgba(240,237,230,0.8);
+  --white-faint: rgba(240,237,230,0.4);
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --card-max: 500px;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  background: #111;
+  color: var(--white);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: var(--gold); text-decoration: none; }
+
+/* ── DESKTOP: phone-in-browser feel ── */
+@media (min-width: 540px) {
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('public/photos/Screenshot-from-2026-06-28-07-29-19.png') center/cover no-repeat;
+    filter: blur(40px) brightness(0.3);
+    z-index: -1;
+  }
+  .story-container {
+    max-width: var(--card-max);
+    margin: 0 auto;
+    box-shadow: 0 0 80px rgba(0,0,0,0.6);
+    position: relative;
+  }
+}
+
+/* ── CARD BASE ── */
+.card {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 24px));
+}
+
+.card-bg-video,
+.card-bg-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.card-bg-img {
+  background-size: cover;
+  background-position: center;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── TEXT STYLES ── */
+.card-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.card-headline {
+  font-size: clamp(36px, 9vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 16px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.card-body {
+  font-size: clamp(18px, 4.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--white-soft);
+  text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+}
+
+h1.card-headline {
+  font-size: clamp(36px, 9vw, 48px);
+}
+
+/* ── PROGRESS DOTS ── */
+.progress-dots {
+  position: fixed;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 4px;
+}
+
+@media (min-width: 540px) {
+  .progress-dots {
+    right: calc(50% - var(--card-max) / 2 - 30px);
+  }
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--white-faint);
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.progress-dot.active {
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(201,168,76,0.5);
+  transform: scale(1.3);
+}
+
+/* ── SWIPE-UP INDICATOR ── */
+.swipe-up {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: swipe-bounce 2s ease-in-out infinite;
+}
+
+.swipe-up span {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+.swipe-up svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--gold-dim);
+  stroke-width: 2;
+  fill: none;
+  transform: rotate(180deg);
+}
+
+@keyframes swipe-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
+  50% { transform: translateX(-50%) translateY(-10px); opacity: 1; }
+}
+
+/* ── CARD 1: HERO ── */
+#card-hero .card-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.25) 40%,
+    rgba(0,0,0,0.7) 100%
+  );
+}
+
+#card-hero .card-content {
+  padding-bottom: 56px;
+}
+
+.hero-quote {
+  font-size: clamp(16px, 4vw, 18px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--white-soft);
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gold-dim);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+  line-height: 1.5;
+}
+
+.hero-date {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold-dim);
+  margin-top: 16px;
+}
+
+/* ── CARD 2: THE WISH ── */
+#card-wish .card-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2) 0%,
+    rgba(0,0,0,0.65) 100%
+  );
+}
+
+/* ── CARD 3: THE BUILD ── */
+#card-build .card-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.7) 100%
+  );
+}
+
+.build-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-top: 16px;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.build-scroll::-webkit-scrollbar { display: none; }
+
+.build-scroll img,
+.build-scroll video {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* ── CARD 4: THE WALK ── */
+#card-walk {
+  justify-content: center;
+}
+
+#card-walk .card-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.1) 0%,
+    rgba(0,0,0,0.55) 100%
+  );
+}
+
+#card-walk .card-content {
+  text-align: center;
+}
+
+/* ── CARD 5: THE COIN ── */
+#card-coin {
+  background: linear-gradient(135deg, #1a1510 0%, #111 50%, #0d0f14 100%);
+  justify-content: center;
+  align-items: center;
+}
+
+#card-coin .card-content {
+  text-align: center;
+  width: 100%;
+}
+
+.coin-3d-container {
+  perspective: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.coin-3d {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.1s ease-out;
+  animation: coin-glow 4s ease infinite;
+}
+
+@keyframes coin-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 0 50px rgba(201,168,76,0.1); }
+  50% { box-shadow: 0 0 35px rgba(201,168,76,0.5), 0 0 70px rgba(201,168,76,0.2); }
+}
+
+.coin-3d.flipping {
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.coin-3d-face {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.coin-3d-face img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.coin-3d-back { transform: rotateY(180deg); }
+
+.coin-3d-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+.coin-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  margin-top: 12px;
+}
+
+/* ── CARD 6: GALLERY ── */
+#card-gallery {
+  background: linear-gradient(135deg, #151210 0%, #111 100%);
+  justify-content: flex-start;
+  padding-top: max(48px, env(safe-area-inset-top, 48px));
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 16px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.gallery-grid img,
+.gallery-grid video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.gallery-grid a {
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* ── CARD 7: GUESTBOOK ── */
+#card-guestbook {
+  background: linear-gradient(to bottom, #141210, #111);
+  justify-content: center;
+}
+
+#card-guestbook .card-content {
+  width: 100%;
+}
+
+.gb-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.gb-form textarea,
+.gb-form input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.gb-form textarea {
+  resize: none;
+  height: 80px;
+}
+
+.gb-form input:focus,
+.gb-form textarea:focus {
+  border-color: var(--gold);
+}
+
+.gb-form input::placeholder,
+.gb-form textarea::placeholder {
+  color: var(--white-faint);
+}
+
+.gb-submit {
+  padding: 14px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.gb-submit:hover, .gb-submit:active {
+  background: var(--gold);
+  color: #111;
+}
+
+.gb-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  max-height: 30vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.gb-entry {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.gb-entry-text {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--white-soft);
+  font-style: italic;
+}
+
+.gb-entry-text::before { content: '\201C'; color: var(--gold-dim); }
+.gb-entry-text::after { content: '\201D'; color: var(--gold-dim); }
+
+.gb-entry-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.gb-entry-name {
+  font-weight: 600;
+  color: var(--white);
+}
+
+.gb-entry-time {
+  color: var(--white-faint);
+}
+
+/* ── CARD 8: SHARE / CLOSE ── */
+#card-share {
+  justify-content: center;
+}
+
+#card-share .card-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.3) 0%,
+    rgba(0,0,0,0.65) 100%
+  );
+}
+
+#card-share .card-content {
+  text-align: center;
+}
+
+.share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.share-btn-big {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.share-btn-big:hover { transform: scale(1.02); opacity: 0.9; }
+
+.share-btn-x {
+  background: #fff;
+  color: #000;
+}
+
+.share-btn-wa {
+  background: #25D366;
+  color: #fff;
+}
+
+.share-btn-copy {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid var(--gold-dim);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.share-btn-native-big {
+  background: var(--gold);
+  color: #111;
+  cursor: pointer;
+  border: none;
+  display: none;
+}
+
+@media (hover: none) {
+  .share-btn-native-big { display: flex; }
+}
+
+.cta-domain {
+  margin-top: 32px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+}
+
+.cta-sub {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+.press-kit-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  border-bottom: 1px solid var(--gold-dim);
+  padding-bottom: 2px;
+  transition: color 0.3s;
+}
+
+.press-kit-link:hover { color: var(--gold); }
+
+.credits-mini {
+  margin-top: 32px;
+  font-size: 11px;
+  color: var(--white-faint);
+  line-height: 1.7;
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.35s; }
+.reveal-d4 { transition-delay: 0.5s; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 0; height: 0; }
+
+/* Hide scrollbar on the story container */
+.story-container {
+  scrollbar-width: none;
+}
+.story-container::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Progress dots -->
+<nav class="progress-dots" id="progress-dots" aria-label="Story progress"></nav>
+
+<div class="story-container" id="story">
+
+<!-- ═══ CARD 1: HERO ═══ -->
+<section class="card" id="card-hero">
+  <video class="card-bg-video" autoplay muted loop playsinline preload="auto" poster="public/clips/the-aisle-walk-poster.jpg">
+    <source src="public/clips/the-aisle-walk-hq.mp4" type="video/mp4">
+  </video>
+  <div class="card-overlay"></div>
+  <div class="card-content">
+    <p class="card-kicker reveal">The World's First Humanoid Bridal Walk</p>
+    <h1 class="card-headline reveal reveal-d1">A robot walked her down the aisle.</h1>
+    <p class="card-body reveal reveal-d2">Her grandfather was inside it.</p>
+    <p class="hero-quote reveal reveal-d3">His face on the screen, his voice in her ear, his blessing on every step down the aisle.</p>
+    <p class="hero-date reveal reveal-d4">26 &middot; VI &middot; 2026</p>
+  </div>
+  <div class="swipe-up">
+    <svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg>
+    <span>Swipe up</span>
+  </div>
+</section>
+
+<!-- ═══ CARD 2: THE WISH ═══ -->
+<section class="card" id="card-wish">
+  <div class="card-bg-img" style="background-image: url('public/photos/Screenshot-from-2026-06-28-07-29-19.png');"></div>
+  <div class="card-overlay"></div>
+  <div class="card-content">
+    <p class="card-kicker reveal">The Wish</p>
+    <p class="card-headline reveal reveal-d1" style="font-size: clamp(30px, 7.5vw, 42px);">She always pictured them at her side.</p>
+    <p class="card-body reveal reveal-d2">Sonia imagined her parents walking her toward the rest of her life. But an ocean stood in the way. So we asked: <em style="color: var(--gold);">what if presence didn't require a plane?</em></p>
+    <p class="card-body reveal reveal-d3" style="margin-top: 16px; font-size: clamp(16px, 4vw, 18px); color: var(--gold);">Not a screen. Not a recording. A presence.</p>
+  </div>
+</section>
+
+<!-- ═══ CARD 3: THE BUILD ═══ -->
+<section class="card" id="card-build">
+  <video class="card-bg-video" muted loop playsinline preload="none" poster="public/clips/prep-ipad-test-poster.jpg" data-lazy="public/clips/prep-ipad-test-mid.mp4" data-hq="public/clips/prep-ipad-test-hq.mp4"></video>
+  <div class="card-overlay"></div>
+  <div class="card-content">
+    <p class="card-kicker reveal">The Build</p>
+    <p class="card-headline reveal reveal-d1">48 hours.<br>One chance.</p>
+    <p class="card-body reveal reveal-d2">Everything that could go wrong, did. But they kept going.</p>
+    <div class="build-scroll reveal reveal-d3">
+      <img src="public/photos/PXL_20260625_090942268.jpg" alt="Robot dressing" loading="lazy">
+      <video muted loop playsinline preload="none" poster="public/clips/rehearsal-walk-poster.jpg" data-lazy="public/clips/rehearsal-walk-mid.mp4"></video>
+      <img src="public/photos/sara-styling-boutonniere.jpg" alt="Sara styling" loading="lazy">
+      <img src="public/photos/PXL_20260625_035436967.jpg" alt="Prep" loading="lazy">
+      <img src="public/photos/PXL_20260626_095934375.jpg" alt="Team" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CARD 4: THE WALK ═══ -->
+<section class="card" id="card-walk">
+  <video class="card-bg-video" muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4"></video>
+  <div class="card-overlay"></div>
+  <div class="card-content">
+    <p class="card-kicker reveal">The Walk</p>
+    <p class="card-headline reveal reveal-d1" style="font-size: clamp(40px, 10vw, 52px);">The Moment</p>
+    <p class="card-body reveal reveal-d2">A humanoid robot walked Sonia down the aisle &mdash; carrying her brother's voice, her parents' love, and forty-eight hours of belief.</p>
+  </div>
+</section>
+
+<!-- ═══ CARD 5: THE COIN ═══ -->
+<section class="card" id="card-coin">
+  <div class="card-content">
+    <p class="card-kicker reveal">The Coin</p>
+    <p class="card-headline reveal reveal-d1" style="font-size: clamp(28px, 7vw, 40px);">A Token of Memory</p>
+
+    <div class="coin-3d-container reveal reveal-d2">
+      <div class="coin-3d" id="coin3d" onclick="flipCoin()" tabindex="0" role="button" aria-label="Flip coin">
+        <div class="coin-3d-face coin-3d-front">
+          <img src="public/coin-obverse.png" alt="Coin obverse">
+        </div>
+        <div class="coin-3d-face coin-3d-back">
+          <img src="public/coin-reverse.png" alt="Coin reverse">
+        </div>
+        <div class="coin-3d-shine" id="coin3d-shine"></div>
+      </div>
+    </div>
+    <p class="coin-label reveal reveal-d3" id="coin3d-face-label">Tap to flip</p>
+    <p class="card-body reveal reveal-d4" style="margin-top: 16px; font-size: 16px; text-align: center;">A coin to keep, so the moment never fades.</p>
+  </div>
+</section>
+
+<!-- ═══ CARD 6: GALLERY ═══ -->
+<section class="card" id="card-gallery">
+  <div class="card-content" style="width: 100%; flex: 1; display: flex; flex-direction: column; min-height: 0;">
+    <p class="card-kicker reveal">The Celebration</p>
+    <p class="card-headline reveal reveal-d1" style="font-size: clamp(28px, 7vw, 36px);">Joy, Shared</p>
+    <div class="gallery-grid reveal reveal-d2">
+      <a href="public/photos/full/PXL_20260626_103410037.jpg" target="_blank"><img src="public/photos/PXL_20260626_103410037.jpg" alt="Group photo" loading="lazy"></a>
+      <a href="public/photos/full/Screenshot-from-2026-06-28-07-33-13.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party" loading="lazy"></a>
+      <a href="public/photos/full/Screenshot-from-2026-06-28-07-24-31.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign" loading="lazy"></a>
+      <a href="public/photos/full/IMG-20260628-WA0004.jpg" target="_blank"><img src="public/photos/sparklers-rooftop.jpg" alt="Sparklers" loading="lazy"></a>
+      <a href="public/photos/full/IMG-20260628-WA0006.jpg" target="_blank"><img src="public/photos/sparklers-wide.jpg" alt="Sparklers wide" loading="lazy"></a>
+      <a href="public/photos/full/Screenshot-from-2026-06-28-07-29-19.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="Ceremony" loading="lazy"></a>
+    </div>
+    <p class="reveal reveal-d3" style="margin-top: 10px; font-size: 12px; color: var(--white-faint); text-align: center;">
+      <span style="color: var(--gold);">#HumanoidBridalWalk</span> &middot; <span style="color: var(--gold);">#KrisAndSonia</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══ CARD 7: GUESTBOOK ═══ -->
+<section class="card" id="card-guestbook">
+  <div class="card-content">
+    <p class="card-kicker reveal">Witness Reactions</p>
+    <p class="card-headline reveal reveal-d1" style="font-size: clamp(28px, 7vw, 36px);">Sign the Guestbook</p>
+    <form class="gb-form reveal reveal-d2" id="guestbook-form" onsubmit="return submitGuestbook(event)">
+      <textarea id="gb-message" maxlength="280" placeholder="What did you feel?" required></textarea>
+      <input type="text" id="gb-name" placeholder="Your name" required>
+      <input type="text" id="gb-handle" placeholder="@handle (X or Instagram)">
+      <button type="submit" class="gb-submit">Leave Your Mark</button>
+    </form>
+    <div class="gb-entries reveal reveal-d3" id="guestbook-entries"></div>
+  </div>
+</section>
+
+<!-- ═══ CARD 8: SHARE & CLOSE ═══ -->
+<section class="card" id="card-share">
+  <video class="card-bg-video" muted loop playsinline preload="none" poster="public/clips/bride-and-robot-poster.jpg" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4"></video>
+  <div class="card-overlay"></div>
+  <div class="card-content">
+    <p class="card-kicker reveal">Share This Story</p>
+    <p class="card-headline reveal reveal-d1" style="font-size: clamp(28px, 7vw, 40px);">Tell the world.</p>
+
+    <div class="share-buttons reveal reveal-d2">
+      <a class="share-btn-big share-btn-x" href="https://twitter.com/intent/tweet?text=A%20robot%20walked%20her%20down%20the%20aisle.%20Her%20grandfather%20was%20inside%20it.%20%F0%9F%A4%8D%0A%0AThe%20world%E2%80%99s%20first%20humanoid%20bridal%20walk.%0Ahttps%3A%2F%2Ffirsthumanoid.xyz%0A%23HumanoidBridalWalk" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Share on X
+      </a>
+      <a class="share-btn-big share-btn-wa" href="https://api.whatsapp.com/send?text=A%20robot%20walked%20her%20down%20the%20aisle.%20Her%20grandfather%20was%20inside%20it.%20%F0%9F%A4%8D%20https%3A%2F%2Ffirsthumanoid.xyz" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button class="share-btn-big share-btn-copy" onclick="copyLink()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy Link
+      </button>
+      <button class="share-btn-big share-btn-native-big" onclick="nativeShare()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share
+      </button>
+    </div>
+
+    <p class="cta-domain reveal reveal-d3"><a href="https://firsthumanoid.xyz" style="color: var(--gold);">firsthumanoid.xyz</a></p>
+    <p class="cta-sub reveal reveal-d3">Genesis Node &middot; XXVI&middot;VI&middot;XXVI</p>
+    <a href="mailto:hus@ns.com?subject=Press%20Kit%20Request%20-%20FirstHumanoid" class="press-kit-link reveal reveal-d4">Press Kit</a>
+
+    <div class="credits-mini reveal reveal-d4">
+      Conceived &amp; directed by <a href="https://ns.com/hus">Husam Abboud</a> &middot;
+      Lab lead <a href="https://ns.com/tonymfer">Tony Lopez</a> &middot;
+      Engineering: Andy, YC, Clarence, Roy &middot;
+      Styling <a href="https://ns.com/sarawondertech">Sara Landi Tortoli</a> &middot;
+      Coin <a href="https://ns.com/vinayvancheeswa">Vinayak Vancheeswaran</a>
+      <br>Built at <a href="https://ns.com" target="_blank">Network School</a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /story-container -->
+
+<script>
+(function() {
+  // ── PROGRESS DOTS ──
+  var cards = document.querySelectorAll('.card');
+  var dotsContainer = document.getElementById('progress-dots');
+  var dots = [];
+
+  cards.forEach(function(card, i) {
+    var dot = document.createElement('button');
+    dot.className = 'progress-dot';
+    dot.setAttribute('aria-label', 'Go to card ' + (i + 1));
+    dot.addEventListener('click', function() {
+      card.scrollIntoView({ behavior: 'smooth' });
+    });
+    dotsContainer.appendChild(dot);
+    dots.push(dot);
+  });
+
+  var dotObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var idx = Array.prototype.indexOf.call(cards, entry.target);
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === idx);
+        });
+        // Hide swipe-up after first card
+        var swipe = document.querySelector('.swipe-up');
+        if (swipe && idx > 0) swipe.style.display = 'none';
+      }
+    });
+  }, { threshold: 0.6 });
+
+  cards.forEach(function(c) { dotObserver.observe(c); });
+
+  // ── REVEAL ANIMATIONS ──
+  var reveals = document.querySelectorAll('.reveal');
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(function(el) { revealObs.observe(el); });
+
+  // ── LAZY VIDEO LOADING ──
+  var lazyVideos = document.querySelectorAll('video[data-lazy]');
+  var loadObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var v = entry.target;
+      var src = v.getAttribute('data-lazy');
+      if (!src) return;
+      v.src = src;
+      v.removeAttribute('data-lazy');
+      v.load();
+      // Upgrade to HQ when ready
+      v.addEventListener('canplay', function() {
+        var hq = v.getAttribute('data-hq');
+        if (!hq) return;
+        var pre = document.createElement('video');
+        pre.preload = 'auto'; pre.src = hq;
+        pre.addEventListener('canplaythrough', function() {
+          var t = v.currentTime;
+          v.src = hq; v.currentTime = t;
+          v.play().catch(function(){});
+        }, { once: true });
+      }, { once: true });
+      loadObs.unobserve(v);
+    });
+  }, { rootMargin: '100% 0px' });
+  lazyVideos.forEach(function(v) { loadObs.observe(v); });
+
+  // ── PLAY/PAUSE VIDEOS ON VISIBILITY ──
+  var allVids = document.querySelectorAll('video');
+  var playObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.play().catch(function(){});
+      else entry.target.pause();
+    });
+  }, { threshold: 0.1 });
+  allVids.forEach(function(v) { playObs.observe(v); });
+
+  // ── 3D COIN ──
+  var coin3d = document.getElementById('coin3d');
+  var coin3dShine = document.getElementById('coin3d-shine');
+  var coinFlipped = false;
+  var isFlipping = false;
+  var idleAngle = 0;
+  var idleRAF;
+
+  function idleWobble() {
+    if (isFlipping) return;
+    idleAngle += 0.01;
+    var wx = Math.sin(idleAngle) * 6;
+    var wy = Math.cos(idleAngle * 0.7) * 6;
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (base + wy) + 'deg) rotateX(' + wx + 'deg)';
+    idleRAF = requestAnimationFrame(idleWobble);
+  }
+  idleWobble();
+
+  window.flipCoin = function() {
+    coinFlipped = !coinFlipped;
+    isFlipping = true;
+    cancelAnimationFrame(idleRAF);
+    coin3d.classList.add('flipping');
+    coin3d.style.transform = 'rotateY(' + (coinFlipped ? 180 : 0) + 'deg) rotateX(0deg)';
+    document.getElementById('coin3d-face-label').textContent = coinFlipped ? 'Reverse - tap again' : 'Tap to flip';
+    setTimeout(function() {
+      coin3d.classList.remove('flipping');
+      isFlipping = false;
+      idleWobble();
+    }, 850);
+  };
+
+  coin3d.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipCoin(); }
+  });
+
+  // Touch tilt on coin
+  var coinContainer = document.querySelector('.coin-3d-container');
+  coinContainer.addEventListener('touchmove', function(e) {
+    if (isFlipping) return;
+    cancelAnimationFrame(idleRAF);
+    var t = e.touches[0];
+    var rect = coin3d.getBoundingClientRect();
+    var normX = (t.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+    var normY = (t.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+    var maxT = 20;
+    var tx = Math.max(-maxT, Math.min(maxT, -normY * maxT));
+    var ty = Math.max(-maxT, Math.min(maxT, normX * maxT));
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (base + ty) + 'deg) rotateX(' + tx + 'deg)';
+  }, { passive: true });
+
+  coinContainer.addEventListener('touchend', function() {
+    coin3d.style.transition = 'transform 0.5s ease-out';
+    coin3d.style.transform = 'rotateY(' + (coinFlipped ? 180 : 0) + 'deg) rotateX(0deg)';
+    setTimeout(function() {
+      coin3d.style.transition = 'transform 0.1s ease-out';
+      if (!isFlipping) idleWobble();
+    }, 500);
+  });
+
+  // Mouse tilt (desktop)
+  coinContainer.addEventListener('mousemove', function(e) {
+    if (isFlipping) return;
+    cancelAnimationFrame(idleRAF);
+    var rect = coin3d.getBoundingClientRect();
+    var normX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+    var normY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+    var maxT = 22;
+    var tx = Math.max(-maxT, Math.min(maxT, -normY * maxT));
+    var ty = Math.max(-maxT, Math.min(maxT, normX * maxT));
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (base + ty) + 'deg) rotateX(' + tx + 'deg)';
+    var sx = (normX + 1) / 2 * 100;
+    var sy = (normY + 1) / 2 * 100;
+    coin3dShine.style.background = 'radial-gradient(circle at ' + sx + '% ' + sy + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+  });
+
+  coinContainer.addEventListener('mouseleave', function() {
+    coin3d.style.transition = 'transform 0.5s ease-out';
+    coin3d.style.transform = 'rotateY(' + (coinFlipped ? 180 : 0) + 'deg) rotateX(0deg)';
+    coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+    setTimeout(function() {
+      coin3d.style.transition = 'transform 0.1s ease-out';
+      if (!isFlipping) idleWobble();
+    }, 500);
+  });
+
+  // ── GUESTBOOK ──
+  var GB_API = '/api/guestbook';
+
+  function relativeTime(ts) {
+    var diff = Date.now() - ts;
+    var sec = Math.floor(diff / 1000);
+    if (sec < 60) return 'just now';
+    var min = Math.floor(sec / 60);
+    if (min < 60) return min + 'm ago';
+    var hr = Math.floor(min / 60);
+    if (hr < 24) return hr + 'h ago';
+    var d = Math.floor(hr / 24);
+    return d + 'd ago';
+  }
+
+  function esc(s) { var d = document.createElement('div'); d.appendChild(document.createTextNode(s)); return d.innerHTML; }
+
+  function renderEntries(entries) {
+    var c = document.getElementById('guestbook-entries');
+    var html = '';
+    entries.forEach(function(e) {
+      var msg = e.text || e.message || '';
+      html += '<div class="gb-entry"><p class="gb-entry-text">' + esc(msg) + '</p><div class="gb-entry-meta"><span class="gb-entry-name">' + esc(e.name) + '</span><span class="gb-entry-time">' + relativeTime(e.ts) + '</span></div></div>';
+    });
+    c.innerHTML = html;
+  }
+
+  function loadEntries() {
+    fetch(GB_API).then(function(r) { return r.json(); }).then(renderEntries).catch(function(){});
+  }
+
+  window.submitGuestbook = function(e) {
+    e.preventDefault();
+    var text = document.getElementById('gb-message').value.trim();
+    var name = document.getElementById('gb-name').value.trim();
+    var handle = document.getElementById('gb-handle').value.trim();
+    if (!text || !name) return false;
+    var btn = document.querySelector('.gb-submit');
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    fetch(GB_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: text, name: name, handle: handle }) })
+    .then(function() {
+      document.getElementById('gb-message').value = '';
+      document.getElementById('gb-name').value = '';
+      document.getElementById('gb-handle').value = '';
+      btn.textContent = 'Leave Your Mark'; btn.disabled = false;
+      loadEntries();
+    })
+    .catch(function() { btn.textContent = 'Leave Your Mark'; btn.disabled = false; });
+    return false;
+  };
+  loadEntries();
+
+  // ── SHARE ──
+  window.copyLink = function() {
+    navigator.clipboard.writeText('https://firsthumanoid.xyz').then(function() {
+      var btn = document.querySelector('.share-btn-copy');
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+      setTimeout(function() {
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Link';
+      }, 2000);
+    });
+  };
+
+  window.nativeShare = function() {
+    if (navigator.share) {
+      navigator.share({
+        title: "The World's First Humanoid Bridal Walk",
+        text: "A robot walked her down the aisle. Her grandfather was inside it.",
+        url: 'https://firsthumanoid.xyz'
+      }).catch(function(){});
+    }
+  };
+})();
+</script>
+</body>
+</html>

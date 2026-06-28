@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The World's First Humanoid Bridal Walk</title>
+<meta name="description" content="A robot walked her down the aisle. Her grandfather was inside it. The world's first humanoid bridal walk — 48 hours to build, one moment to change everything.">
+
+<!-- OG Meta Tags -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="The World's First Humanoid Bridal Walk">
+<meta property="og:description" content="A robot walked her down the aisle. Her grandfather was inside it. 48 hours to build, one moment to change everything.">
+<meta property="og:image" content="https://firsthumanoid.vercel.app/public/clips/the-aisle-walk-poster.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:url" content="https://firsthumanoid.vercel.app">
+<meta property="og:site_name" content="FirstHumanoid">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The World's First Humanoid Bridal Walk">
+<meta name="twitter:description" content="A robot walked her down the aisle. Her grandfather was inside it. 48 hours to build, one moment to change everything.">
+<meta name="twitter:image" content="https://firsthumanoid.vercel.app/public/clips/the-aisle-walk-poster.jpg">
+<meta name="twitter:site" content="@haborium">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════
+   RESET & FOUNDATIONS
+   ══════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg-end: #141414;
+  --gold: #c9a84c;
+  --gold-dim: rgba(201,168,76,0.4);
+  --gold-faint: rgba(201,168,76,0.12);
+  --white: #f0ede6;
+  --white-soft: rgba(240,237,230,0.7);
+  --white-faint: rgba(240,237,230,0.35);
+  --sans: 'Space Grotesk', sans-serif;
+  --serif: 'Crimson Pro', serif;
+  --timeline-width: 2px;
+  --node-size: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-end) 30%, var(--bg) 60%, var(--bg-end) 100%);
+  color: var(--white);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: var(--gold); text-decoration: none; transition: opacity 0.3s; }
+a:hover { opacity: 0.75; }
+
+/* ══════════════════════════════════
+   HERO
+   ══════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,10,0.25) 0%,
+    rgba(10,10,10,0.4) 40%,
+    rgba(10,10,10,0.75) 100%
+  );
+  z-index: 1;
+}
+
+.hero-topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 40px 24px;
+  text-align: center;
+  margin-top: 8vh;
+}
+
+.hero-content h1 {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(32px, 7vw, 80px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+
+.hero-content h1 em {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-quote {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.2vw, 24px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--white-soft);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.hero-subtext {
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--white-faint);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.4vw, 14px);
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.scroll-arrow {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: float 2.5s ease-in-out infinite;
+}
+.scroll-arrow svg {
+  width: 28px; height: 28px;
+  stroke: var(--gold-dim);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 1; }
+}
+
+/* ══════════════════════════════════
+   TIMELINE SPINE
+   ══════════════════════════════════ */
+.timeline {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px 40px;
+}
+
+/* The gold vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--timeline-width);
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--gold-dim) 5%,
+    var(--gold-dim) 95%,
+    transparent 100%
+  );
+  z-index: 0;
+}
+
+/* ══════════════════════════════════
+   TIMELINE ENTRIES
+   ══════════════════════════════════ */
+.tl-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 100px;
+  align-items: start;
+}
+
+/* The node dot on the spine */
+.tl-entry::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  width: var(--node-size);
+  height: var(--node-size);
+  background: var(--bg);
+  border: var(--timeline-width) solid var(--gold);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+
+.tl-entry.visible::before {
+  background: var(--gold);
+  box-shadow: 0 0 16px rgba(201,168,76,0.5);
+}
+
+/* Timestamp side */
+.tl-timestamp {
+  text-align: right;
+  padding-top: 16px;
+  padding-right: 40px;
+}
+
+.tl-timestamp-label {
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.2vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.tl-timestamp-time {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 36px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white-soft);
+  line-height: 1.2;
+}
+
+/* Content side */
+.tl-content {
+  padding-top: 16px;
+  padding-left: 40px;
+}
+
+/* Alternate sides */
+.tl-entry.right .tl-timestamp {
+  text-align: left;
+  padding-left: 40px;
+  padding-right: 0;
+  order: 2;
+}
+
+.tl-entry.right .tl-content {
+  text-align: right;
+  padding-right: 40px;
+  padding-left: 0;
+  order: 1;
+}
+
+.tl-headline {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: clamp(22px, 3.5vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.tl-body {
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--white-soft);
+  margin-bottom: 20px;
+}
+
+.tl-punchline {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2vw, 22px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold);
+  margin-top: 12px;
+}
+
+/* Media in timeline */
+.tl-media {
+  margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tl-media img,
+.tl-media video {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.tl-media-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.tl-media-row img,
+.tl-media-row video {
+  flex: 1 1 200px;
+  max-width: 280px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  filter: brightness(0.85);
+  transition: filter 0.4s;
+}
+
+.tl-media-row img:hover,
+.tl-media-row video:hover { filter: brightness(1); }
+
+/* Full-width timeline entries */
+.tl-full {
+  display: block;
+  text-align: center;
+  margin-bottom: 100px;
+  position: relative;
+}
+
+.tl-full::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: var(--node-size);
+  height: var(--node-size);
+  background: var(--bg);
+  border: var(--timeline-width) solid var(--gold);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+
+.tl-full.visible::before {
+  background: var(--gold);
+  box-shadow: 0 0 16px rgba(201,168,76,0.5);
+}
+
+.tl-full-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+/* ══════════════════════════════════
+   SCROLL-DRIVEN ANIMATIONS
+   ══════════════════════════════════ */
+
+/* Modern scroll-driven (Chrome 115+) */
+@supports (animation-timeline: scroll()) {
+  .tl-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: scrollReveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  @keyframes scrollReveal {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tl-reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    animation: scrollRevealLeft linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  @keyframes scrollRevealLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .tl-reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    animation: scrollRevealRight linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  @keyframes scrollRevealRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+}
+
+/* Fallback for all browsers via IntersectionObserver */
+@supports not (animation-timeline: scroll()) {
+  .tl-reveal,
+  .tl-reveal-left,
+  .tl-reveal-right {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tl-reveal-left {
+    transform: translateX(-40px) translateY(20px);
+  }
+
+  .tl-reveal-right {
+    transform: translateX(40px) translateY(20px);
+  }
+
+  .tl-reveal.vis,
+  .tl-reveal-left.vis,
+  .tl-reveal-right.vis {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* Also add fallback class for hero elements */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.5s; }
+
+/* ══════════════════════════════════
+   CREDITS
+   ══════════════════════════════════ */
+.credits {
+  margin-top: 32px;
+  max-width: 500px;
+}
+
+.tl-entry.right .credits {
+  margin-left: auto;
+}
+
+.credit-item {
+  display: flex;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gold-faint);
+}
+
+.credit-role {
+  flex: 0 0 auto;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-right: 14px;
+  border-right: 1px solid rgba(201,168,76,0.15);
+  white-space: nowrap;
+}
+
+.credit-name {
+  flex: 1;
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--white-soft);
+  padding-left: 14px;
+}
+
+.credit-name a { border-bottom: 1px solid var(--gold-dim); }
+
+.credit-handle {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--white-faint);
+  margin-left: 5px;
+}
+
+/* ══════════════════════════════════
+   WALK MEDIA GRID
+   ══════════════════════════════════ */
+.walk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.walk-grid video,
+.walk-grid img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.walk-grid .walk-wide {
+  grid-column: 1 / -1;
+  height: 300px;
+}
+
+/* ══════════════════════════════════
+   COIN
+   ══════════════════════════════════ */
+.coin-3d-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 800px;
+  margin: 32px auto 0;
+}
+
+.coin-3d {
+  width: 280px;
+  height: 280px;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.1s ease-out;
+  animation: coin-glow 5s ease infinite;
+}
+
+@keyframes coin-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(201,168,76,0.35), 0 0 60px rgba(201,168,76,0.15); }
+  50% { box-shadow: 0 0 40px rgba(201,168,76,0.5), 0 0 80px rgba(201,168,76,0.25); }
+}
+
+.coin-3d.flipping {
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.coin-3d-face {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.coin-3d-face img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.coin-3d-back { transform: rotateY(180deg); }
+
+.coin-3d-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
+  mix-blend-mode: overlay;
+  z-index: 2;
+  transition: background 0.1s ease-out;
+}
+
+.coin-3d::after {
+  content: '';
+  position: absolute;
+  top: 1%; left: 1%;
+  width: 98%; height: 98%;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.12);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.coin-3d-shadow {
+  width: 200px;
+  height: 16px;
+  margin-top: 18px;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(12px);
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.coin-3d-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  margin-top: 10px;
+  user-select: none;
+}
+
+.coin-photo {
+  margin-top: 20px;
+  max-width: 160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.coin-photo img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* ══════════════════════════════════
+   MASONRY GALLERY
+   ══════════════════════════════════ */
+.masonry-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  text-align: center;
+}
+
+.masonry {
+  columns: 3;
+  column-gap: 12px;
+  max-width: 960px;
+  width: 100%;
+  margin: 32px auto 0;
+  text-align: left;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.masonry-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.15);
+}
+
+a.masonry-item {
+  display: block;
+  cursor: zoom-in;
+}
+
+.masonry-video {
+  position: relative;
+}
+
+.masonry-video .share-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.masonry-video:hover .share-overlay { opacity: 1; }
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.share-btn:hover { background: rgba(255,255,255,0.3); opacity: 1; }
+.share-btn-native { display: none; }
+@media (hover: none) { .share-btn-native { display: inline-flex; } }
+
+.masonry-item img,
+.masonry-item video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ══════════════════════════════════
+   GUESTBOOK
+   ══════════════════════════════════ */
+.guestbook-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  text-align: center;
+}
+
+.guestbook-form {
+  max-width: 560px;
+  width: 100%;
+  margin: 32px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 4px;
+  padding: 14px 18px;
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.guestbook-form textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+.guestbook-form input:focus,
+.guestbook-form textarea:focus { border-color: var(--gold); }
+.guestbook-form input::placeholder,
+.guestbook-form textarea::placeholder { color: var(--white-faint); font-style: italic; }
+
+.guestbook-char-count { font-family: var(--sans); font-size: 11px; color: var(--white-faint); text-align: right; margin-top: -8px; }
+
+.guestbook-submit {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  align-self: center;
+}
+
+.guestbook-submit:hover { background: var(--gold); color: var(--bg); }
+
+.guestbook-entries {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 800px;
+  width: 100%;
+  margin: 48px auto 0;
+  text-align: left;
+}
+
+.guestbook-entry {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--gold-faint);
+  border-radius: 6px;
+  padding: 24px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.guestbook-entry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(201,168,76,0.1);
+}
+
+.guestbook-entry-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--white-soft);
+  margin-bottom: 16px;
+}
+
+.guestbook-entry-quote::before { content: '\201C'; color: var(--gold-dim); }
+.guestbook-entry-quote::after { content: '\201D'; color: var(--gold-dim); }
+
+.guestbook-entry-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.guestbook-entry-name { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--white); letter-spacing: 0.05em; }
+.guestbook-entry-handle { font-family: var(--sans); font-size: 12px; color: var(--gold-dim); }
+.guestbook-entry-time { font-family: var(--sans); font-size: 11px; color: var(--white-faint); }
+
+/* ══════════════════════════════════
+   CLOSING / CTA
+   ══════════════════════════════════ */
+.closing-section {
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.closing-section video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.closing-section .closing-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.6), rgba(10,10,10,0.85));
+  z-index: 1;
+}
+
+.closing-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.closing-names {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(40px, 7vw, 80px);
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.cta-btn:hover { background: var(--gold); color: var(--bg); opacity: 1; }
+
+.press-kit-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  border-bottom: 1px solid var(--gold-dim);
+  padding-bottom: 2px;
+  transition: color 0.3s;
+}
+.press-kit-link:hover { color: var(--gold); opacity: 1; }
+
+.separator {
+  width: 60px;
+  height: 1px;
+  background: var(--gold-dim);
+  margin: 24px auto;
+}
+
+/* ══════════════════════════════════
+   FOOTER
+   ══════════════════════════════════ */
+.site-footer {
+  text-align: center;
+  padding: 60px 24px;
+  background: linear-gradient(to bottom, var(--bg-end), var(--bg));
+}
+
+.footer-location {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+.footer-credit {
+  margin-top: 48px;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--white-faint);
+  letter-spacing: 0.1em;
+}
+
+/* ══════════════════════════════════
+   SCROLLBAR
+   ══════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 3px; }
+
+/* ══════════════════════════════════
+   MOBILE
+   ══════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .timeline::before {
+    left: 24px;
+  }
+
+  .tl-entry {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-left: 48px;
+    margin-bottom: 64px;
+  }
+
+  .tl-entry::before {
+    left: 24px;
+    top: 20px;
+  }
+
+  .tl-timestamp,
+  .tl-entry.right .tl-timestamp {
+    text-align: left;
+    padding: 0;
+    order: 0;
+  }
+
+  .tl-content,
+  .tl-entry.right .tl-content {
+    text-align: left;
+    padding: 0;
+    order: 1;
+  }
+
+  .tl-full::before {
+    left: 24px;
+  }
+
+  .tl-full-inner {
+    padding-left: 48px;
+    text-align: left;
+  }
+
+  .tl-media-row {
+    flex-direction: column;
+  }
+
+  .tl-media-row img,
+  .tl-media-row video {
+    max-width: 100%;
+    flex: 1 1 auto;
+  }
+
+  .walk-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .walk-grid video,
+  .walk-grid img {
+    height: 200px;
+  }
+
+  .masonry { columns: 1; }
+
+  .guestbook-entries { grid-template-columns: 1fr; }
+
+  .tl-body,
+  .tl-headline,
+  .tl-punchline,
+  .hero-quote,
+  .hero-subtext {
+    min-height: auto;
+  }
+
+  /* 50vh for text-heavy elements on mobile */
+  .hero-content {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-content h1 {
+    min-height: auto;
+  }
+
+  .coin-3d { width: 220px; height: 220px; }
+
+  .credit-role { font-size: 9px; letter-spacing: 0.12em; padding-right: 10px; }
+  .credit-name { font-size: 14px; padding-left: 10px; }
+
+  .hero-topbar {
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 20px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .masonry { columns: 1; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .masonry { columns: 2; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     HERO — with quote merged in
+     ═══════════════════════════════════ -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="public/clips/the-aisle-walk-poster.jpg">
+    <source src="public/clips/the-aisle-walk-hq.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-topbar reveal">
+    <p class="kicker" style="margin: 0;">The World's First Humanoid Bridal Walk</p>
+    <p class="kicker" style="margin: 0;">26 &middot; 6 &middot; 26 &nbsp; 6 PM</p>
+  </div>
+  <div class="hero-content">
+    <h1 class="reveal">A robot walked her<br>down the aisle.<br><em>Her grandfather<br>was inside it.</em></h1>
+    <p class="hero-quote reveal reveal-delay-1">He walked beside her through a humanoid &mdash; his face on the screen, his voice in her ear, his blessing on every step.</p>
+    <p class="hero-subtext reveal reveal-delay-2">Genesis Node &middot; Network School &middot; 26 June 2026</p>
+  </div>
+  <div class="scroll-arrow">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     TIMELINE
+     ═══════════════════════════════════ -->
+<div class="timeline">
+
+  <!-- ── THE WISH (with "The Idea" merged as punchline) ── -->
+  <div class="tl-entry tl-reveal" data-tl>
+    <div class="tl-timestamp tl-reveal-left">
+      <p class="tl-timestamp-label">The Wish</p>
+      <p class="tl-timestamp-time">Before Day 1</p>
+    </div>
+    <div class="tl-content tl-reveal-right">
+      <h2 class="tl-headline">A daughter always pictured them at her side.</h2>
+      <p class="tl-body">
+        Sonia always imagined her parents walking her toward the rest of her life. But the years, and an ocean, stood in the way. So we asked: <em style="color: var(--gold);">what if presence didn&rsquo;t require a plane?</em>
+      </p>
+      <p class="tl-punchline">Not a screen. Not a recording. A presence.</p>
+      <div class="tl-media">
+        <img src="public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="The family, separated by distance" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DAY 1 MORNING — THE BUILD BEGINS ── -->
+  <div class="tl-entry right tl-reveal" data-tl>
+    <div class="tl-timestamp tl-reveal-right">
+      <p class="tl-timestamp-label">Day 1</p>
+      <p class="tl-timestamp-time">6 AM</p>
+    </div>
+    <div class="tl-content tl-reveal-left">
+      <h2 class="tl-headline">48 Hours. One Chance.</h2>
+      <p class="tl-body">
+        The lab opens. A humanoid robot frame, an iPad for a face, a dream that sounds impossible. The team assembles &mdash; engineers, a robotics lead, a stylist. Everything that could go wrong, did. But they kept going.
+      </p>
+      <div class="tl-media">
+        <video muted loop playsinline preload="none" poster="public/clips/prep-ipad-test-poster.jpg" data-lazy="public/clips/prep-ipad-test-mid.mp4" data-hq="public/clips/prep-ipad-test-hq.mp4" style="height: 260px;"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DAY 1 NOON — WORK IN PROGRESS ── -->
+  <div class="tl-entry tl-reveal" data-tl>
+    <div class="tl-timestamp tl-reveal-left">
+      <p class="tl-timestamp-label">Day 1</p>
+      <p class="tl-timestamp-time">Noon</p>
+    </div>
+    <div class="tl-content tl-reveal-right">
+      <h2 class="tl-headline">Wiring, Testing, Breaking, Fixing.</h2>
+      <p class="tl-body">
+        The robot needed to walk steadily enough to guide a bride in heels. It needed a live video call so her grandfather could see her face, and she could hear his voice. Every detail mattered.
+      </p>
+      <div class="tl-media-row">
+        <img src="public/photos/PXL_20260625_090942268.jpg" alt="Robot dressing" loading="lazy" decoding="async">
+        <img src="public/photos/PXL_20260625_083727700.jpg" alt="Robot in lab" loading="lazy" decoding="async">
+        <img src="public/photos/PXL_20260625_035436967.jpg" alt="Team preparation" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DAY 1 MIDNIGHT ── -->
+  <div class="tl-entry right tl-reveal" data-tl>
+    <div class="tl-timestamp tl-reveal-right">
+      <p class="tl-timestamp-label">Day 1</p>
+      <p class="tl-timestamp-time">Midnight</p>
+    </div>
+    <div class="tl-content tl-reveal-left">
+      <h2 class="tl-headline">Still in the Lab.</h2>
+      <p class="tl-body">
+        Debugging servos, calibrating the walk cycle, stitching in video conferencing. The kind of night where coffee stops working and stubbornness takes over.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── DAY 2 MORNING — REHEARSAL ── -->
+  <div class="tl-entry tl-reveal" data-tl>
+    <div class="tl-timestamp tl-reveal-left">
+      <p class="tl-timestamp-label">Day 2</p>
+      <p class="tl-timestamp-time">10 AM</p>
+    </div>
+    <div class="tl-content tl-reveal-right">
+      <h2 class="tl-headline">The First Walk Test.</h2>
+      <p class="tl-body">
+        Outdoor rehearsal. The robot walks. It wobbles. They adjust. It walks again. Sara dresses the robot in a suit and boutonniere. It starts to look like a gentleman.
+      </p>
+      <div class="tl-media-row">
+        <video muted loop playsinline preload="none" poster="public/clips/rehearsal-walk-poster.jpg" data-lazy="public/clips/rehearsal-walk-mid.mp4" data-hq="public/clips/rehearsal-walk-hq.mp4" style="height: 180px;"></video>
+        <video muted loop playsinline preload="none" poster="public/clips/outdoor-walk-poster.jpg" data-lazy="public/clips/outdoor-walk-mid.mp4" data-hq="public/clips/outdoor-walk-hq.mp4" style="height: 180px;"></video>
+        <img src="public/photos/sara-styling-boutonniere.jpg" alt="Sara styling boutonniere" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DAY 2 AFTERNOON — SUITED UP ── -->
+  <div class="tl-entry right tl-reveal" data-tl>
+    <div class="tl-timestamp tl-reveal-right">
+      <p class="tl-timestamp-label">Day 2</p>
+      <p class="tl-timestamp-time">2 PM</p>
+    </div>
+    <div class="tl-content tl-reveal-left">
+      <h2 class="tl-headline">Final Checks.</h2>
+      <p class="tl-body">
+        The team gathers for a final group photo. The robot is suited up, the video feed from overseas is stable, grandfather is ready. Now all they need is the bride.
+      </p>
+      <div class="tl-media">
+        <img src="public/photos/PXL_20260626_095934375.jpg" alt="Team with robot" loading="lazy" decoding="async" style="height: 280px; object-fit: cover;">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6 PM — THE WALK ── -->
+  <div class="tl-full tl-reveal" data-tl>
+    <div class="tl-full-inner">
+      <p class="tl-timestamp-label" style="margin-bottom: 4px;">Day 2</p>
+      <p class="tl-timestamp-time" style="margin-bottom: 24px; font-size: clamp(28px, 5vw, 56px); color: var(--gold);">6 PM &mdash; The Walk</p>
+      <h2 class="tl-headline" style="font-size: clamp(28px, 5vw, 56px);">The Moment</h2>
+      <p class="tl-body" style="max-width: 640px; margin: 0 auto 32px;">
+        A humanoid robot walked Sonia down the aisle &mdash; carrying her grandfather&rsquo;s voice, her parents&rsquo; love, and forty-eight hours of belief.
+      </p>
+      <div class="walk-grid">
+        <video muted loop playsinline preload="none" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4"></video>
+        <video muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4"></video>
+        <video muted loop playsinline preload="none" poster="public/clips/bride-and-robot-poster.jpg" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4"></video>
+        <img class="walk-wide" src="public/photos/PXL_20260626_103410037.jpg" alt="Group with bride and robot" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── THE COIN ── -->
+  <div class="tl-entry tl-reveal" data-tl>
+    <div class="tl-timestamp tl-reveal-left">
+      <p class="tl-timestamp-label">After the Walk</p>
+      <p class="tl-timestamp-time">The Coin</p>
+    </div>
+    <div class="tl-content tl-reveal-right">
+      <h2 class="tl-headline">A Token of Memory</h2>
+      <p class="tl-body">
+        A coin to keep, so the moment never fades &mdash; a small, lasting reminder that love found a way.
+      </p>
+      <div class="coin-3d-container" id="coin3d-container">
+        <div class="coin-3d" id="coin3d" onclick="flipCoin()" tabindex="0" role="button" aria-label="Flip coin">
+          <div class="coin-3d-face coin-3d-front">
+            <img src="public/coin-obverse.png" alt="Coin obverse">
+          </div>
+          <div class="coin-3d-face coin-3d-back">
+            <img src="public/coin-reverse.png" alt="Coin reverse">
+          </div>
+          <div class="coin-3d-shine" id="coin3d-shine"></div>
+        </div>
+        <div class="coin-3d-shadow" id="coin3d-shadow"></div>
+      </div>
+      <p class="coin-3d-label" id="coin3d-face-label">Obverse</p>
+      <p class="coin-3d-label" id="coin3d-flip-label" style="color: var(--gold-dim); margin-top: 6px;">Click to flip</p>
+      <div class="coin-photo">
+        <img src="public/photos/PXL_20260626_094810823.PORTRAIT.jpg" alt="Coin in hand" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── THE TEAM ── -->
+  <div class="tl-entry right tl-reveal" data-tl>
+    <div class="tl-timestamp tl-reveal-right">
+      <p class="tl-timestamp-label">The Team</p>
+      <p class="tl-timestamp-time">Credits</p>
+    </div>
+    <div class="tl-content tl-reveal-left">
+      <h2 class="tl-headline">The Builders</h2>
+      <p class="tl-body">
+        This happened because a group of builders lived together, cared about each other, and refused to say it couldn&rsquo;t be done.
+      </p>
+      <div class="credits">
+        <div class="credit-item">
+          <div class="credit-role">Conceived &amp; Directed</div>
+          <div class="credit-name"><a href="https://ns.com/hus" target="_blank">Husam Abboud</a> <a href="https://instagram.com/hus" target="_blank" class="credit-handle">@hus</a></div>
+        </div>
+        <div class="credit-item">
+          <div class="credit-role">Robotics Lab Lead</div>
+          <div class="credit-name"><a href="https://ns.com/tonymfer" target="_blank">Tony Lopez</a> <a href="https://instagram.com/tonylifeforce" target="_blank" class="credit-handle">@tonylifeforce</a></div>
+        </div>
+        <div class="credit-item">
+          <div class="credit-role">Robotics Engineering</div>
+          <div class="credit-name"><a href="https://ns.com/theteatoast" target="_blank">Andy</a>, YC, Clarence, Roy <a href="https://instagram.com/virtualsio" target="_blank" class="credit-handle">@virtualsio</a> <a href="https://instagram.com/eastworlds_io" target="_blank" class="credit-handle">@eastworlds_io</a></div>
+        </div>
+        <div class="credit-item">
+          <div class="credit-role">Robot Styling</div>
+          <div class="credit-name"><a href="https://ns.com/sarawondertech" target="_blank">Sara Landi Tortoli</a> <a href="https://instagram.com/sarainwondertech" target="_blank" class="credit-handle">@sarainwondertech</a></div>
+        </div>
+        <div class="credit-item">
+          <div class="credit-role">Memorial Coin</div>
+          <div class="credit-name"><a href="https://ns.com/vinayvancheeswa" target="_blank">Vinayak Vancheeswaran</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- END TIMELINE -->
+
+<!-- ═══════════════════════════════════
+     THE CELEBRATION — MASONRY GALLERY
+     ═══════════════════════════════════ -->
+<div class="masonry-section">
+  <p class="kicker tl-reveal">The Celebration</p>
+  <h2 class="tl-headline tl-reveal" style="text-align: center; margin-top: 8px; font-size: clamp(28px, 5vw, 56px);">Joy, Shared</h2>
+  <div class="masonry tl-reveal">
+    <a class="masonry-item" href="public/photos/full/Screenshot-from-2026-06-28-07-24-31.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign" loading="lazy" decoding="async"></a>
+    <div class="masonry-item masonry-video"><video muted loop playsinline preload="none" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4"></video><div class="share-overlay"><a class="share-btn" href="https://twitter.com/intent/tweet?text=The%20world%E2%80%99s%20first%20humanoid%20bridal%20walk%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk%20%23KrisAndSonia%20%23NetworkSchool" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share</a><a class="share-btn" href="public/clips/the-aisle-walk-hq.mp4" download="humanoid-bridal-walk.mp4"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save</a></div></div>
+    <a class="masonry-item" href="public/photos/full/Screenshot-from-2026-06-28-07-29-19.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="Ceremony" loading="lazy" decoding="async"></a>
+    <div class="masonry-item masonry-video"><video muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4"></video><div class="share-overlay"><a class="share-btn" href="https://twitter.com/intent/tweet?text=A%20humanoid%20robot%20walked%20her%20to%20the%20groom%20%E2%80%94%20and%20stepped%20aside.%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk%20%23KrisAndSonia%20%23NetworkSchool" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share</a><a class="share-btn" href="public/clips/the-handoff-hq.mp4" download="humanoid-handoff.mp4"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save</a></div></div>
+    <a class="masonry-item" href="public/photos/full/PXL_20260626_103410037.jpg" target="_blank"><img src="public/photos/PXL_20260626_103410037.jpg" alt="Bride and robot" loading="lazy" decoding="async"></a>
+    <a class="masonry-item" href="public/photos/full/Screenshot-from-2026-06-28-07-33-13.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party" loading="lazy" decoding="async"></a>
+    <div class="masonry-item masonry-video"><video muted loop playsinline preload="none" poster="public/clips/bride-and-robot-poster.jpg" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4"></video><div class="share-overlay"><a class="share-btn" href="https://twitter.com/intent/tweet?text=Her%20parents%20couldn%E2%80%99t%20cross%20the%20seas.%20So%20we%20refused%20to%20let%20distance%20win.%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk%20%23KrisAndSonia%20%23NetworkSchool" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share</a><a class="share-btn" href="public/clips/bride-and-robot-hq.mp4" download="bride-and-robot.mp4"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save</a></div></div>
+    <a class="masonry-item" href="public/photos/full/IMG-20260628-WA0004.jpg" target="_blank"><img src="public/photos/sparklers-rooftop.jpg" alt="Rooftop sparklers celebration" loading="lazy" decoding="async"></a>
+    <div class="masonry-item masonry-video"><video muted loop playsinline preload="none" poster="public/clips/robot-guest-moment-poster.jpg" data-lazy="public/clips/robot-guest-moment-mid.mp4" data-hq="public/clips/robot-guest-moment-hq.mp4"></video><div class="share-overlay"><a class="share-btn" href="https://twitter.com/intent/tweet?text=The%20world%E2%80%99s%20first%20humanoid%20bridal%20walk%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk%20%23KrisAndSonia%20%23NetworkSchool" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share</a><a class="share-btn" href="public/clips/robot-guest-moment-hq.mp4" download="robot-guest-moment.mp4"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save</a></div></div>
+    <a class="masonry-item" href="public/photos/full/IMG-20260628-WA0006.jpg" target="_blank"><img src="public/photos/sparklers-wide.jpg" alt="Sparklers wide" loading="lazy" decoding="async"></a>
+  </div>
+  <p style="margin-top: 24px; font-family: var(--sans); font-size: 12px; color: var(--white-faint); letter-spacing: 0.06em;">
+    Were you there? Share your photos &amp; videos with <span style="color: var(--gold);">#HumanoidBridalWalk</span> <span style="color: var(--gold);">#KrisAndSonia</span> <span style="color: var(--gold);">#NetworkSchool</span>
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════
+     GUESTBOOK
+     ═══════════════════════════════════ -->
+<div class="guestbook-section">
+  <p class="kicker tl-reveal">Witness Reactions</p>
+  <h2 class="tl-headline tl-reveal" style="text-align: center; margin-top: 8px; font-size: clamp(28px, 5vw, 56px);">The Guestbook</h2>
+  <p class="tl-body tl-reveal" style="text-align: center; max-width: 540px; margin: 0 auto 8px;">Were you there? Leave a memory.</p>
+  <form class="guestbook-form tl-reveal" id="guestbook-form" onsubmit="return submitGuestbook(event)">
+    <textarea id="gb-message" maxlength="280" placeholder="What did you feel that night?" required></textarea>
+    <p class="guestbook-char-count"><span id="gb-char-count">0</span> / 280</p>
+    <input type="text" id="gb-name" placeholder="Your name" required>
+    <input type="text" id="gb-handle" placeholder="@handle on X or Instagram">
+    <button type="submit" class="guestbook-submit">Leave Your Mark</button>
+  </form>
+  <div class="guestbook-entries tl-reveal" id="guestbook-entries"></div>
+</div>
+
+<!-- ═══════════════════════════════════
+     CLOSING + CTA
+     ═══════════════════════════════════ -->
+<section class="closing-section" style="min-height: 80vh; display: flex; align-items: center; justify-content: center;">
+  <video muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4"></video>
+  <div class="closing-overlay"></div>
+  <div class="closing-inner">
+    <p class="kicker reveal" style="margin-bottom: 12px;">The Couple</p>
+    <p class="closing-names reveal reveal-delay-1">Kris &amp; Sonia</p>
+    <p style="margin-bottom: 32px;" class="reveal reveal-delay-1">
+      <a href="https://krisandsonia.com" target="_blank" style="font-family: var(--sans); font-size: 14px; letter-spacing: 0.15em; color: var(--white-faint);">krisandsonia.com</a>
+    </p>
+    <div class="separator reveal reveal-delay-2"></div>
+    <h2 class="tl-headline reveal reveal-delay-2" style="text-align: center; font-size: clamp(24px, 4vw, 44px); margin-top: 32px;">Want to build the next first?</h2>
+    <p class="tl-body reveal reveal-delay-2" style="text-align: center; max-width: 540px; margin: 16px auto 32px;">
+      This happened because a group of builders lived together, cared about each other, and refused to say it couldn&rsquo;t be done.
+    </p>
+    <a href="https://ns.com" target="_blank" class="cta-btn reveal reveal-delay-3">Come Join Them</a>
+    <br>
+    <a href="mailto:press@firsthumanoid.com" class="press-kit-link reveal reveal-delay-3">Press Kit</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════ -->
+<footer class="site-footer">
+  <p class="footer-location">
+    Genesis Node &middot; First Wedding &middot; XXVI&middot;VI&middot;XXVI &middot; First Humanoid Bridal Walk
+  </p>
+  <p class="footer-credit">
+    FirstHumanoid &mdash; built with &#10084;&#65039; by <a href="https://instagram.com/hus" target="_blank">@Hus</a> at <a href="https://ns.com/hus" target="_blank">Network School</a>
+  </p>
+</footer>
+
+<script>
+(function() {
+  // ── IntersectionObserver for reveal animations (fallback + hero) ──
+  var reveals = document.querySelectorAll('.reveal');
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(function(el) { revealObs.observe(el); });
+
+  // ── Timeline scroll reveal fallback (for browsers without scroll-timeline) ──
+  var supportsScrollTimeline = CSS.supports && CSS.supports('animation-timeline', 'scroll()');
+
+  if (!supportsScrollTimeline) {
+    var tlEls = document.querySelectorAll('.tl-reveal, .tl-reveal-left, .tl-reveal-right');
+    var tlObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) e.target.classList.add('vis');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    tlEls.forEach(function(el) { tlObs.observe(el); });
+  }
+
+  // ── Timeline node glow on scroll ──
+  var tlEntries = document.querySelectorAll('[data-tl]');
+  var nodeObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  tlEntries.forEach(function(el) { nodeObs.observe(el); });
+
+  // ── 3D COIN ──
+  var coin3d = document.getElementById('coin3d');
+  var coin3dShine = document.getElementById('coin3d-shine');
+  var coin3dShadow = document.getElementById('coin3d-shadow');
+  var coin3dFaceLabel = document.getElementById('coin3d-face-label');
+  var coin3dFlipLabel = document.getElementById('coin3d-flip-label');
+  var coin3dContainer = document.getElementById('coin3d-container');
+  var coinFlipped = false;
+  var isFlipping = false;
+  var mouseOver = false;
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (isTouchDevice && coin3dFlipLabel) coin3dFlipLabel.textContent = 'Tap to flip';
+
+  var idleAngle = 0;
+  var idleRAF;
+  function idleWobble() {
+    if (mouseOver || isFlipping) return;
+    idleAngle += 0.008;
+    var wobbleX = Math.sin(idleAngle) * 5;
+    var wobbleY = Math.cos(idleAngle * 0.7) * 5;
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (base + wobbleY) + 'deg) rotateX(' + wobbleX + 'deg)';
+    if (coin3dShadow) coin3dShadow.style.transform = 'translateX(' + (-wobbleY * 0.6) + 'px) scaleY(' + (0.8 + Math.abs(wobbleX) * 0.015) + ')';
+    idleRAF = requestAnimationFrame(idleWobble);
+  }
+  idleWobble();
+
+  window.flipCoin = function() {
+    coinFlipped = !coinFlipped;
+    isFlipping = true;
+    cancelAnimationFrame(idleRAF);
+    coin3d.classList.add('flipping');
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + base + 'deg) rotateX(0deg)';
+    coin3dFaceLabel.textContent = coinFlipped ? 'Reverse' : 'Obverse';
+    setTimeout(function() {
+      coin3d.classList.remove('flipping');
+      isFlipping = false;
+      if (!mouseOver) idleWobble();
+    }, 850);
+  };
+
+  coin3d.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipCoin(); }
+  });
+
+  coin3dContainer.addEventListener('mouseenter', function() {
+    mouseOver = true;
+    cancelAnimationFrame(idleRAF);
+  });
+
+  coin3dContainer.addEventListener('mousemove', function(e) {
+    if (isFlipping) return;
+    var rect = coin3d.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var mx = e.clientX - cx;
+    var my = e.clientY - cy;
+    var maxTilt = 25;
+    var normX = mx / (rect.width / 2);
+    var normY = my / (rect.height / 2);
+    var tiltX = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+    var tiltY = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (baseY + tiltY) + 'deg) rotateX(' + tiltX + 'deg)';
+    var shineX = (normX + 1) / 2 * 100;
+    var shineY = (normY + 1) / 2 * 100;
+    coin3dShine.style.background = 'radial-gradient(circle at ' + shineX + '% ' + shineY + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+    if (coin3dShadow) {
+      coin3dShadow.style.transform = 'translateX(' + (-tiltY * 1.2) + 'px) scaleY(' + (0.5 + Math.abs(tiltX) * 0.025) + ')';
+      coin3dShadow.style.opacity = String(Math.min(0.5, 0.1 + (Math.abs(tiltX) + Math.abs(tiltY)) * 0.008));
+    }
+  });
+
+  coin3dContainer.addEventListener('mouseleave', function() {
+    mouseOver = false;
+    if (isFlipping) return;
+    coin3d.style.transition = 'transform 0.5s ease-out';
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+    coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+    if (coin3dShadow) {
+      coin3dShadow.style.transform = 'translateX(0) scaleY(1)';
+      coin3dShadow.style.opacity = '0.15';
+    }
+    setTimeout(function() {
+      coin3d.style.transition = 'transform 0.1s ease-out';
+      if (!mouseOver && !isFlipping) idleWobble();
+    }, 500);
+  });
+
+  if (isTouchDevice) {
+    coin3dContainer.addEventListener('touchmove', function(e) {
+      if (isFlipping) return;
+      mouseOver = true;
+      cancelAnimationFrame(idleRAF);
+      var t = e.touches[0];
+      var rect = coin3d.getBoundingClientRect();
+      var normX = (t.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      var normY = (t.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      var maxTilt = 25;
+      var tx = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+      var ty = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transform = 'rotateY(' + (baseY + ty) + 'deg) rotateX(' + tx + 'deg)';
+      var sx = (normX + 1) / 2 * 100;
+      var sy = (normY + 1) / 2 * 100;
+      coin3dShine.style.background = 'radial-gradient(circle at ' + sx + '% ' + sy + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+    }, { passive: true });
+    coin3dContainer.addEventListener('touchend', function() {
+      mouseOver = false;
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transition = 'transform 0.5s ease-out';
+      coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+      coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+      setTimeout(function() {
+        coin3d.style.transition = 'transform 0.1s ease-out';
+        if (!mouseOver && !isFlipping) idleWobble();
+      }, 500);
+    });
+  }
+
+  // ── Upgrade video from mid to hq ──
+  function upgradeToHq(v) {
+    var hq = v.getAttribute('data-hq');
+    if (!hq) return;
+    var pre = document.createElement('video');
+    pre.preload = 'auto';
+    pre.src = hq;
+    pre.addEventListener('canplaythrough', function() {
+      var t = v.currentTime;
+      v.src = hq;
+      v.currentTime = t;
+      v.play().catch(function(){});
+    }, { once: true });
+  }
+
+  // ── Lazy video loading ──
+  var lazyVideos = document.querySelectorAll('video[data-lazy]');
+  var loadObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var v = entry.target;
+      var src = v.getAttribute('data-lazy');
+      if (!src) return;
+      v.src = src;
+      v.removeAttribute('data-lazy');
+      v.load();
+      v.addEventListener('canplay', function() {
+        upgradeToHq(v);
+      }, { once: true });
+      loadObserver.unobserve(v);
+    });
+  }, { rootMargin: '100% 0px' });
+  lazyVideos.forEach(function(v) { loadObserver.observe(v); });
+
+  // ── Play/pause videos based on visibility ──
+  var allVideos = document.querySelectorAll('video');
+  var playObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(function(){});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+  allVideos.forEach(function(v) { playObserver.observe(v); });
+
+  // ── GUESTBOOK ──
+  var GB_API = '/api/guestbook';
+
+  function relativeTime(ts) {
+    var diff = Date.now() - ts;
+    var sec = Math.floor(diff / 1000);
+    if (sec < 60) return 'just now';
+    var min = Math.floor(sec / 60);
+    if (min < 60) return min + (min === 1 ? ' minute ago' : ' minutes ago');
+    var hr = Math.floor(min / 60);
+    if (hr < 24) return hr + (hr === 1 ? ' hour ago' : ' hours ago');
+    var days = Math.floor(hr / 24);
+    return days + (days === 1 ? ' day ago' : ' days ago');
+  }
+
+  function gbEscape(str) { var d = document.createElement('div'); d.appendChild(document.createTextNode(str)); return d.innerHTML; }
+
+  function handleToLink(h) {
+    if (!h) return '';
+    h = h.trim();
+    if (!h.startsWith('@') || h.indexOf(' ') !== -1) return '<span class="guestbook-entry-handle">' + h + '</span>';
+    return '<a href="https://instagram.com/' + h.substring(1) + '" target="_blank" class="guestbook-entry-handle">' + h + '</a>';
+  }
+
+  function renderEntries(entries) {
+    var c = document.getElementById('guestbook-entries');
+    var html = '';
+    entries.forEach(function(e) {
+      var msg = e.text || e.message || '';
+      html += '<div class="guestbook-entry"><p class="guestbook-entry-quote">' + gbEscape(msg) + '</p><div class="guestbook-entry-meta"><span class="guestbook-entry-name">' + gbEscape(e.name) + '</span>' + (e.handle ? handleToLink(e.handle) : '') + '<span class="guestbook-entry-time">' + relativeTime(e.ts) + '</span></div></div>';
+    });
+    c.innerHTML = html;
+  }
+
+  function loadEntries() { fetch(GB_API).then(function(r) { return r.json(); }).then(renderEntries).catch(function(){}); }
+
+  var msgInput = document.getElementById('gb-message');
+  var charCount = document.getElementById('gb-char-count');
+  if (msgInput) {
+    msgInput.addEventListener('input', function() {
+      charCount.textContent = msgInput.value.length;
+      charCount.style.color = msgInput.value.length > 260 ? 'var(--gold)' : 'var(--white-faint)';
+    });
+  }
+
+  window.submitGuestbook = function(e) {
+    e.preventDefault();
+    var text = document.getElementById('gb-message').value.trim();
+    var name = document.getElementById('gb-name').value.trim();
+    var handle = document.getElementById('gb-handle').value.trim();
+    if (!text || !name) return false;
+    var btn = document.querySelector('.guestbook-submit');
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    fetch(GB_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: text, name: name, handle: handle }) })
+    .then(function() { document.getElementById('gb-message').value = ''; document.getElementById('gb-name').value = ''; document.getElementById('gb-handle').value = ''; charCount.textContent = '0'; btn.textContent = 'Leave Your Mark'; btn.disabled = false; loadEntries(); })
+    .catch(function() { btn.textContent = 'Leave Your Mark'; btn.disabled = false; });
+    return false;
+  };
+  loadEntries();
+
+  // ── Native Share (mobile) ──
+  if (navigator.share) {
+    document.querySelectorAll('.masonry-video').forEach(function(item) {
+      var overlay = item.querySelector('.share-overlay');
+      var btn = document.createElement('button');
+      btn.className = 'share-btn share-btn-native';
+      btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>Share';
+      btn.onclick = function(ev) {
+        ev.stopPropagation();
+        navigator.share({
+          title: "The World's First Humanoid Bridal Walk",
+          text: "Her parents couldn\u2019t cross the seas \u2014 so we refused to let distance win. \ud83e\udd0d #HumanoidBridalWalk #KrisAndSonia #NetworkSchool",
+          url: 'https://firsthumanoid.vercel.app'
+        }).catch(function(){});
+      };
+      overlay.appendChild(btn);
+    });
+  }
+})();
+</script>
+</body>
+</html>
