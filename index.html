@@ -252,6 +252,62 @@ body {
   letter-spacing: -0.01em;
 }
 
+.roman-date {
+  margin-bottom: 24px;
+  cursor: default;
+}
+
+.roman-line {
+  display: block;
+  font-family: var(--serif);
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.roman-day {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.2;
+  animation: date-glow 4s ease-in-out infinite;
+}
+
+.roman-time {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  font-weight: 300;
+  color: var(--ink-dim);
+  letter-spacing: 0.2em;
+  margin-top: 4px;
+}
+
+.roman-line::after {
+  content: attr(data-english);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: rotateX(90deg);
+  transition: all 0.4s ease;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.45em;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+}
+
+.roman-date:hover .roman-line {
+  opacity: 0;
+  transform: rotateX(-90deg);
+}
+
+.roman-date:hover .roman-line::after {
+  opacity: 1;
+  transform: rotateX(0deg);
+}
+
 .event-kicker {
   font-family: var(--mono);
   font-size: 12px;
@@ -795,13 +851,16 @@ footer .footer-title {
 
   <main role="main">
 
-    <!-- ── DATE HERO ── -->
-    <section class="date-hero reveal" aria-label="Event date">
-      <p class="date-big" aria-label="26 June 2026">26·06·26</p>
-      <p class="date-sub"><strong>6:00 PM</strong> &nbsp;MYT</p>
-
+    <!-- ── HERO ── -->
+    <section class="date-hero reveal" aria-label="Event">
       <p class="event-kicker">The World's First</p>
       <h1 class="event-title">Humanoid<br>Bridal Walk</h1>
+
+      <div class="roman-date" aria-label="26 June 2026, 6:00 PM">
+        <span class="roman-line roman-day" data-english="26 · JUNE · 2026">XXVI · VI · MMXXVI</span>
+        <span class="roman-line roman-time" data-english="6:00 PM">VI PM</span>
+      </div>
+
       <p class="event-subtitle">Humanoid Bride Escort & Aisle Walk</p>
       <p class="event-lede">"The first time in recorded history a humanoid robot escorted a bride down the aisle — standing in for the family who could not cross the distance."</p>
       <p class="event-couple">At the wedding of <a href="https://krisandsonia.com" target="_blank" rel="noopener">Kris &amp; Sonia</a></p>
