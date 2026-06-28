@@ -313,13 +313,11 @@ a:hover { opacity: 0.75; }
   margin-left: auto;
   margin-right: auto;
   padding: 0 24px;
+  text-align: center;
 }
 
 .credit-item {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  padding: 10px 0;
+  padding: 12px 0;
   border-bottom: 1px solid rgba(201,168,76,0.08);
 }
 
@@ -330,9 +328,7 @@ a:hover { opacity: 0.75; }
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  min-width: 140px;
-  flex-shrink: 0;
-  text-align: right;
+  margin-bottom: 4px;
 }
 
 .credit-name {
@@ -352,11 +348,6 @@ a:hover { opacity: 0.75; }
   font-size: 11px;
   color: var(--white-faint);
   margin-left: 6px;
-}
-
-@media (max-width: 640px) {
-  .credit-item { flex-direction: column; gap: 2px; }
-  .credit-role { text-align: left; min-width: auto; }
 }
 
 /* ══════════════════════════════════
