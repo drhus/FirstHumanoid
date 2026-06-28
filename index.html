@@ -997,40 +997,60 @@ a:hover { opacity: 0.75; }
     }
   }
 
-  // ── Lazy-load all other videos: load src only when near viewport ──
-  var lazyVideos = document.querySelectorAll('video[data-lazy]');
-  var lazyObserver = new IntersectionObserver(function(entries) {
+  // ── Sequential background loading: after hero, load others in DOM order ──
+  var lazyVideos = Array.from(document.querySelectorAll('video[data-lazy]'));
+  var loadIdx = 0;
+
+  function upgradeToHq(v) {
+    var hq = v.getAttribute('data-hq');
+    if (!hq) return;
+    var pre = document.createElement('video');
+    pre.preload = 'auto';
+    pre.src = hq;
+    pre.addEventListener('canplaythrough', function() {
+      var t = v.currentTime;
+      v.src = hq;
+      v.currentTime = t;
+      v.play().catch(function(){});
+    }, { once: true });
+  }
+
+  function loadNext() {
+    if (loadIdx >= lazyVideos.length) return;
+    var v = lazyVideos[loadIdx];
+    loadIdx++;
+    v.src = v.getAttribute('data-lazy');
+    v.removeAttribute('data-lazy');
+    v.load();
+    v.addEventListener('canplaythrough', function() {
+      upgradeToHq(v);
+      loadNext(); // chain to next video
+    }, { once: true });
+    // fallback if canplaythrough never fires
+    setTimeout(loadNext, 4000);
+  }
+
+  // Start chain after hero is ready
+  if (heroVid) {
+    heroVid.addEventListener('canplay', function() {
+      loadNext();
+    }, { once: true });
+  } else {
+    loadNext();
+  }
+
+  // Play/pause based on viewport visibility
+  var allLazy = document.querySelectorAll('video');
+  var playObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-      var v = entry.target;
       if (entry.isIntersecting) {
-        if (!v.src && v.getAttribute('data-lazy')) {
-          v.src = v.getAttribute('data-lazy');
-          v.removeAttribute('data-lazy');
-          v.load();
-          // After mid loads, upgrade to hq
-          var hq = v.getAttribute('data-hq');
-          if (hq) {
-            v.addEventListener('canplay', function() {
-              var pre = document.createElement('video');
-              pre.preload = 'auto';
-              pre.src = hq;
-              pre.addEventListener('canplaythrough', function() {
-                var t = v.currentTime;
-                v.src = hq;
-                v.currentTime = t;
-                v.play().catch(function(){});
-              }, { once: true });
-            }, { once: true });
-          }
-        }
-        v.play().catch(function(){});
+        entry.target.play().catch(function(){});
       } else {
-        v.pause();
+        entry.target.pause();
       }
     });
-  }, { threshold: 0.1, rootMargin: '200px 0px' });
-
-  lazyVideos.forEach(function(v) { lazyObserver.observe(v); });
+  }, { threshold: 0.1 });
+  allLazy.forEach(function(v) { playObserver.observe(v); });
 })();
 </script>
 </body>
