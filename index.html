@@ -3,585 +3,391 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The World's First Humanoid Bridal Walk — 26.06.26 · Network School</title>
-<meta name="description" content="The world's first humanoid robot bridal escort. 26 June 2026, 6:00 PM at Network School, Forest City, Malaysia.">
-<meta property="og:title" content="The World's First Humanoid Bridal Walk — 26.06.26">
-<meta property="og:description" content="The world's first humanoid robot escorted a bride down the aisle. Network School, Forest City, Malaysia.">
-<meta property="og:type" content="website">
+<title>The World's First Humanoid Bridal Walk</title>
+<meta name="description" content="Her parents couldn't cross the seas to walk her down the aisle. So we sent a humanoid robot in their place. Genesis Node, Forest City, 26 June 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ══════════════════════════════════
+   RESET & FOUNDATIONS
+   ══════════════════════════════════ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
+  --bg: #080808;
   --gold: #c9a84c;
-  --gold-hi: #f0dca0;
-  --gold-dim: rgba(201,168,76,0.3);
-  --ink: #e8e8f0;
-  --ink-dim: rgba(232,232,240,0.5);
-  --ink-faint: rgba(232,232,240,0.25);
-  --bg: #0b0e17;
-  --bg-elevated: #101420;
-  --cyan: #00d4ff;
-  --magenta: #ff00aa;
-  --glass: rgba(255,255,255,0.04);
-  --glass-border: rgba(255,255,255,0.08);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --mono: 'JetBrains Mono', monospace;
+  --gold-dim: rgba(201,168,76,0.4);
+  --white: #f0ede6;
+  --white-soft: rgba(240,237,230,0.7);
+  --white-faint: rgba(240,237,230,0.35);
+  --sans: 'Space Grotesk', sans-serif;
+  --serif: 'Crimson Pro', serif;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
 body {
   background: var(--bg);
-  color: var(--ink);
-  font-family: var(--serif);
-  line-height: 1.6;
-  overflow-x: hidden;
+  color: var(--white);
+  font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-.sr-only {
-  position: absolute; width: 1px; height: 1px;
-  padding: 0; margin: -1px; overflow: hidden;
-  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-}
+a { color: var(--gold); text-decoration: none; transition: opacity 0.3s; }
+a:hover { opacity: 0.75; }
 
 /* ══════════════════════════════════
-   ANIMATIONS
+   SECTION BASE
    ══════════════════════════════════ */
-
-@keyframes holo-shift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.chapter {
+  position: relative;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-@keyframes border-rotate {
-  0%   { --angle: 0deg; }
-  100% { --angle: 360deg; }
+/* Video / image backgrounds */
+.chapter-bg-video,
+.chapter-bg-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.2), 0 0 40px rgba(255,0,170,0.1); }
-  33%      { box-shadow: 0 0 25px rgba(255,0,170,0.25), 0 0 50px rgba(201,168,76,0.15); }
-  66%      { box-shadow: 0 0 22px rgba(201,168,76,0.2), 0 0 45px rgba(0,212,255,0.15); }
+.chapter-bg-img {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-@keyframes coin-glow {
-  0%, 100% { box-shadow: 0 0 30px rgba(0,212,255,0.35), 0 0 60px rgba(255,0,170,0.15), 0 0 90px rgba(201,168,76,0.08); }
-  33%      { box-shadow: 0 0 35px rgba(255,0,170,0.35), 0 0 70px rgba(201,168,76,0.2), 0 0 100px rgba(0,212,255,0.08); }
-  66%      { box-shadow: 0 0 32px rgba(201,168,76,0.35), 0 0 65px rgba(0,212,255,0.2), 0 0 95px rgba(255,0,170,0.08); }
+@supports (-webkit-touch-callout: none) {
+  /* iOS doesn't support background-attachment: fixed */
+  .chapter-bg-img { background-attachment: scroll; }
 }
 
-@keyframes coin-idle-wobble {
-  0%, 100% { transform: rotateY(0deg) rotateX(0deg); }
-  25%      { transform: rotateY(6deg) rotateX(2deg); }
-  50%      { transform: rotateY(0deg) rotateX(-2deg); }
-  75%      { transform: rotateY(-6deg) rotateX(1deg); }
+.chapter-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
 }
 
-@keyframes gradient-text {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.chapter-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  padding: 40px 24px;
+  text-align: center;
 }
 
-@keyframes date-glow {
-  0%, 100% { text-shadow: 0 0 30px rgba(201,168,76,0.4); }
-  50%      { text-shadow: 0 0 60px rgba(201,168,76,0.6), 0 0 120px rgba(201,168,76,0.2); }
-}
-
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-/* ── Reveal ── */
+/* Reveal animations */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* ── Glass card ── */
-.glass {
-  background: var(--glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  position: relative;
-}
-
-.glass-glow::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 13px;
-  padding: 1px;
-  background: linear-gradient(var(--angle, 0deg), var(--cyan), var(--magenta), var(--gold), var(--cyan));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: border-rotate 6s linear infinite;
-  opacity: 0.35;
-  pointer-events: none;
-}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.5s; }
+.reveal-delay-4 { transition-delay: 0.7s; }
 
 /* ══════════════════════════════════
-   STATUS BAR
+   TYPOGRAPHY
    ══════════════════════════════════ */
-.status-bar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  padding: 10px 24px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  background: rgba(11,14,23,0.9);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-
-/* ══════════════════════════════════
-   MAIN
-   ══════════════════════════════════ */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* ══════════════════════════════════
-   NS LOGO HEADER
-   ══════════════════════════════════ */
-.ns-header {
-  text-align: center;
-  padding: 100px 0 20px;
-}
-
-.ns-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.ns-logo:hover { color: var(--gold); }
-
-.ns-logo-img {
-  height: 32px;
-  width: auto;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-}
-
-.ns-logo:hover .ns-logo-img {
-  opacity: 1;
-}
-
-.ns-tagline {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-top: 8px;
-}
-
-/* ══════════════════════════════════
-   DATE HERO — THE CENTERPIECE
-   ══════════════════════════════════ */
-.date-hero {
-  text-align: center;
-  padding: 60px 0;
-}
-
-.date-big {
-  font-family: var(--mono);
-  font-size: clamp(4rem, 15vw, 10rem);
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--gold);
-  line-height: 1;
-  animation: date-glow 4s ease-in-out infinite;
-  margin-bottom: 8px;
-}
-
-.date-sub {
-  font-family: var(--mono);
-  font-size: clamp(1.2rem, 4vw, 2rem);
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  color: var(--ink-dim);
-  margin-bottom: 40px;
-}
-
-.date-sub strong {
-  color: var(--gold-hi);
-  font-weight: 500;
-}
-
-.event-title {
-  font-family: var(--serif);
-  font-size: clamp(2.5rem, 7vw, 5rem);
-  font-weight: 300;
-  line-height: 1.15;
-  color: var(--ink);
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
-}
-
-.roman-date {
-  margin-bottom: 24px;
-  cursor: default;
-}
-
-.roman-line {
-  display: block;
-  font-family: var(--serif);
-  letter-spacing: 0.08em;
-  color: var(--gold);
-  position: relative;
-  transition: all 0.4s ease;
-}
-
-.roman-day {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  font-weight: 300;
-  line-height: 1.2;
-  animation: date-glow 4s ease-in-out infinite;
-}
-
-.roman-time {
-  font-size: clamp(1.5rem, 5vw, 3rem);
-  font-weight: 300;
-  color: var(--ink-dim);
-  letter-spacing: 0.2em;
-  margin-top: 4px;
-}
-
-.roman-line::after {
-  content: attr(data-english);
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: rotateX(90deg);
-  transition: all 0.4s ease;
-  color: var(--gold);
-  font-family: var(--serif);
-  font-size: 1em;
-  font-weight: 300;
-  letter-spacing: 0.08em;
-}
-
-.roman-date:hover .roman-line {
-  opacity: 0;
-  transform: rotateX(-90deg);
-}
-
-.roman-date:hover .roman-line::after {
-  opacity: 1;
-  transform: rotateX(0deg);
-}
-
-.event-kicker {
-  font-family: var(--mono);
-  font-size: 12px;
+.kicker {
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.4vw, 14px);
   font-weight: 500;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  background: linear-gradient(90deg, var(--gold), var(--cyan), var(--magenta), var(--gold));
-  background-size: 300% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-text 6s ease infinite;
+  color: var(--gold);
+  margin-bottom: 16px;
 }
 
-.event-subtitle {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  margin-bottom: 32px;
+.headline {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(36px, 8vw, 96px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 24px;
 }
 
-.event-lede {
+.headline-serif {
   font-family: var(--serif);
-  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-  font-weight: 400;
+  font-weight: 300;
   font-style: italic;
-  line-height: 1.8;
-  color: rgba(232,232,240,0.65);
-  max-width: 580px;
+  font-size: clamp(28px, 5.5vw, 72px);
+  line-height: 1.2;
+  color: var(--white);
+}
+
+.body-text {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--white-soft);
+  max-width: 640px;
   margin: 0 auto;
 }
 
-.event-couple {
-  font-family: var(--serif);
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--ink-dim);
-  margin-top: 24px;
-}
-
-.event-couple a {
-  color: var(--gold);
-  text-decoration: none;
-  border-bottom: 1px solid var(--gold-dim);
-  transition: border-color 0.3s ease;
-}
-
-.event-couple a:hover {
-  border-color: var(--gold);
-}
-
-/* Gold separator */
-.gold-rule {
-  width: 80px;
-  height: 1px;
-  background: var(--gold);
-  margin: 48px auto;
-  opacity: 0.6;
+.date-display {
+  font-family: var(--sans);
+  font-size: clamp(12px, 1.6vw, 16px);
+  letter-spacing: 0.5em;
+  color: var(--gold-dim);
+  margin-top: 32px;
 }
 
 /* ══════════════════════════════════
-   COUNTDOWN
+   1. HERO
    ══════════════════════════════════ */
-.countdown-section {
-  text-align: center;
-  margin: 40px 0 56px;
+#hero .chapter-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(8,8,8,0.4) 0%,
+    rgba(8,8,8,0.6) 50%,
+    rgba(8,8,8,0.85) 100%
+  );
 }
 
-.countdown-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
+.scroll-arrow {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: float 2.5s ease-in-out infinite;
+}
+.scroll-arrow svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--gold-dim);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 1; }
+}
+
+/* ══════════════════════════════════
+   2. THE DREAM
+   ══════════════════════════════════ */
+#dream .chapter-bg-img {
+  background-image: url('public/photos/Screenshot-from-2026-06-28-07-29-19.png');
+}
+
+#dream .chapter-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(8,8,8,0.75) 0%,
+    rgba(8,8,8,0.55) 100%
+  );
+}
+
+/* ══════════════════════════════════
+   3. THE DISTANCE
+   ══════════════════════════════════ */
+#distance {
+  background: var(--bg);
+}
+
+#distance .headline-serif {
+  font-size: clamp(30px, 6vw, 80px);
+  max-width: 900px;
+}
+
+/* ══════════════════════════════════
+   4. THE IDEA
+   ══════════════════════════════════ */
+#idea .chapter-bg-img {
+  background-image: url('public/photos/PXL_20260625_083727700.jpg');
+}
+
+#idea .chapter-overlay {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8,8,8,0.5) 0%,
+    rgba(8,8,8,0.8) 100%
+  );
+}
+
+/* ══════════════════════════════════
+   5. THE BUILD
+   ══════════════════════════════════ */
+#build {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0;
+}
+
+#build .chapter-overlay {
+  background: rgba(8,8,8,0.75);
+}
+
+.build-photos {
+  display: flex;
+  gap: 16px;
+  margin: 40px auto;
+  max-width: 900px;
+  overflow-x: auto;
+  padding: 0 24px;
+}
+
+.build-photos img {
+  width: 280px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  filter: brightness(0.85);
+  transition: filter 0.4s;
+}
+
+.build-photos img:hover { filter: brightness(1); }
+
+.credits {
+  margin-top: 48px;
+  max-width: 700px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+.credit-item {
   margin-bottom: 20px;
 }
 
-.countdown-grid {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.countdown-box {
-  padding: 20px 18px;
-  min-width: 85px;
-  text-align: center;
-  animation: glow-pulse 4s ease infinite;
-}
-
-.countdown-box .num {
-  font-family: var(--mono);
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+.credit-role {
+  font-family: var(--sans);
+  font-size: 10px;
   font-weight: 500;
-  color: var(--ink);
-  line-height: 1;
-}
-
-.countdown-box .unit {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-top: 6px;
-}
-
-.countdown-sealed {
-  font-family: var(--mono);
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 24px;
-  background: linear-gradient(90deg, var(--gold), var(--cyan), var(--magenta));
-  background-size: 300% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-text 4s ease infinite;
-}
-
-/* ══════════════════════════════════
-   EVENT META
-   ══════════════════════════════════ */
-.meta-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin: 48px 0;
-}
-
-.meta-card {
-  padding: 24px 16px;
-  text-align: center;
-}
-
-.meta-card .label {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: 8px;
-}
-
-.meta-card .value {
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--ink);
-}
-
-/* ══════════════════════════════════
-   NETWORK SCHOOL SECTION
-   ══════════════════════════════════ */
-.ns-section {
-  margin: 56px 0;
-  text-align: center;
-}
-
-.ns-panel {
-  padding: 48px 32px;
-}
-
-.ns-panel-title {
-  font-family: var(--mono);
-  font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 24px;
+  margin-bottom: 4px;
 }
 
-.ns-panel-text {
+.credit-name {
   font-family: var(--serif);
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  line-height: 1.9;
-  color: rgba(232,232,240,0.7);
-  max-width: 580px;
-  margin: 0 auto 24px;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--white-soft);
+  line-height: 1.5;
 }
 
-.ns-panel-text em { color: var(--gold-hi); font-style: italic; }
+.credit-name a {
+  border-bottom: 1px solid var(--gold-dim);
+}
 
-.ns-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
+.credit-links {
+  font-family: var(--sans);
   font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  text-decoration: none;
-  padding: 10px 20px;
-  border: 1px solid var(--gold-dim);
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.ns-link:hover {
-  background: rgba(201,168,76,0.08);
-  border-color: var(--gold);
+  letter-spacing: 0.08em;
+  color: var(--white-faint);
+  margin-top: 2px;
 }
 
 /* ══════════════════════════════════
-   THE MOMENT — NARRATIVE
+   6. THE WALK
    ══════════════════════════════════ */
-.narrative-section {
-  margin: 56px 0;
+#walk {
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 60px 0;
 }
 
-.narrative-panel {
-  padding: 44px 36px;
+#walk .chapter-overlay {
+  background: rgba(8,8,8,0.3);
 }
 
-.narrative-panel h2 {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 24px;
+.walk-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 960px;
+  width: 100%;
+  padding: 0 24px;
+  margin-top: 40px;
 }
 
-.narrative-panel p {
-  font-family: var(--serif);
-  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
-  line-height: 1.9;
-  color: rgba(232,232,240,0.7);
-  font-style: italic;
+.walk-media video,
+.walk-media img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .walk-media { grid-template-columns: 1fr; }
 }
 
 /* ══════════════════════════════════
-   3D COIN
+   7. THE COIN
    ══════════════════════════════════ */
-.coin-section {
-  margin: 64px 0;
-  text-align: center;
+#coin-section {
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 60px 0;
 }
 
-.coin-section-title {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 40px;
+.coin-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+  padding: 0 24px;
+  margin-top: 40px;
 }
 
+/* 3D Coin */
 .coin-3d-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 40px;
   perspective: 800px;
 }
 
 .coin-3d {
-  width: 320px;
-  height: 320px;
+  width: 280px;
+  height: 280px;
   position: relative;
   transform-style: preserve-3d;
   cursor: pointer;
   border-radius: 50%;
-  /* Smooth but fast response to mouse — no animation fighting */
   transition: transform 0.1s ease-out;
   animation: coin-glow 5s ease infinite;
 }
 
-/* Only slow transition when flipping on click */
+@keyframes coin-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(201,168,76,0.35), 0 0 60px rgba(201,168,76,0.15); }
+  50% { box-shadow: 0 0 40px rgba(201,168,76,0.5), 0 0 80px rgba(201,168,76,0.25); }
+}
+
 .coin-3d.flipping {
   transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -617,7 +423,6 @@ body {
   transition: background 0.1s ease-out;
 }
 
-/* Rim edge for thickness */
 .coin-3d::after {
   content: '';
   position: absolute;
@@ -630,406 +435,444 @@ body {
 }
 
 .coin-3d-shadow {
-  width: 280px;
-  height: 20px;
+  width: 240px;
+  height: 18px;
   margin-top: 20px;
-  background: radial-gradient(ellipse at center, rgba(0,212,255,0.15) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.15) 0%, transparent 70%);
   border-radius: 50%;
   filter: blur(12px);
   transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
 
 .coin-3d-label {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-top: 16px;
+  color: var(--white-faint);
+  margin-top: 12px;
   user-select: none;
 }
 
-.coin-3d-face-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-top: 12px;
+.coin-right {
+  max-width: 360px;
 }
 
-.coin-inscriptions {
-  margin: 32px auto;
-  max-width: 520px;
-}
-
-.coin-inscriptions dt {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 4px;
-  margin-top: 16px;
-}
-
-.coin-inscriptions dd {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--ink-dim);
-}
-
-.coin-specs {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-
-.coin-spec {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  padding: 8px 14px;
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 6px;
-}
-
-/* ══════════════════════════════════
-   PERSONALIZATION
-   ══════════════════════════════════ */
-.personalization {
-  margin: 64px 0;
-  text-align: center;
-}
-
-.personalization-panel {
-  padding: 48px 32px;
-}
-
-.reserved-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: 12px;
-}
-
-.reserved-name {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 300;
-  line-height: 1.2;
-  margin-bottom: 16px;
-  background: linear-gradient(90deg, var(--gold-hi), var(--cyan), var(--magenta), var(--gold-hi));
-  background-size: 300% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient-text 5s ease infinite;
-}
-
-.edition-number {
-  font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 0.15em;
-  color: var(--ink-dim);
-}
-
-/* ══════════════════════════════════
-   FOOTER
-   ══════════════════════════════════ */
-footer {
-  margin-top: 80px;
-  padding: 48px 24px;
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.04);
-}
-
-.footer-ns {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.footer-ns-logo {
-  height: 22px;
-  width: auto;
-  opacity: 0.35;
-}
-
-.footer-ns-text {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-footer p {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  line-height: 2.4;
-}
-
-footer .footer-title {
-  font-family: var(--serif);
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: var(--ink-dim);
-  text-transform: none;
-  margin-top: 8px;
-}
-
-.versions-link {
-  display: inline-block;
-  margin-top: 20px;
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  text-decoration: none;
-  padding: 6px 14px;
-  border: 1px solid rgba(255,255,255,0.06);
+.coin-right video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
   border-radius: 4px;
-  transition: all 0.3s ease;
+  margin-bottom: 16px;
 }
 
-.versions-link:hover {
-  border-color: var(--gold-dim);
-  color: var(--gold);
-}
-
-/* ══════════════════════════════════
-   FOCUS & RESPONSIVE
-   ══════════════════════════════════ */
-:focus-visible {
-  outline: 2px solid var(--cyan);
-  outline-offset: 4px;
+.coin-right img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 @media (max-width: 768px) {
-  .status-bar { font-size: 8px; padding: 8px 16px; gap: 16px; }
-  .ns-header { padding-top: 80px; }
-  .date-big { font-size: clamp(3rem, 12vw, 6rem); }
-  .meta-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .coin-3d { width: 260px; height: 260px; }
-  .narrative-panel, .ns-panel { padding: 28px 20px; }
-  .personalization-panel { padding: 32px 20px; }
+  .coin-showcase { gap: 40px; }
+  .coin-3d { width: 220px; height: 220px; }
+  .coin-right { max-width: 300px; }
 }
 
-@media (max-width: 400px) {
-  .status-bar { flex-direction: column; gap: 2px; }
-  .meta-row { grid-template-columns: 1fr; }
-  .countdown-box { min-width: 64px; padding: 14px 10px; }
-  .coin-3d { width: 220px; height: 220px; }
-  .date-big { font-size: 3rem; }
+/* ══════════════════════════════════
+   8. THE CELEBRATION
+   ══════════════════════════════════ */
+#celebration .chapter-overlay {
+  background: rgba(8,8,8,0.45);
+}
+
+.celebration-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 900px;
+  width: 100%;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+.celebration-grid video,
+.celebration-grid img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .celebration-grid { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════
+   9. CLOSING
+   ══════════════════════════════════ */
+#closing {
+  background: var(--bg);
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+.closing-names {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(40px, 7vw, 80px);
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.closing-link {
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: var(--white-faint);
+  margin-bottom: 48px;
+}
+
+.closing-ns {
+  font-family: var(--sans);
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 500;
+  color: var(--white-soft);
+  margin-bottom: 12px;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 0.3s, color 0.3s;
+  margin-bottom: 48px;
+}
+
+.cta-btn:hover {
+  background: var(--gold);
+  color: var(--bg);
+  opacity: 1;
+}
+
+.closing-location {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+/* ══════════════════════════════════
+   UTILITY
+   ══════════════════════════════════ */
+.separator {
+  width: 60px;
+  height: 1px;
+  background: var(--gold-dim);
+  margin: 24px auto;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 3px; }
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .build-photos img { width: 220px; height: 160px; }
+  .walk-media video, .walk-media img { height: 200px; }
+  .celebration-grid video, .celebration-grid img { height: 200px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ── STATUS BAR ── -->
-<header class="status-bar" role="banner">
-  <span>Network School · Genesis Node</span>
-  <span>Forest City, Malaysia</span>
-  <span>26.06.26 · 6:00 PM MYT</span>
-</header>
+<!-- ═══════════════════════════════════
+     1. HERO
+     ═══════════════════════════════════ -->
+<section id="hero" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline>
+    <source src="public/clips/the-aisle-walk.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content">
+    <p class="kicker reveal">The World's First</p>
+    <h1 class="headline reveal reveal-delay-1">HUMANOID<br>BRIDAL WALK</h1>
+    <div class="separator reveal reveal-delay-2"></div>
+    <p class="date-display reveal reveal-delay-3">XXVI &middot; VI &middot; XXVI</p>
+  </div>
+  <div class="scroll-arrow">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
 
-<div class="container">
+<!-- ═══════════════════════════════════
+     2. THE DREAM
+     ═══════════════════════════════════ -->
+<section id="dream" class="chapter">
+  <div class="chapter-bg-img"></div>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content">
+    <p class="kicker reveal">The Dream</p>
+    <p class="headline-serif reveal reveal-delay-1" style="margin-bottom: 32px;">
+      "Every bride dreams of this moment."
+    </p>
+    <div class="separator reveal reveal-delay-2"></div>
+    <p class="body-text reveal reveal-delay-3">
+      Sonia had always dreamed of her parents walking her down the aisle.
+      It was the kind of moment she'd imagined since she was a little girl &mdash;
+      her family beside her, on the most important day of her life. But the seas between them had other plans.
+    </p>
+  </div>
+</section>
 
-  <main role="main">
+<!-- ═══════════════════════════════════
+     3. THE DISTANCE
+     ═══════════════════════════════════ -->
+<section id="distance" class="chapter">
+  <div class="chapter-content">
+    <p class="headline-serif reveal" style="color: var(--white-soft);">
+      But an ocean stood<br>between them.
+    </p>
+  </div>
+</section>
 
-    <!-- ── HERO ── -->
-    <section class="date-hero reveal" aria-label="Event">
-      <p class="event-kicker">The World's First</p>
-      <h1 class="event-title">Humanoid<br>Bridal Walk</h1>
+<!-- ═══════════════════════════════════
+     4. THE IDEA
+     ═══════════════════════════════════ -->
+<section id="idea" class="chapter">
+  <div class="chapter-bg-img"></div>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content">
+    <p class="kicker reveal">The Idea</p>
+    <p class="headline-serif reveal reveal-delay-1" style="margin-bottom: 24px;">
+      "What if we could<br>bring them there?"
+    </p>
+    <div class="separator reveal reveal-delay-2"></div>
+    <p class="body-text reveal reveal-delay-3">
+      Not a screen. Not a recording. A presence &mdash; standing, walking,
+      carrying their spirit down the aisle in their place.
+    </p>
+  </div>
+</section>
 
-      <div class="roman-date" aria-label="26 June 2026, 6:00 PM">
-        <span class="roman-line roman-day" data-english="26·06·26">XXVI·VI·XXVI</span>
-        <span class="roman-line roman-time" data-english="6 PM">VI PM</span>
-      </div>
+<!-- ═══════════════════════════════════
+     5. THE BUILD
+     ═══════════════════════════════════ -->
+<section id="build" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline>
+    <source src="public/clips/prep-ipad-test.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Build</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px); margin-bottom: 16px;">
+      48 Hours. Countless Setbacks. One Chance.
+    </h2>
+    <p class="body-text reveal reveal-delay-2">
+      A team of roboticists, designers, and dreamers racing against the clock
+      through technical breakdowns and sleepless nights in a Network School lab at Forest City.
+      Everything that could go wrong, did. But they kept going &mdash; because giving up was never an option.
+    </p>
 
-      <p class="event-subtitle">Humanoid Bride Escort & Aisle Walk</p>
-      <p class="event-lede">"The first time in recorded history a humanoid robot escorted a bride down the aisle — standing in for the family who could not cross the distance."</p>
-      <p class="event-couple">At the wedding of <a href="https://krisandsonia.com" target="_blank" rel="noopener">Kris &amp; Sonia</a></p>
-    </section>
-
-    <div class="gold-rule reveal"></div>
-
-    <!-- ── COUNTDOWN ── -->
-    <section class="countdown-section reveal" aria-label="Countdown" style="transition-delay:0.1s">
-      <p class="countdown-label">Countdown to History</p>
-      <div id="countdown" aria-live="polite">
-        <div class="countdown-grid">
-          <div class="countdown-box glass glass-glow"><div class="num" id="cd-days">--</div><div class="unit">Days</div></div>
-          <div class="countdown-box glass glass-glow"><div class="num" id="cd-hours">--</div><div class="unit">Hours</div></div>
-          <div class="countdown-box glass glass-glow"><div class="num" id="cd-mins">--</div><div class="unit">Min</div></div>
-          <div class="countdown-box glass glass-glow"><div class="num" id="cd-secs">--</div><div class="unit">Sec</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── EVENT META ── -->
-    <section class="meta-row reveal" aria-label="Event details" style="transition-delay:0.15s">
-      <div class="meta-card glass">
-        <div class="label">Occasion</div>
-        <div class="value">First NS Wedding</div>
-      </div>
-      <div class="meta-card glass">
-        <div class="label">Date</div>
-        <div class="value">26·06·26</div>
-      </div>
-      <div class="meta-card glass">
-        <div class="label">Hour</div>
-        <div class="value">6:00 PM</div>
-      </div>
-      <div class="meta-card glass">
-        <div class="label">Place</div>
-        <div class="value">Network School</div>
-      </div>
-    </section>
-
-    <!-- ── NETWORK SCHOOL SECTION ── -->
-    <section class="ns-section reveal" aria-label="About Network School" style="transition-delay:0.1s">
-      <div class="ns-panel glass glass-glow">
-        <p class="ns-panel-title">The Venue · The Community</p>
-        <p class="ns-panel-text">
-          <em>Network School</em> — a community turning internet communities into physical startup societies.
-          Learn, Burn, and Earn in Forest City, Malaysia. The first wedding in its history. The genesis node.
-          Where a community that builds the future also celebrates the most human of moments.
-        </p>
-        <a href="https://ns.com" target="_blank" rel="noopener" class="ns-link">
-          Visit Network School →
-        </a>
-      </div>
-    </section>
-
-    <!-- ── THE MOMENT ── -->
-    <section class="narrative-section reveal" aria-label="The Moment" style="transition-delay:0.1s">
-      <div class="narrative-panel glass glass-glow">
-        <h2>The Moment</h2>
-        <p>Her father and grandparents could not make the crossing. So at Network School — the genesis node — something this community helped bring to life took their place, and walked the bride to meet her groom. Not a spectacle. A stand-in for love that distance kept away.</p>
-      </div>
-    </section>
-
-    <!-- ── 3D COIN ── -->
-    <section class="coin-section reveal" aria-label="Commemorative coin" style="transition-delay:0.15s">
-      <h2 class="coin-section-title">The Commemorative Coin</h2>
-
-      <div class="coin-3d-container" id="coin3d-container">
-        <div class="coin-3d" id="coin3d" onclick="flipCoin()" role="button" tabindex="0" aria-label="Interactive 3D coin — click to flip">
-          <div class="coin-3d-face coin-3d-front">
-            <img src="public/coin-obverse.png" alt="Obverse: humanoid robot bride escort engraving" loading="lazy">
-          </div>
-          <div class="coin-3d-face coin-3d-back">
-            <img src="public/coin-reverse.png" alt="Reverse: Swiss cross with K · Genesis Node · First Wedding · S · XXVI · VI · XXVI" loading="lazy">
-          </div>
-          <div class="coin-3d-shine" id="coin3d-shine"></div>
-        </div>
-        <div class="coin-3d-shadow" id="coin3d-shadow"></div>
-        <p class="coin-3d-face-label" id="coin3d-face-label">Obverse</p>
-        <p class="coin-3d-label" id="coin3d-flip-label">Click to flip</p>
-      </div>
-
-      <dl class="coin-inscriptions">
-        <dt>Obverse Rim</dt>
-        <dd>FIRST HUMANOID / BRIDE ESCORT</dd>
-        <dt>Reverse Ring</dt>
-        <dd>K · GENESIS NODE · FIRST WEDDING · S · XXVI · VI · XXVI</dd>
-        <dt>K &amp; S</dt>
-        <dd><a href="https://krisandsonia.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dim)">Kris &amp; Sonia</a></dd>
-      </dl>
-
-      <div class="coin-specs">
-        <span class="coin-spec">Limited & Numbered</span>
-        <span class="coin-spec">Struck Once</span>
-        <span class="coin-spec">Serialized</span>
-        <span class="coin-spec">Personalized</span>
-      </div>
-    </section>
-
-    <!-- ── PERSONALIZATION ── -->
-    <section class="personalization reveal" aria-label="Personalization" style="transition-delay:0.1s">
-      <div class="personalization-panel glass glass-glow">
-        <p class="reserved-label">Reserved for</p>
-        <p class="reserved-name" id="reserved-name">[ your name ]</p>
-        <p class="edition-number">No. <span id="edition-num">001</span> / <span id="edition-size">100</span></p>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ── FOOTER ── -->
-  <footer role="contentinfo">
-    <div class="footer-ns">
-      <img src="https://assets.ns.com/static/about/network-state-and-network-school-logos/ns-com-logos/ns-com-logo-white.svg" alt="Network School" class="footer-ns-logo">
-      <span class="footer-ns-text">Genesis Node · Block 0</span>
+    <div class="build-photos reveal reveal-delay-3">
+      <img src="public/photos/PXL_20260625_090942268.jpg" alt="Robot dressing">
+      <img src="public/photos/PXL_20260625_035436967.jpg" alt="Team preparation">
+      <img src="public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Sara styling the robot">
     </div>
-    <p>1.4143°N 103.6253°E · Forest City · Malaysia</p>
-    <p class="footer-title">First Humanoid Bridal Walk — 26 June 2026</p>
-    <a href="/versions/" class="versions-link">View all design versions</a>
-  </footer>
 
-</div>
+    <div class="credits reveal reveal-delay-4">
+      <div class="credit-item">
+        <div class="credit-role">Conceived &amp; Directed</div>
+        <div class="credit-name">Husam Abboud</div>
+        <div class="credit-links">
+          <a href="https://ns.com/hus" target="_blank">ns.com/hus</a> &middot;
+          <a href="https://instagram.com/hus" target="_blank">instagram.com/hus</a>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">NS Robotics Lab Lead</div>
+        <div class="credit-name">Tony Park</div>
+        <div class="credit-links">
+          <a href="https://ns.com/tonymfer" target="_blank">ns.com/tonymfer</a> &middot;
+          <a href="https://instagram.com/tonylifeforce" target="_blank">instagram.com/tonylifeforce</a>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Robotics Engineering</div>
+        <div class="credit-name">Andy, Clarence, Roy &mdash; Virtuals / Eastworlds</div>
+        <div class="credit-links">
+          <a href="https://ns.com/theteatoast" target="_blank">ns.com/theteatoast</a> &middot;
+          <a href="https://instagram.com/virtualsio" target="_blank">IG @virtualsio</a> &middot;
+          <a href="https://instagram.com/eastworlds_io" target="_blank">IG @eastworlds_io</a> &middot;
+          <a href="https://x.com/virtuals_io" target="_blank">X @virtuals_io</a> &middot;
+          <a href="https://x.com/eastworlds_io" target="_blank">X @eastworlds_io</a>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Robot Styling</div>
+        <div class="credit-name">Sara Landi Tortoli</div>
+        <div class="credit-links">
+          <a href="https://ns.com/sarawondertech" target="_blank">ns.com/sarawondertech</a> &middot;
+          <a href="https://instagram.com/sarainwondertech" target="_blank">instagram.com/sarainwondertech</a>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Memorial Coin</div>
+        <div class="credit-name">Vinayak Vancheeswaran</div>
+        <div class="credit-links">
+          <a href="https://ns.com/vinayvancheeswa" target="_blank">ns.com/vinayvancheeswa</a> &middot;
+          <a href="https://avely.me/vanchee_kai" target="_blank">avely.me/vanchee_kai</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- TODO: MEDIA GALLERY — Photos & videos from the event (post-wedding) -->
-<!-- <section id="gallery" aria-label="Event Gallery">
-  <h2>The Gallery</h2>
-  <p>Photos and videos from the ceremony will appear here.</p>
-</section> -->
+<!-- ═══════════════════════════════════
+     6. THE WALK
+     ═══════════════════════════════════ -->
+<section id="walk" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline style="opacity: 0.25;">
+    <source src="public/clips/the-aisle-walk.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay" style="background: rgba(8,8,8,0.6);"></div>
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Walk</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(32px, 6vw, 72px);">
+      The Moment
+    </h2>
+    <p class="body-text reveal reveal-delay-2" style="margin-bottom: 32px;">
+      A humanoid robot walked a bride down the aisle &mdash; carrying the love of a
+      parents who couldn't be there.
+    </p>
+    <div class="walk-media reveal reveal-delay-3">
+      <video autoplay muted loop playsinline>
+        <source src="public/clips/the-aisle-walk.mp4" type="video/mp4">
+      </video>
+      <video autoplay muted loop playsinline>
+        <source src="public/clips/bride-and-robot.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div style="margin-top: 16px; padding: 0 24px;" class="reveal reveal-delay-4">
+      <img src="public/photos/PXL_20260626_103410037.jpg" alt="Group with bride and robot"
+           style="width: 100%; max-width: 960px; height: 320px; object-fit: cover; border-radius: 4px;">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     7. THE COIN
+     ═══════════════════════════════════ -->
+<section id="coin-section" class="chapter">
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Coin</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(24px, 4vw, 48px); margin-bottom: 8px;">
+      A Token of Memory
+    </h2>
+    <p class="body-text reveal reveal-delay-2" style="margin-bottom: 40px;">
+      Every guest received a memorial coin &mdash; a physical artifact to carry
+      the memory forward.
+    </p>
+
+    <div class="coin-showcase reveal reveal-delay-3">
+      <!-- 3D Interactive Coin -->
+      <div>
+        <div class="coin-3d-container" id="coin3d-container">
+          <div class="coin-3d" id="coin3d" onclick="flipCoin()" tabindex="0" role="button" aria-label="Flip coin">
+            <div class="coin-3d-face coin-3d-front">
+              <img src="public/coin-obverse.png" alt="Coin obverse">
+            </div>
+            <div class="coin-3d-face coin-3d-back">
+              <img src="public/coin-reverse.png" alt="Coin reverse">
+            </div>
+            <div class="coin-3d-shine" id="coin3d-shine"></div>
+          </div>
+          <div class="coin-3d-shadow" id="coin3d-shadow"></div>
+        </div>
+        <p class="coin-3d-label" id="coin3d-face-label">Obverse</p>
+        <p class="coin-3d-label" id="coin3d-flip-label" style="color: var(--gold-dim); margin-top: 6px;">Click to flip</p>
+      </div>
+
+      <!-- Coin media -->
+      <div class="coin-right">
+        <video autoplay muted loop playsinline>
+          <source src="public/clips/coins-printing.mp4" type="video/mp4">
+        </video>
+        <img src="public/photos/PXL_20260626_094810823.PORTRAIT.jpg" alt="Coin in hand">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     8. THE CELEBRATION
+     ═══════════════════════════════════ -->
+<section id="celebration" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline style="opacity: 0.35;">
+    <source src="public/clips/robot-guest-moment.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay" style="background: rgba(8,8,8,0.55);"></div>
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Celebration</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px);">
+      Joy, Shared
+    </h2>
+    <div class="celebration-grid reveal reveal-delay-2">
+      <img src="public/photos/PXL_20260626_103410037-_1_.jpg" alt="Group under arch">
+      <video autoplay muted loop playsinline>
+        <source src="public/clips/robot-guest-moment.mp4" type="video/mp4">
+      </video>
+      <img src="public/photos/PXL_20260626_095934375.jpg" alt="Celebration">
+      <img src="public/photos/Screenshot-from-2026-06-28-07-36-21.png" alt="Sparklers and confetti">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     9. CLOSING
+     ═══════════════════════════════════ -->
+<section id="closing" class="chapter">
+  <div class="chapter-content">
+    <div class="separator reveal" style="margin-bottom: 40px;"></div>
+    <p class="closing-names reveal reveal-delay-1">Kris &amp; Sonia</p>
+    <p class="closing-link reveal reveal-delay-2">
+      <a href="https://krisandsonia.com" target="_blank">krisandsonia.com</a>
+    </p>
+    <p class="closing-ns reveal reveal-delay-3">
+      Made possible by <a href="https://ns.com" target="_blank" style="color: var(--gold);">Network School</a>
+    </p>
+    <a href="https://ns.com/hus/apply" target="_blank" class="cta-btn reveal reveal-delay-3">
+      Join Us
+    </a>
+    <p class="closing-location reveal reveal-delay-4">
+      Genesis Node &middot; Forest City &middot; 26 June 2026
+    </p>
+  </div>
+</section>
 
 <script>
-(function () {
-  'use strict';
+(function() {
+  // ── IntersectionObserver for reveals ──
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-  // ── PERSONALIZATION ──
-  var EDITION_SIZE = 100; /* TODO: confirm final edition count */
-  var params = new URLSearchParams(window.location.search);
-  var name = params.get('name');
-  var n = params.get('n');
-  if (name) document.getElementById('reserved-name').textContent = name;
-  if (n) document.getElementById('edition-num').textContent = String(n).padStart(3, '0');
-  document.getElementById('edition-size').textContent = String(EDITION_SIZE);
-
-  // ── COUNTDOWN ──
-  var TARGET = new Date('2026-06-26T18:00:00+08:00').getTime();
-  var SIX_HOURS = 6 * 60 * 60 * 1000;
-  var countdownEl = document.getElementById('countdown');
-
-  function pad(v) { return String(v).padStart(2, '0'); }
-
-  function tick() {
-    var now = Date.now();
-    var diff = TARGET - now;
-    if (diff > 0) {
-      var d = Math.floor(diff / 86400000);
-      var h = Math.floor((diff % 86400000) / 3600000);
-      var m = Math.floor((diff % 3600000) / 60000);
-      var s = Math.floor((diff % 60000) / 1000);
-      document.getElementById('cd-days').textContent = pad(d);
-      document.getElementById('cd-hours').textContent = pad(h);
-      document.getElementById('cd-mins').textContent = pad(m);
-      document.getElementById('cd-secs').textContent = pad(s);
-    } else if (diff > -SIX_HOURS) {
-      countdownEl.innerHTML = '<p class="countdown-sealed">Happening now</p>';
-    } else {
-      countdownEl.innerHTML = '<p class="countdown-sealed">26·06·2026 — Sealed</p>';
-    }
-  }
-  tick();
-  setInterval(tick, 1000);
+  reveals.forEach(function(el) { observer.observe(el); });
 
   // ── 3D COIN — fully interactive mouse tracking ──
   var coin3d = document.getElementById('coin3d');
@@ -1046,7 +889,6 @@ footer .footer-title {
   var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
   if (isTouchDevice && coin3dFlipLabel) coin3dFlipLabel.textContent = 'Tap to flip';
 
-  // Set initial gentle idle tilt
   var idleAngle = 0;
   var idleRAF;
   function idleWobble() {
@@ -1056,23 +898,19 @@ footer .footer-title {
     var wobbleY = Math.cos(idleAngle * 0.7) * 5;
     var base = coinFlipped ? 180 : 0;
     coin3d.style.transform = 'rotateY(' + (base + wobbleY) + 'deg) rotateX(' + wobbleX + 'deg)';
-    // Subtle shadow movement
     coin3dShadow.style.transform = 'translateX(' + (-wobbleY * 0.6) + 'px) scaleY(' + (0.8 + Math.abs(wobbleX) * 0.015) + ')';
     idleRAF = requestAnimationFrame(idleWobble);
   }
   idleWobble();
 
-  // Click to flip
   window.flipCoin = function() {
     coinFlipped = !coinFlipped;
     isFlipping = true;
     cancelAnimationFrame(idleRAF);
-    // Add slow transition class for the flip animation
     coin3d.classList.add('flipping');
     var base = coinFlipped ? 180 : 0;
     coin3d.style.transform = 'rotateY(' + base + 'deg) rotateX(0deg)';
     coin3dFaceLabel.textContent = coinFlipped ? 'Reverse' : 'Obverse';
-    // Remove flipping class after animation and resume
     setTimeout(function() {
       coin3d.classList.remove('flipping');
       isFlipping = false;
@@ -1084,7 +922,6 @@ footer .footer-title {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipCoin(); }
   });
 
-  // Mouse move — instant 3D tilt tracking
   coin3dContainer.addEventListener('mouseenter', function() {
     mouseOver = true;
     cancelAnimationFrame(idleRAF);
@@ -1097,27 +934,18 @@ footer .footer-title {
     var cy = rect.top + rect.height / 2;
     var mx = e.clientX - cx;
     var my = e.clientY - cy;
-    var maxTilt = 25; // More dramatic tilt
-
-    // Normalize to -1..1 range, then scale to degrees
+    var maxTilt = 25;
     var normX = mx / (rect.width / 2);
     var normY = my / (rect.height / 2);
-    currentTiltX = -normY * maxTilt; // tilt up/down
-    currentTiltY = normX * maxTilt;  // tilt left/right
-
-    // Clamp
+    currentTiltX = -normY * maxTilt;
+    currentTiltY = normX * maxTilt;
     currentTiltX = Math.max(-maxTilt, Math.min(maxTilt, currentTiltX));
     currentTiltY = Math.max(-maxTilt, Math.min(maxTilt, currentTiltY));
-
     var baseY = coinFlipped ? 180 : 0;
     coin3d.style.transform = 'rotateY(' + (baseY + currentTiltY) + 'deg) rotateX(' + currentTiltX + 'deg)';
-
-    // Shine follows mouse — bright spot where mouse points
     var shineX = (normX + 1) / 2 * 100;
     var shineY = (normY + 1) / 2 * 100;
     coin3dShine.style.background = 'radial-gradient(circle at ' + shineX + '% ' + shineY + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
-
-    // Shadow reacts to tilt
     coin3dShadow.style.transform = 'translateX(' + (-currentTiltY * 1.2) + 'px) scaleY(' + (0.5 + Math.abs(currentTiltX) * 0.025) + ')';
     coin3dShadow.style.opacity = String(Math.min(0.5, 0.1 + (Math.abs(currentTiltX) + Math.abs(currentTiltY)) * 0.008));
   });
@@ -1125,21 +953,18 @@ footer .footer-title {
   coin3dContainer.addEventListener('mouseleave', function() {
     mouseOver = false;
     if (isFlipping) return;
-    // Smooth return: temporarily add transition
     coin3d.style.transition = 'transform 0.5s ease-out';
     var baseY = coinFlipped ? 180 : 0;
     coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
     coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
     coin3dShadow.style.transform = 'translateX(0) scaleY(1)';
     coin3dShadow.style.opacity = '0.15';
-    // After return animation, switch back to fast transition and start idle
     setTimeout(function() {
       coin3d.style.transition = 'transform 0.1s ease-out';
       if (!mouseOver && !isFlipping) idleWobble();
     }, 500);
   });
 
-  // Touch: tilt on drag
   if (isTouchDevice) {
     coin3dContainer.addEventListener('touchmove', function(e) {
       if (isFlipping) return;
@@ -1171,23 +996,20 @@ footer .footer-title {
     });
   }
 
-  // ── REVEAL ──
-  var reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-    reveals.forEach(function(el) { observer.observe(el); });
-  } else {
-    reveals.forEach(function(el) { el.classList.add('visible'); });
-  }
+  // ── Lazy-load videos: only play when in viewport ──
+  var allVideos = document.querySelectorAll('video');
+  var videoObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(function(){});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+
+  allVideos.forEach(function(v) { videoObserver.observe(v); });
 })();
 </script>
-
 </body>
 </html>
