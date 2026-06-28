@@ -154,6 +154,50 @@ a:hover { opacity: 0.75; }
   margin-top: 32px;
 }
 
+.date-flip {
+  margin-top: 32px;
+  cursor: default;
+  perspective: 600px;
+}
+
+.date-flip-inner {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  position: relative;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.date-flip-inner::after {
+  content: attr(data-english);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: rotateX(90deg);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 1em;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+}
+
+.date-flip:hover .date-flip-inner {
+  opacity: 0;
+  transform: rotateX(-90deg);
+}
+
+.date-flip:hover .date-flip-inner::after {
+  opacity: 1;
+  transform: rotateX(0deg);
+}
+
 /* ══════════════════════════════════
    1. HERO
    ══════════════════════════════════ */
@@ -627,7 +671,9 @@ a.masonry-item {
     <p class="kicker reveal">The World's First Humanoid Bridal Walk</p>
     <h1 class="headline-serif reveal reveal-delay-1" style="font-size: clamp(28px, 5.5vw, 72px); margin-bottom: 24px;">Some promises are<br>stronger than distance.</h1>
     <div class="separator reveal reveal-delay-2"></div>
-    <p class="date-display reveal reveal-delay-3">XXVI &middot; VI &middot; XXVI</p>
+    <div class="date-flip reveal reveal-delay-3">
+      <span class="date-flip-inner" data-english="26 &middot; 6 &middot; 26">XXVI &middot; VI &middot; XXVI</span>
+    </div>
   </div>
   <div class="scroll-arrow">
     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
