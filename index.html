@@ -551,6 +551,48 @@ a.masonry-item {
   cursor: zoom-in;
 }
 
+.masonry-video {
+  position: relative;
+}
+
+.masonry-video .share-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.masonry-video:hover .share-overlay {
+  opacity: 1;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.share-btn:hover {
+  background: rgba(255,255,255,0.3);
+  opacity: 1;
+}
+
 .masonry-item img,
 .masonry-item video {
   width: 100%;
@@ -846,54 +888,19 @@ a.masonry-item {
     </h2>
     <div class="masonry reveal reveal-delay-2">
       <a class="masonry-item" href="public/photos/full/Screenshot-from-2026-06-28-07-24-31.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign" loading="lazy" decoding="async"></a>
-      <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4"></video></div>
+      <div class="masonry-item masonry-video"><video muted loop playsinline preload="none" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4"></video><div class="share-overlay"><a class="share-btn" href="https://twitter.com/intent/tweet?text=The%20world%E2%80%99s%20first%20humanoid%20bridal%20walk%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share</a><a class="share-btn" href="public/clips/the-aisle-walk-hq.mp4" download="humanoid-bridal-walk.mp4"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save</a></div></div>
       <a class="masonry-item" href="public/photos/full/Screenshot-from-2026-06-28-07-29-19.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="Ceremony" loading="lazy" decoding="async"></a>
-      <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4"></video></div>
+      <div class="masonry-item masonry-video"><video muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4"></video><div class="share-overlay"><a class="share-btn" href="https://twitter.com/intent/tweet?text=A%20humanoid%20robot%20walked%20her%20to%20the%20groom%20%E2%80%94%20and%20stepped%20aside.%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share</a><a class="share-btn" href="public/clips/the-handoff-hq.mp4" download="humanoid-handoff.mp4"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save</a></div></div>
       <a class="masonry-item" href="public/photos/full/PXL_20260626_103410037.jpg" target="_blank"><img src="public/photos/PXL_20260626_103410037.jpg" alt="Bride and robot" loading="lazy" decoding="async"></a>
       <a class="masonry-item" href="public/photos/full/Screenshot-from-2026-06-28-07-33-13.png" target="_blank"><img src="public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party" loading="lazy" decoding="async"></a>
-      <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/bride-and-robot-poster.jpg" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4"></video></div>
+      <div class="masonry-item masonry-video"><video muted loop playsinline preload="none" poster="public/clips/bride-and-robot-poster.jpg" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4"></video><div class="share-overlay"><a class="share-btn" href="https://twitter.com/intent/tweet?text=Her%20parents%20couldn%E2%80%99t%20cross%20the%20seas.%20So%20we%20refused%20to%20let%20distance%20win.%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share</a><a class="share-btn" href="public/clips/bride-and-robot-hq.mp4" download="bride-and-robot.mp4"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save</a></div></div>
       <a class="masonry-item" href="public/photos/full/IMG-20260628-WA0004.jpg" target="_blank"><img src="public/photos/sparklers-rooftop.jpg" alt="Rooftop sparklers celebration" loading="lazy" decoding="async"></a>
-      <div class="masonry-item"><video muted loop playsinline preload="none" poster="public/clips/robot-guest-moment-poster.jpg" data-lazy="public/clips/robot-guest-moment-mid.mp4" data-hq="public/clips/robot-guest-moment-hq.mp4"></video></div>
+      <div class="masonry-item masonry-video"><video muted loop playsinline preload="none" poster="public/clips/robot-guest-moment-poster.jpg" data-lazy="public/clips/robot-guest-moment-mid.mp4" data-hq="public/clips/robot-guest-moment-hq.mp4"></video><div class="share-overlay"><a class="share-btn" href="https://twitter.com/intent/tweet?text=The%20world%E2%80%99s%20first%20humanoid%20bridal%20walk%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share</a><a class="share-btn" href="public/clips/robot-guest-moment-hq.mp4" download="robot-guest-moment.mp4"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Save</a></div></div>
       <a class="masonry-item" href="public/photos/full/IMG-20260628-WA0006.jpg" target="_blank"><img src="public/photos/sparklers-wide.jpg" alt="Sparklers wide" loading="lazy" decoding="async"></a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     SHARE THIS MOMENT
-     ═══════════════════════════════════ -->
-<section style="background: var(--bg); padding: 80px 24px; text-align: center;">
-  <div style="max-width: 600px; margin: 0 auto;">
-    <p class="kicker">Spread the word</p>
-    <h2 class="headline" style="font-size: clamp(24px, 4vw, 40px); margin-bottom: 24px;">Share this moment</h2>
-
-    <div style="margin-bottom: 32px;">
-      <video muted loop playsinline autoplay poster="public/clips/the-aisle-walk-poster.jpg" style="width: 100%; max-width: 400px; border-radius: 8px; margin: 0 auto; display: block;">
-        <source src="public/clips/the-aisle-walk-hq.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;">
-      <a href="https://twitter.com/intent/tweet?text=The%20world%E2%80%99s%20first%20humanoid%20bridal%20walk.%20Her%20parents%20couldn%E2%80%99t%20cross%20the%20seas%20%E2%80%94%20so%20a%20community%20refused%20to%20let%20distance%20win.%20%F0%9F%A4%8D%0A%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%0A%23HumanoidBridalWalk%20%23FirstHumanoid" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; color: var(--white); font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.05em; transition: all 0.3s; text-decoration: none;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        Share on X
-      </a>
-      <a href="public/clips/the-aisle-walk-hq.mp4" download="humanoid-bridal-walk.mp4" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; color: var(--white); font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.05em; transition: all 0.3s; text-decoration: none;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download clip
-      </a>
-    </div>
-
-    <p style="font-family: var(--sans); font-size: 12px; color: var(--white-faint); letter-spacing: 0.08em;">
-      Download &rarr; post to your IG or TikTok with
-    </p>
-    <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 8px;">
-      <span style="font-family: var(--sans); font-size: 12px; color: var(--gold); padding: 4px 12px; border: 1px solid var(--gold-dim); border-radius: 20px;">#HumanoidBridalWalk</span>
-      <span style="font-family: var(--sans); font-size: 12px; color: var(--gold); padding: 4px 12px; border: 1px solid var(--gold-dim); border-radius: 20px;">#FirstHumanoid</span>
-      <span style="font-family: var(--sans); font-size: 12px; color: var(--gold); padding: 4px 12px; border: 1px solid var(--gold-dim); border-radius: 20px;">#KrisAndSonia</span>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════════════════════
      9. CLOSING
