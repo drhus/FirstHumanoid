@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The World's First Humanoid Bridal Walk</title>
+<meta name="description" content="Her parents couldn't cross the seas to walk her down the aisle. So we sent a humanoid robot in their place. Genesis Node, Forest City, 26 June 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════
+   RESET & FOUNDATIONS
+   ══════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #080808;
+  --gold: #c9a84c;
+  --gold-dim: rgba(201,168,76,0.4);
+  --white: #f0ede6;
+  --white-soft: rgba(240,237,230,0.7);
+  --white-faint: rgba(240,237,230,0.35);
+  --sans: 'Space Grotesk', sans-serif;
+  --serif: 'Crimson Pro', serif;
+}
+
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: var(--gold); text-decoration: none; transition: opacity 0.3s; }
+a:hover { opacity: 0.75; }
+
+/* ══════════════════════════════════
+   SECTION BASE
+   ══════════════════════════════════ */
+.chapter {
+  position: relative;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Video / image backgrounds */
+.chapter-bg-video,
+.chapter-bg-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.chapter-bg-img {
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+}
+
+.chapter-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.chapter-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.5s; }
+.reveal-delay-4 { transition-delay: 0.7s; }
+
+/* ══════════════════════════════════
+   TYPOGRAPHY
+   ══════════════════════════════════ */
+.kicker {
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.4vw, 14px);
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.headline {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(36px, 8vw, 96px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.headline-serif {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(28px, 5.5vw, 72px);
+  line-height: 1.2;
+  color: var(--white);
+}
+
+.body-text {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--white-soft);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.date-display {
+  font-family: var(--sans);
+  font-size: clamp(12px, 1.6vw, 16px);
+  letter-spacing: 0.5em;
+  color: var(--gold-dim);
+  margin-top: 32px;
+}
+
+.date-flip {
+  margin-top: 32px;
+  cursor: default;
+  perspective: 600px;
+}
+
+.date-flip-inner {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  position: relative;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.date-flip-inner::after {
+  content: attr(data-english);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: rotateX(90deg);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 1em;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+}
+
+.date-flip:hover .date-flip-inner {
+  opacity: 0;
+  transform: rotateX(-90deg);
+}
+
+.date-flip:hover .date-flip-inner::after {
+  opacity: 1;
+  transform: rotateX(0deg);
+}
+
+/* ══════════════════════════════════
+   1. HERO
+   ══════════════════════════════════ */
+#hero .chapter-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(8,8,8,0.4) 0%,
+    rgba(8,8,8,0.6) 50%,
+    rgba(8,8,8,0.85) 100%
+  );
+}
+
+.scroll-arrow {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: float 2.5s ease-in-out infinite;
+}
+.scroll-arrow svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--gold-dim);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 1; }
+}
+
+/* ══════════════════════════════════
+   2. THE DREAM
+   ══════════════════════════════════ */
+#dream .chapter-bg-img {
+  background-image: url('../public/photos/Screenshot-from-2026-06-28-07-29-19.png');
+}
+
+#dream .chapter-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(8,8,8,0.75) 0%,
+    rgba(8,8,8,0.55) 100%
+  );
+}
+
+/* ══════════════════════════════════
+   3. THE DISTANCE
+   ══════════════════════════════════ */
+#distance {
+  background: var(--bg);
+}
+
+#distance .headline-serif {
+  font-size: clamp(30px, 6vw, 80px);
+  max-width: 900px;
+}
+
+/* ══════════════════════════════════
+   4. THE IDEA
+   ══════════════════════════════════ */
+#idea .chapter-bg-img {
+  background-image: url('../public/photos/PXL_20260625_083727700.jpg');
+}
+
+#idea .chapter-overlay {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8,8,8,0.5) 0%,
+    rgba(8,8,8,0.8) 100%
+  );
+}
+
+/* ══════════════════════════════════
+   5. THE BUILD
+   ══════════════════════════════════ */
+#build {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0;
+}
+
+#build .chapter-overlay {
+  background: rgba(8,8,8,0.75);
+}
+
+.build-photos {
+  display: flex;
+  gap: 16px;
+  margin: 40px auto;
+  max-width: 900px;
+  overflow-x: auto;
+  padding: 0 24px;
+}
+
+.build-photos img {
+  width: 280px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  filter: brightness(0.85);
+  transition: filter 0.4s;
+}
+
+.build-photos img:hover { filter: brightness(1); }
+
+.credits {
+  margin-top: 48px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+.credit-item {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+
+.credit-role {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  min-width: 140px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.credit-name {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--white-soft);
+  line-height: 1.5;
+}
+
+.credit-name a {
+  border-bottom: 1px solid var(--gold-dim);
+}
+
+.credit-handle {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--white-faint);
+  margin-left: 6px;
+}
+
+@media (max-width: 640px) {
+  .credit-item { flex-direction: column; gap: 2px; }
+  .credit-role { text-align: left; min-width: auto; }
+}
+
+/* ══════════════════════════════════
+   6. THE WALK
+   ══════════════════════════════════ */
+#walk {
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 60px 0;
+}
+
+#walk .chapter-overlay {
+  background: rgba(8,8,8,0.3);
+}
+
+.walk-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 960px;
+  width: 100%;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+.walk-media video,
+.walk-media img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .walk-media { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════
+   7. THE COIN
+   ══════════════════════════════════ */
+#coin-section {
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 60px 0;
+}
+
+.coin-showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+/* 3D Coin */
+.coin-3d-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 800px;
+}
+
+.coin-3d {
+  width: 340px;
+  height: 340px;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.1s ease-out;
+  animation: coin-glow 5s ease infinite;
+}
+
+@keyframes coin-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(201,168,76,0.35), 0 0 60px rgba(201,168,76,0.15); }
+  50% { box-shadow: 0 0 40px rgba(201,168,76,0.5), 0 0 80px rgba(201,168,76,0.25); }
+}
+
+.coin-3d.flipping {
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.coin-3d-face {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.coin-3d-face img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.coin-3d-back { transform: rotateY(180deg); }
+
+.coin-3d-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
+  mix-blend-mode: overlay;
+  z-index: 2;
+  transition: background 0.1s ease-out;
+}
+
+.coin-3d::after {
+  content: '';
+  position: absolute;
+  top: 1%; left: 1%;
+  width: 98%; height: 98%;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.12);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.coin-3d-shadow {
+  width: 240px;
+  height: 18px;
+  margin-top: 20px;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(12px);
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.coin-3d-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  margin-top: 12px;
+  user-select: none;
+}
+
+.coin-right {
+  max-width: 180px;
+}
+
+.coin-right img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .coin-showcase { gap: 24px; }
+  .coin-3d { width: 260px; height: 260px; }
+  .coin-right { max-width: 140px; }
+}
+
+/* ══════════════════════════════════
+   8. THE CELEBRATION — MASONRY GALLERY
+   ══════════════════════════════════ */
+#celebration {
+  background: var(--bg);
+  min-height: auto;
+  padding: 80px 0;
+  flex-direction: column;
+}
+
+.masonry {
+  columns: 3;
+  column-gap: 12px;
+  max-width: 960px;
+  width: 100%;
+  padding: 0 24px;
+  margin-top: 40px;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.masonry-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.15);
+}
+
+a.masonry-item {
+  display: block;
+  cursor: zoom-in;
+}
+
+.masonry-item img,
+.masonry-item video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .masonry { columns: 2; }
+}
+@media (max-width: 480px) {
+  .masonry { columns: 1; }
+}
+
+/* ══════════════════════════════════
+   NEW: THE GUESTBOOK
+   ══════════════════════════════════ */
+#guestbook {
+  background: var(--bg);
+  min-height: auto;
+  padding: 80px 0;
+  flex-direction: column;
+}
+
+.guestbook-form {
+  max-width: 560px;
+  width: 100%;
+  margin: 32px auto 0;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 4px;
+  padding: 14px 18px;
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.guestbook-form textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.guestbook-form input:focus,
+.guestbook-form textarea:focus {
+  border-color: var(--gold);
+}
+
+.guestbook-form input::placeholder,
+.guestbook-form textarea::placeholder {
+  color: var(--white-faint);
+  font-style: italic;
+}
+
+.guestbook-char-count {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--white-faint);
+  text-align: right;
+  margin-top: -8px;
+}
+
+.guestbook-submit {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  align-self: center;
+}
+
+.guestbook-submit:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+.guestbook-entries {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 800px;
+  width: 100%;
+  padding: 0 24px;
+  margin: 48px auto 0;
+}
+
+@media (max-width: 640px) {
+  .guestbook-entries { grid-template-columns: 1fr; }
+}
+
+.guestbook-entry {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 6px;
+  padding: 24px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.guestbook-entry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(201,168,76,0.1);
+}
+
+.guestbook-entry-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--white-soft);
+  margin-bottom: 16px;
+}
+
+.guestbook-entry-quote::before { content: '\201C'; color: var(--gold-dim); }
+.guestbook-entry-quote::after { content: '\201D'; color: var(--gold-dim); }
+
+.guestbook-entry-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.guestbook-entry-name {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.05em;
+}
+
+.guestbook-entry-handle {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--gold-dim);
+}
+
+.guestbook-entry-time {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--white-faint);
+}
+
+/* ══════════════════════════════════
+   NEW: PRESS & FIRSTS
+   ══════════════════════════════════ */
+#press-firsts {
+  background: var(--bg);
+  min-height: auto;
+  padding: 80px 0;
+  flex-direction: column;
+}
+
+/* Timeline */
+.timeline {
+  max-width: 700px;
+  width: 100%;
+  margin: 40px auto 0;
+  padding: 0 24px 0 48px;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 36px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-dim), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 32px;
+  padding-bottom: 36px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-dot {
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--gold);
+  z-index: 1;
+}
+
+.timeline-date {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.timeline-text {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--white-soft);
+  line-height: 1.5;
+}
+
+/* Hashtag pills */
+.hashtag-pills {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.hashtag-pill {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 20px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.hashtag-pill:hover {
+  background: rgba(201,168,76,0.1);
+  border-color: var(--gold);
+  opacity: 1;
+}
+
+/* Instagram placeholder grid */
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 700px;
+  width: 100%;
+  margin: 24px auto 0;
+  padding: 0 24px;
+}
+
+@media (max-width: 640px) {
+  .ig-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.ig-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 6px;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ig-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(201,168,76,0.1);
+  opacity: 1;
+}
+
+.ig-card-icon {
+  width: 36px;
+  height: 36px;
+  stroke: var(--white-faint);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.ig-card-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white-faint);
+}
+
+.ig-card-link {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+
+.ig-tag-note {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--white-faint);
+  text-align: center;
+  margin-top: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* Press cards */
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 800px;
+  width: 100%;
+  margin: 40px auto 0;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .press-grid { grid-template-columns: 1fr; }
+}
+
+.press-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: 6px;
+  padding: 28px 24px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.press-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.12);
+}
+
+.press-card-pub {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.press-card-headline {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--white-soft);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.press-card-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+/* ══════════════════════════════════
+   9. CLOSING
+   ══════════════════════════════════ */
+#closing {
+  background: var(--bg);
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+.closing-names {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(40px, 7vw, 80px);
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.closing-link {
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: var(--white-faint);
+  margin-bottom: 48px;
+}
+
+.closing-ns {
+  font-family: var(--sans);
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 500;
+  color: var(--white-soft);
+  margin-bottom: 12px;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 0.3s, color 0.3s;
+  margin-bottom: 48px;
+}
+
+.cta-btn:hover {
+  background: var(--gold);
+  color: var(--bg);
+  opacity: 1;
+}
+
+.closing-location {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+/* ══════════════════════════════════
+   UTILITY
+   ══════════════════════════════════ */
+.separator {
+  width: 60px;
+  height: 1px;
+  background: var(--gold-dim);
+  margin: 24px auto;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 3px; }
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .build-photos img { width: 220px; height: 160px; }
+  .walk-media video, .walk-media img { height: 200px; }
+  .celebration-grid video, .celebration-grid img { height: 200px; }
+  .timeline { padding-left: 40px; }
+  .timeline::before { left: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     1. HERO
+     ═══════════════════════════════════ -->
+<section id="hero" class="chapter">
+  <video class="chapter-bg-video" autoplay muted loop playsinline preload="auto" poster="../public/clips/the-aisle-walk-poster.jpg">
+    <source src="../public/clips/the-aisle-walk-hq.mp4" type="video/mp4">
+  </video>
+  <div class="chapter-overlay"></div>
+  <div class="hero-topbar reveal" style="position: absolute; top: 0; left: 0; right: 0; z-index: 3; display: flex; justify-content: space-between; align-items: center; padding: 24px 32px;">
+    <p class="kicker" style="margin: 0;">The World's First Humanoid Bridal Walk</p>
+    <p class="kicker" style="margin: 0; text-align: right;">26 &middot; 6 &middot; 26 &nbsp; 6 PM</p>
+  </div>
+  <div class="chapter-content" style="margin-top: 10vh;">
+    <h1 class="headline-serif reveal" style="font-size: clamp(28px, 5.5vw, 72px); margin-bottom: 16px;">Some promises are<br>stronger than distance.</h1>
+    <p class="body-text reveal reveal-delay-1" style="margin-bottom: 24px; max-width: 540px;">When her parents couldn&rsquo;t cross the seas, we refused to let distance win.</p>
+  </div>
+  <div class="scroll-arrow">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     THE QUOTE
+     ═══════════════════════════════════ -->
+<section class="chapter" style="background: var(--bg);">
+  <div class="chapter-content">
+    <p class="headline-serif reveal" style="max-width: 700px; color: var(--white-soft); font-size: clamp(22px, 4vw, 42px);">
+      He walked beside her through a humanoid &mdash; his face on the screen, his voice in her ear, his blessing on every step down the aisle.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     2. THE WISH
+     ═══════════════════════════════════ -->
+<section id="dream" class="chapter">
+  <div class="chapter-bg-img"></div>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content">
+    <p class="kicker reveal">The Wish</p>
+    <p class="headline-serif reveal reveal-delay-1" style="margin-bottom: 32px;">
+      A daughter always pictured them at her side.
+    </p>
+    <div class="separator reveal reveal-delay-2"></div>
+    <p class="body-text reveal reveal-delay-3">
+      Sonia always imagined her parents walking her toward the rest of her life. But the years, and an ocean, stood in the way. So we asked: <em style="color: var(--gold);">what if presence didn&rsquo;t require a plane?</em>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     THE IDEA
+     ═══════════════════════════════════ -->
+<section class="chapter" style="background: var(--bg);">
+  <div class="chapter-content">
+    <p class="kicker reveal">The Idea</p>
+    <p class="headline-serif reveal reveal-delay-1" style="font-size: clamp(28px, 5.5vw, 72px);">
+      Not a screen. Not a recording.<br>A presence.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     5. THE BUILD
+     ═══════════════════════════════════ -->
+<section id="build" class="chapter">
+  <video class="chapter-bg-video" muted loop playsinline preload="none" poster="../public/clips/prep-ipad-test-poster.jpg" data-lazy="../public/clips/prep-ipad-test-mid.mp4" data-hq="../public/clips/prep-ipad-test-hq.mp4">
+  </video>
+  <div class="chapter-overlay"></div>
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Build</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px); margin-bottom: 16px;">
+      48 Hours. One Chance.
+    </h2>
+    <p class="body-text reveal reveal-delay-2">
+      Everything that could go wrong, did. But they kept going.
+    </p>
+
+    <div class="build-photos reveal reveal-delay-3">
+      <img src="../public/photos/PXL_20260625_090942268.jpg" alt="Robot dressing" loading="lazy" decoding="async">
+      <video muted loop playsinline preload="none" poster="../public/clips/rehearsal-walk-poster.jpg" data-lazy="../public/clips/rehearsal-walk-mid.mp4" data-hq="../public/clips/rehearsal-walk-hq.mp4" style="width:280px;height:200px;object-fit:cover;border-radius:4px;flex-shrink:0;"></video>
+      <img src="../public/photos/sara-styling-boutonniere.jpg" alt="Sara styling boutonniere" loading="lazy" decoding="async">
+      <video muted loop playsinline preload="none" poster="../public/clips/outdoor-walk-poster.jpg" data-lazy="../public/clips/outdoor-walk-mid.mp4" data-hq="../public/clips/outdoor-walk-hq.mp4" style="width:280px;height:200px;object-fit:cover;border-radius:4px;flex-shrink:0;"></video>
+      <img src="../public/photos/PXL_20260625_035436967.jpg" alt="Team preparation" loading="lazy" decoding="async">
+      <img src="../public/photos/PXL_20260626_095934375.jpg" alt="Team with robot" loading="lazy" decoding="async">
+    </div>
+
+    <div class="credits reveal reveal-delay-4">
+      <div class="credit-item">
+        <div class="credit-role">Conceived &amp; Directed</div>
+        <div class="credit-name"><a href="https://ns.com/hus" target="_blank">Husam Abboud</a> <a href="https://instagram.com/hus" target="_blank" class="credit-handle">@hus</a></div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Robotics Lab Lead</div>
+        <div class="credit-name"><a href="https://ns.com/" target="_blank">Tony Lopez</a> <a href="https://instagram.com/tonylifeforce" target="_blank" class="credit-handle">@tonylifeforce</a></div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Robotics Engineering</div>
+        <div class="credit-name"><a href="https://ns.com/theteatoast" target="_blank">Andy</a>, YC, Clarence, Roy <a href="https://instagram.com/virtualsio" target="_blank" class="credit-handle">@virtualsio</a> <a href="https://instagram.com/eastworlds_io" target="_blank" class="credit-handle">@eastworlds_io</a></div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Robot Styling</div>
+        <div class="credit-name"><a href="https://ns.com/sarawondertech" target="_blank">Sara Landi Tortoli</a> <a href="https://instagram.com/sarainwondertech" target="_blank" class="credit-handle">@sarainwondertech</a></div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-role">Memorial Coin</div>
+        <div class="credit-name"><a href="https://ns.com/vinayvancheeswa" target="_blank">Vinayak Vancheeswaran</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     6. THE WALK
+     ═══════════════════════════════════ -->
+<section id="walk" class="chapter">
+  <video class="chapter-bg-video" muted loop playsinline preload="none" style="opacity: 0.25;" poster="../public/clips/the-aisle-walk-poster.jpg" data-lazy="../public/clips/the-aisle-walk-mid.mp4" data-hq="../public/clips/the-aisle-walk-hq.mp4">
+  </video>
+  <div class="chapter-overlay" style="background: rgba(8,8,8,0.6);"></div>
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Walk</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(32px, 6vw, 72px);">
+      The Moment
+    </h2>
+    <p class="body-text reveal reveal-delay-2" style="margin-bottom: 32px;">
+      A humanoid robot walked Sonia down the aisle &mdash; carrying her brother&rsquo;s voice, her parents&rsquo; love, and forty-eight hours of belief.
+    </p>
+    <div class="walk-media reveal reveal-delay-3" style="grid-template-columns: 1fr 1fr 1fr;">
+      <video muted loop playsinline preload="none" poster="../public/clips/the-aisle-walk-poster.jpg" data-lazy="../public/clips/the-aisle-walk-mid.mp4" data-hq="../public/clips/the-aisle-walk-hq.mp4">
+      </video>
+      <video muted loop playsinline preload="none" poster="../public/clips/the-handoff-poster.jpg" data-lazy="../public/clips/the-handoff-mid.mp4" data-hq="../public/clips/the-handoff-hq.mp4">
+      </video>
+      <video muted loop playsinline preload="none" poster="../public/clips/bride-and-robot-poster.jpg" data-lazy="../public/clips/bride-and-robot-mid.mp4" data-hq="../public/clips/bride-and-robot-hq.mp4">
+      </video>
+    </div>
+    <div style="margin-top: 16px; padding: 0 24px;" class="reveal reveal-delay-4">
+      <img src="../public/photos/PXL_20260626_103410037.jpg" alt="Group with bride and robot"
+           style="width: 100%; max-width: 960px; height: 320px; object-fit: cover; border-radius: 4px;">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     7. THE COIN
+     ═══════════════════════════════════ -->
+<section id="coin-section" class="chapter">
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Coin</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(24px, 4vw, 48px); margin-bottom: 8px;">
+      A Token of Memory
+    </h2>
+    <p class="body-text reveal reveal-delay-2" style="margin-bottom: 40px;">
+      A coin to keep, so the moment never fades &mdash; a small, lasting reminder that love found a way.
+    </p>
+
+    <div class="coin-showcase reveal reveal-delay-3">
+      <!-- 3D Interactive Coin -->
+      <div>
+        <div class="coin-3d-container" id="coin3d-container">
+          <div class="coin-3d" id="coin3d" onclick="flipCoin()" tabindex="0" role="button" aria-label="Flip coin">
+            <div class="coin-3d-face coin-3d-front">
+              <img src="../public/coin-obverse.png" alt="Coin obverse">
+            </div>
+            <div class="coin-3d-face coin-3d-back">
+              <img src="../public/coin-reverse.png" alt="Coin reverse">
+            </div>
+            <div class="coin-3d-shine" id="coin3d-shine"></div>
+          </div>
+          <div class="coin-3d-shadow" id="coin3d-shadow"></div>
+        </div>
+        <p class="coin-3d-label" id="coin3d-face-label">Obverse</p>
+        <p class="coin-3d-label" id="coin3d-flip-label" style="color: var(--gold-dim); margin-top: 6px;">Click to flip</p>
+      </div>
+
+      <!-- Coin photo below -->
+      <div class="coin-right">
+        <img src="../public/photos/PXL_20260626_094810823.PORTRAIT.jpg" alt="Coin in hand" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     8. THE CELEBRATION
+     ═══════════════════════════════════ -->
+<section id="celebration" class="chapter">
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">The Celebration</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px);">
+      Joy, Shared
+    </h2>
+    <div class="masonry reveal reveal-delay-2">
+      <a class="masonry-item" href="../public/photos/full/Screenshot-from-2026-06-28-07-24-31.png" target="_blank"><img src="../public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign" loading="lazy" decoding="async"></a>
+      <div class="masonry-item"><video muted loop playsinline preload="none" poster="../public/clips/the-aisle-walk-poster.jpg" data-lazy="../public/clips/the-aisle-walk-mid.mp4" data-hq="../public/clips/the-aisle-walk-hq.mp4"></video></div>
+      <a class="masonry-item" href="../public/photos/full/Screenshot-from-2026-06-28-07-29-19.png" target="_blank"><img src="../public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="Ceremony" loading="lazy" decoding="async"></a>
+      <div class="masonry-item"><video muted loop playsinline preload="none" poster="../public/clips/the-handoff-poster.jpg" data-lazy="../public/clips/the-handoff-mid.mp4" data-hq="../public/clips/the-handoff-hq.mp4"></video></div>
+      <a class="masonry-item" href="../public/photos/full/PXL_20260626_103410037.jpg" target="_blank"><img src="../public/photos/PXL_20260626_103410037.jpg" alt="Bride and robot" loading="lazy" decoding="async"></a>
+      <a class="masonry-item" href="../public/photos/full/Screenshot-from-2026-06-28-07-33-13.png" target="_blank"><img src="../public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party" loading="lazy" decoding="async"></a>
+      <div class="masonry-item"><video muted loop playsinline preload="none" poster="../public/clips/bride-and-robot-poster.jpg" data-lazy="../public/clips/bride-and-robot-mid.mp4" data-hq="../public/clips/bride-and-robot-hq.mp4"></video></div>
+      <a class="masonry-item" href="../public/photos/full/IMG-20260628-WA0004.jpg" target="_blank"><img src="../public/photos/sparklers-rooftop.jpg" alt="Rooftop sparklers celebration" loading="lazy" decoding="async"></a>
+      <div class="masonry-item"><video muted loop playsinline preload="none" poster="../public/clips/robot-guest-moment-poster.jpg" data-lazy="../public/clips/robot-guest-moment-mid.mp4" data-hq="../public/clips/robot-guest-moment-hq.mp4"></video></div>
+      <a class="masonry-item" href="../public/photos/full/IMG-20260628-WA0006.jpg" target="_blank"><img src="../public/photos/sparklers-wide.jpg" alt="Sparklers wide" loading="lazy" decoding="async"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     NEW: THE GUESTBOOK
+     ═══════════════════════════════════ -->
+<section id="guestbook" class="chapter">
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">Witness Reactions</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px);">
+      The Guestbook
+    </h2>
+    <p class="body-text reveal reveal-delay-2" style="margin-bottom: 8px;">
+      Were you there? Leave a memory.
+    </p>
+
+    <form class="guestbook-form reveal reveal-delay-3" id="guestbook-form" onsubmit="return submitGuestbook(event)">
+      <textarea id="gb-message" maxlength="280" placeholder="What did you feel that night?" required></textarea>
+      <p class="guestbook-char-count"><span id="gb-char-count">0</span> / 280</p>
+      <input type="text" id="gb-name" placeholder="Your name" required>
+      <input type="text" id="gb-handle" placeholder="@handle on X or Instagram">
+      <button type="submit" class="guestbook-submit">Leave Your Mark</button>
+    </form>
+
+    <div class="guestbook-entries reveal reveal-delay-4" id="guestbook-entries">
+      <!-- Entries rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     NEW: PRESS & FIRSTS
+     ═══════════════════════════════════ -->
+<section id="press-firsts" class="chapter">
+  <div class="chapter-content" style="max-width: 1100px;">
+    <p class="kicker reveal">In The Record</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px);">
+      Press &amp; Firsts
+    </h2>
+
+    <!-- Timeline -->
+    <div class="timeline reveal reveal-delay-2">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">26 June 2026, 6:00 PM</p>
+        <p class="timeline-text">The world's first humanoid robot bridal escort</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">26 June 2026</p>
+        <p class="timeline-text">First wedding at Network School's Genesis Node</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">26 June 2026</p>
+        <p class="timeline-text">First remotely-controlled humanoid to walk a bride down the aisle</p>
+      </div>
+    </div>
+
+    <!-- Instagram / Social -->
+    <div style="margin-top: 64px;">
+      <p class="kicker reveal" style="margin-bottom: 8px;">From the crowd</p>
+      <div class="hashtag-pills reveal reveal-delay-1">
+        <a href="https://instagram.com/explore/tags/humanoidbridalwalk" target="_blank" class="hashtag-pill">#HumanoidBridalWalk</a>
+        <a href="https://instagram.com/explore/tags/krisandsonia" target="_blank" class="hashtag-pill">#KrisAndSonia</a>
+        <a href="https://instagram.com/explore/tags/firsthumanoid" target="_blank" class="hashtag-pill">#FirstHumanoid</a>
+        <a href="https://instagram.com/explore/tags/networkschool" target="_blank" class="hashtag-pill">#NetworkSchool</a>
+      </div>
+
+      <div class="ig-grid reveal reveal-delay-2">
+        <a href="https://instagram.com/explore/tags/humanoidbridalwalk" target="_blank" class="ig-card">
+          <svg class="ig-card-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          <p class="ig-card-text">Photo from the evening</p>
+          <span class="ig-card-link">View on Instagram</span>
+        </a>
+        <a href="https://instagram.com/explore/tags/humanoidbridalwalk" target="_blank" class="ig-card">
+          <svg class="ig-card-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          <p class="ig-card-text">Photo from the evening</p>
+          <span class="ig-card-link">View on Instagram</span>
+        </a>
+        <a href="https://instagram.com/explore/tags/humanoidbridalwalk" target="_blank" class="ig-card">
+          <svg class="ig-card-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          <p class="ig-card-text">Photo from the evening</p>
+          <span class="ig-card-link">View on Instagram</span>
+        </a>
+        <a href="https://instagram.com/explore/tags/krisandsonia" target="_blank" class="ig-card">
+          <svg class="ig-card-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          <p class="ig-card-text">Photo from the evening</p>
+          <span class="ig-card-link">View on Instagram</span>
+        </a>
+        <a href="https://instagram.com/explore/tags/krisandsonia" target="_blank" class="ig-card">
+          <svg class="ig-card-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          <p class="ig-card-text">Photo from the evening</p>
+          <span class="ig-card-link">View on Instagram</span>
+        </a>
+        <a href="https://instagram.com/explore/tags/krisandsonia" target="_blank" class="ig-card">
+          <svg class="ig-card-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          <p class="ig-card-text">Photo from the evening</p>
+          <span class="ig-card-link">View on Instagram</span>
+        </a>
+      </div>
+      <p class="ig-tag-note reveal reveal-delay-3">Tag your photos <strong style="color: var(--gold);">#HumanoidBridalWalk</strong> to appear here</p>
+    </div>
+
+    <!-- Press -->
+    <div style="margin-top: 64px;">
+      <p class="kicker reveal">Press Coverage</p>
+      <div class="press-grid reveal reveal-delay-1">
+        <div class="press-card">
+          <p class="press-card-pub">TechCrunch</p>
+          <p class="press-card-headline">A humanoid robot walked a bride down the aisle when her parents couldn't be there</p>
+          <span class="press-card-badge">Coming Soon</span>
+        </div>
+        <div class="press-card">
+          <p class="press-card-pub">The Verge</p>
+          <p class="press-card-headline">The most human thing a robot has ever done</p>
+          <span class="press-card-badge">Coming Soon</span>
+        </div>
+        <div class="press-card">
+          <p class="press-card-pub">IEEE Spectrum</p>
+          <p class="press-card-headline">First remotely-operated humanoid performs bridal escort at Malaysian wedding</p>
+          <span class="press-card-badge">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     9. CLOSING
+     ═══════════════════════════════════ -->
+<section id="closing" class="chapter">
+  <div class="chapter-content">
+    <p class="kicker reveal">The Couple</p>
+    <p class="closing-names reveal reveal-delay-1">Kris &amp; Sonia</p>
+    <p class="closing-link reveal reveal-delay-2">
+      <a href="https://krisandsonia.com" target="_blank">krisandsonia.com</a>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     THE VENUE
+     ═══════════════════════════════════ -->
+<section class="chapter" style="background: var(--bg);">
+  <div class="chapter-content">
+    <p class="kicker reveal">The Venue</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px); margin-bottom: 16px;">Network School</h2>
+    <p class="body-text reveal reveal-delay-2">
+      A community where people build things that don&rsquo;t exist yet &mdash; and sometimes, something extraordinary does.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     JOIN
+     ═══════════════════════════════════ -->
+<section class="chapter">
+  <video class="chapter-bg-video" muted loop playsinline preload="none" poster="../public/clips/the-handoff-poster.jpg" data-lazy="../public/clips/the-handoff-mid.mp4" data-hq="../public/clips/the-handoff-hq.mp4">
+  </video>
+  <div class="chapter-overlay" style="background: rgba(8,8,8,0.65);"></div>
+  <div class="chapter-content">
+    <h2 class="headline reveal" style="font-size: clamp(28px, 5vw, 56px); margin-bottom: 16px;">Want to build the next first?</h2>
+    <p class="body-text reveal reveal-delay-1" style="margin-bottom: 32px;">
+      This happened because a group of builders lived together, cared about each other, and refused to say it couldn&rsquo;t be done.
+    </p>
+    <a href="https://ns.com" target="_blank" class="cta-btn reveal reveal-delay-2" style="margin-bottom: 0;">
+      Come Join Them
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════ -->
+<section style="background: var(--bg); padding: 60px 24px; text-align: center;">
+  <div>
+    <p class="closing-location">
+      Genesis Node &middot; First Wedding &middot; XXVI&middot;VI&middot;XXVI &middot; First Humanoid Bridal Walk
+    </p>
+    <p style="margin-top: 48px; font-family: var(--sans); font-size: 12px; color: var(--white-faint); letter-spacing: 0.1em;">
+      FirstHumanoid &mdash; built with &#10084;&#65039; by <a href="https://instagram.com/hus" target="_blank">@Hus</a> at <a href="https://ns.com/hus" target="_blank">Network School</a> &#127987;&#65039;
+    </p>
+  </div>
+</section>
+
+<script>
+(function() {
+  // ── IntersectionObserver for reveals ──
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+
+  // ── 3D COIN — fully interactive mouse tracking ──
+  var coin3d = document.getElementById('coin3d');
+  var coin3dShine = document.getElementById('coin3d-shine');
+  var coin3dShadow = document.getElementById('coin3d-shadow');
+  var coin3dFaceLabel = document.getElementById('coin3d-face-label');
+  var coin3dFlipLabel = document.getElementById('coin3d-flip-label');
+  var coin3dContainer = document.getElementById('coin3d-container');
+  var coinFlipped = false;
+  var isFlipping = false;
+  var mouseOver = false;
+  var currentTiltX = 0;
+  var currentTiltY = 0;
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (isTouchDevice && coin3dFlipLabel) coin3dFlipLabel.textContent = 'Tap to flip';
+
+  var idleAngle = 0;
+  var idleRAF;
+  function idleWobble() {
+    if (mouseOver || isFlipping) return;
+    idleAngle += 0.008;
+    var wobbleX = Math.sin(idleAngle) * 5;
+    var wobbleY = Math.cos(idleAngle * 0.7) * 5;
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (base + wobbleY) + 'deg) rotateX(' + wobbleX + 'deg)';
+    coin3dShadow.style.transform = 'translateX(' + (-wobbleY * 0.6) + 'px) scaleY(' + (0.8 + Math.abs(wobbleX) * 0.015) + ')';
+    idleRAF = requestAnimationFrame(idleWobble);
+  }
+  idleWobble();
+
+  window.flipCoin = function() {
+    coinFlipped = !coinFlipped;
+    isFlipping = true;
+    cancelAnimationFrame(idleRAF);
+    coin3d.classList.add('flipping');
+    var base = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + base + 'deg) rotateX(0deg)';
+    coin3dFaceLabel.textContent = coinFlipped ? 'Reverse' : 'Obverse';
+    setTimeout(function() {
+      coin3d.classList.remove('flipping');
+      isFlipping = false;
+      if (!mouseOver) idleWobble();
+    }, 850);
+  };
+
+  coin3d.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipCoin(); }
+  });
+
+  coin3dContainer.addEventListener('mouseenter', function() {
+    mouseOver = true;
+    cancelAnimationFrame(idleRAF);
+  });
+
+  coin3dContainer.addEventListener('mousemove', function(e) {
+    if (isFlipping) return;
+    var rect = coin3d.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var mx = e.clientX - cx;
+    var my = e.clientY - cy;
+    var maxTilt = 25;
+    var normX = mx / (rect.width / 2);
+    var normY = my / (rect.height / 2);
+    currentTiltX = -normY * maxTilt;
+    currentTiltY = normX * maxTilt;
+    currentTiltX = Math.max(-maxTilt, Math.min(maxTilt, currentTiltX));
+    currentTiltY = Math.max(-maxTilt, Math.min(maxTilt, currentTiltY));
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + (baseY + currentTiltY) + 'deg) rotateX(' + currentTiltX + 'deg)';
+    var shineX = (normX + 1) / 2 * 100;
+    var shineY = (normY + 1) / 2 * 100;
+    coin3dShine.style.background = 'radial-gradient(circle at ' + shineX + '% ' + shineY + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+    coin3dShadow.style.transform = 'translateX(' + (-currentTiltY * 1.2) + 'px) scaleY(' + (0.5 + Math.abs(currentTiltX) * 0.025) + ')';
+    coin3dShadow.style.opacity = String(Math.min(0.5, 0.1 + (Math.abs(currentTiltX) + Math.abs(currentTiltY)) * 0.008));
+  });
+
+  coin3dContainer.addEventListener('mouseleave', function() {
+    mouseOver = false;
+    if (isFlipping) return;
+    coin3d.style.transition = 'transform 0.5s ease-out';
+    var baseY = coinFlipped ? 180 : 0;
+    coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+    coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+    coin3dShadow.style.transform = 'translateX(0) scaleY(1)';
+    coin3dShadow.style.opacity = '0.15';
+    setTimeout(function() {
+      coin3d.style.transition = 'transform 0.1s ease-out';
+      if (!mouseOver && !isFlipping) idleWobble();
+    }, 500);
+  });
+
+  if (isTouchDevice) {
+    coin3dContainer.addEventListener('touchmove', function(e) {
+      if (isFlipping) return;
+      mouseOver = true;
+      cancelAnimationFrame(idleRAF);
+      var t = e.touches[0];
+      var rect = coin3d.getBoundingClientRect();
+      var normX = (t.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      var normY = (t.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      var maxTilt = 25;
+      var tx = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+      var ty = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transform = 'rotateY(' + (baseY + ty) + 'deg) rotateX(' + tx + 'deg)';
+      var sx = (normX + 1) / 2 * 100;
+      var sy = (normY + 1) / 2 * 100;
+      coin3dShine.style.background = 'radial-gradient(circle at ' + sx + '% ' + sy + '%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 65%)';
+    }, { passive: true });
+    coin3dContainer.addEventListener('touchend', function() {
+      mouseOver = false;
+      var baseY = coinFlipped ? 180 : 0;
+      coin3d.style.transition = 'transform 0.5s ease-out';
+      coin3d.style.transform = 'rotateY(' + baseY + 'deg) rotateX(0deg)';
+      coin3dShine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)';
+      setTimeout(function() {
+        coin3d.style.transition = 'transform 0.1s ease-out';
+        if (!mouseOver && !isFlipping) idleWobble();
+      }, 500);
+    });
+  }
+
+  // ── Upgrade any video from mid -> hq ──
+  function upgradeToHq(v) {
+    var hq = v.getAttribute('data-hq');
+    if (!hq) return;
+    var pre = document.createElement('video');
+    pre.preload = 'auto';
+    pre.src = hq;
+    pre.addEventListener('canplaythrough', function() {
+      var t = v.currentTime;
+      v.src = hq;
+      v.currentTime = t;
+      v.play().catch(function(){});
+    }, { once: true });
+  }
+
+  // ── Lazy videos: load when 1 screen away, play/pause on visibility ──
+  var lazyVideos = document.querySelectorAll('video[data-lazy]');
+  var loadObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var v = entry.target;
+      var src = v.getAttribute('data-lazy');
+      if (!src) return;
+      v.src = src;
+      v.removeAttribute('data-lazy');
+      v.load();
+      v.addEventListener('canplay', function() {
+        upgradeToHq(v);
+      }, { once: true });
+      loadObserver.unobserve(v);
+    });
+  }, { rootMargin: '100% 0px' });
+
+  lazyVideos.forEach(function(v) { loadObserver.observe(v); });
+
+  // ── Play/pause all videos based on visibility ──
+  var allVideos = document.querySelectorAll('video');
+  var playObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(function(){});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+  allVideos.forEach(function(v) { playObserver.observe(v); });
+
+  // ══════════════════════════════════
+  // GUESTBOOK — localStorage-backed
+  // ══════════════════════════════════
+  var GB_KEY = 'firsthumanoid_guestbook';
+
+  var defaultEntries = [
+    { message: "I've never cried at a robot before.", name: "Anonymous", handle: "", ts: Date.now() - 86400000 * 2 },
+    { message: "The moment he appeared on screen and she saw his face \u2014 that's when everyone lost it.", name: "Guest", handle: "", ts: Date.now() - 86400000 },
+    { message: "This is what happens when engineers have hearts.", name: "Hus", handle: "@hus", ts: Date.now() - 3600000 * 6 },
+    { message: "History. We were all part of history.", name: "Guest", handle: "", ts: Date.now() - 3600000 * 2 }
+  ];
+
+  function getEntries() {
+    try {
+      var stored = localStorage.getItem(GB_KEY);
+      if (stored) return JSON.parse(stored);
+    } catch(e) {}
+    localStorage.setItem(GB_KEY, JSON.stringify(defaultEntries));
+    return defaultEntries.slice();
+  }
+
+  function saveEntries(entries) {
+    try { localStorage.setItem(GB_KEY, JSON.stringify(entries)); } catch(e) {}
+  }
+
+  function relativeTime(ts) {
+    var diff = Date.now() - ts;
+    var sec = Math.floor(diff / 1000);
+    if (sec < 60) return 'just now';
+    var min = Math.floor(sec / 60);
+    if (min < 60) return min + (min === 1 ? ' minute ago' : ' minutes ago');
+    var hr = Math.floor(min / 60);
+    if (hr < 24) return hr + (hr === 1 ? ' hour ago' : ' hours ago');
+    var days = Math.floor(hr / 24);
+    if (days < 30) return days + (days === 1 ? ' day ago' : ' days ago');
+    var months = Math.floor(days / 30);
+    return months + (months === 1 ? ' month ago' : ' months ago');
+  }
+
+  function handleToLink(handle) {
+    if (!handle) return '';
+    var h = handle.trim();
+    if (!h.startsWith('@') || h.indexOf(' ') !== -1) return '<span class="guestbook-entry-handle">' + h + '</span>';
+    var username = h.substring(1);
+    // Default to Instagram, but could be X — link both as tooltip
+    return '<a href="https://instagram.com/' + username + '" target="_blank" class="guestbook-entry-handle">' + h + '</a>';
+  }
+
+  function renderEntries() {
+    var container = document.getElementById('guestbook-entries');
+    var entries = getEntries();
+    // Sort newest first
+    entries.sort(function(a, b) { return b.ts - a.ts; });
+    var html = '';
+    entries.forEach(function(e) {
+      html += '<div class="guestbook-entry">';
+      html += '<p class="guestbook-entry-quote">' + escapeHtml(e.message) + '</p>';
+      html += '<div class="guestbook-entry-meta">';
+      html += '<span class="guestbook-entry-name">' + escapeHtml(e.name) + '</span>';
+      if (e.handle) html += handleToLink(e.handle);
+      html += '<span class="guestbook-entry-time">' + relativeTime(e.ts) + '</span>';
+      html += '</div></div>';
+    });
+    container.innerHTML = html;
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  // Char counter
+  var msgInput = document.getElementById('gb-message');
+  var charCount = document.getElementById('gb-char-count');
+  msgInput.addEventListener('input', function() {
+    charCount.textContent = msgInput.value.length;
+    charCount.style.color = msgInput.value.length > 260 ? 'var(--gold)' : 'var(--white-faint)';
+  });
+
+  window.submitGuestbook = function(e) {
+    e.preventDefault();
+    var message = document.getElementById('gb-message').value.trim();
+    var name = document.getElementById('gb-name').value.trim();
+    var handle = document.getElementById('gb-handle').value.trim();
+    if (!message || !name) return false;
+
+    var entries = getEntries();
+    entries.push({
+      message: message,
+      name: name,
+      handle: handle,
+      ts: Date.now()
+    });
+    saveEntries(entries);
+    renderEntries();
+
+    // Reset form
+    document.getElementById('gb-message').value = '';
+    document.getElementById('gb-name').value = '';
+    document.getElementById('gb-handle').value = '';
+    charCount.textContent = '0';
+
+    return false;
+  };
+
+  // Initial render
+  renderEntries();
+
+})();
+</script>
+</body>
+</html>
