@@ -613,7 +613,7 @@ a:hover { opacity: 0.75; }
      1. HERO
      ═══════════════════════════════════ -->
 <section id="hero" class="chapter">
-  <video class="chapter-bg-video" autoplay muted loop playsinline data-mid="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
+  <video class="chapter-bg-video" autoplay muted loop playsinline preload="auto" data-hq="public/clips/the-aisle-walk-hq.mp4">
     <source src="public/clips/the-aisle-walk-mid.mp4" type="video/mp4">
   </video>
   <div class="chapter-overlay"></div>
@@ -682,8 +682,7 @@ a:hover { opacity: 0.75; }
      5. THE BUILD
      ═══════════════════════════════════ -->
 <section id="build" class="chapter">
-  <video class="chapter-bg-video" autoplay muted loop playsinline data-mid="public/clips/prep-ipad-test-mid.mp4" data-hq="public/clips/prep-ipad-test-hq.mp4">
-    <source src="public/clips/prep-ipad-test-mid.mp4" type="video/mp4">
+  <video class="chapter-bg-video" muted loop playsinline preload="none" data-lazy="public/clips/prep-ipad-test-mid.mp4" data-hq="public/clips/prep-ipad-test-hq.mp4">
   </video>
   <div class="chapter-overlay"></div>
   <div class="chapter-content" style="max-width: 1100px;">
@@ -730,8 +729,7 @@ a:hover { opacity: 0.75; }
      6. THE WALK
      ═══════════════════════════════════ -->
 <section id="walk" class="chapter">
-  <video class="chapter-bg-video" autoplay muted loop playsinline style="opacity: 0.25;" data-mid="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
-    <source src="public/clips/the-aisle-walk-mid.mp4" type="video/mp4">
+  <video class="chapter-bg-video" muted loop playsinline preload="none" style="opacity: 0.25;" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
   </video>
   <div class="chapter-overlay" style="background: rgba(8,8,8,0.6);"></div>
   <div class="chapter-content" style="max-width: 1100px;">
@@ -744,11 +742,9 @@ a:hover { opacity: 0.75; }
       parents who couldn't be there.
     </p>
     <div class="walk-media reveal reveal-delay-3">
-      <video autoplay muted loop playsinline data-mid="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
-        <source src="public/clips/the-aisle-walk-mid.mp4" type="video/mp4">
+      <video muted loop playsinline preload="none" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
       </video>
-      <video autoplay muted loop playsinline data-mid="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4">
-        <source src="public/clips/bride-and-robot-mid.mp4" type="video/mp4">
+      <video muted loop playsinline preload="none" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4">
       </video>
     </div>
     <div style="margin-top: 16px; padding: 0 24px;" class="reveal reveal-delay-4">
@@ -811,15 +807,15 @@ a:hover { opacity: 0.75; }
     <div class="masonry reveal reveal-delay-2">
       <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-24-31.png" alt="Welcome sign"></div>
       <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-29-19.png" alt="Ceremony"></div>
-      <div class="masonry-item"><video src="public/clips/the-aisle-walk-mid.mp4" autoplay muted loop playsinline data-mid="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4"></video></div>
-      <div class="masonry-item"><img src="public/photos/PXL_20260626_103410037.jpg" alt="Bride and robot"></div>
-      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party"></div>
-      <div class="masonry-item"><video src="public/clips/bride-and-robot-mid.mp4" autoplay muted loop playsinline data-mid="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4"></video></div>
-      <div class="masonry-item"><img src="public/photos/PXL_20260626_095934375.jpg" alt="Team selfie with robot"></div>
-      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-36-21.png" alt="Sparklers and confetti"></div>
-      <div class="masonry-item"><video src="public/clips/robot-guest-moment-mid.mp4" autoplay muted loop playsinline data-mid="public/clips/robot-guest-moment-mid.mp4" data-hq="public/clips/robot-guest-moment-hq.mp4"></video></div>
-      <div class="masonry-item"><img src="public/photos/PXL_20260625_090942268.jpg" alt="Styling the robot"></div>
-      <div class="masonry-item"><video src="public/clips/robot-walking-suited-mid.mp4" autoplay muted loop playsinline data-mid="public/clips/robot-walking-suited-mid.mp4" data-hq="public/clips/robot-walking-suited-hq.mp4"></video></div>
+      <div class="masonry-item"><video muted loop playsinline preload="none" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4"></video></div>
+      <div class="masonry-item"><img src="public/photos/PXL_20260626_103410037.jpg" alt="Bride and robot" loading="lazy"></div>
+      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-33-13.png" alt="Wedding party" loading="lazy"></div>
+      <div class="masonry-item"><video muted loop playsinline preload="none" data-lazy="public/clips/bride-and-robot-mid.mp4" data-hq="public/clips/bride-and-robot-hq.mp4"></video></div>
+      <div class="masonry-item"><img src="public/photos/PXL_20260626_095934375.jpg" alt="Team selfie with robot" loading="lazy"></div>
+      <div class="masonry-item"><img src="public/photos/Screenshot-from-2026-06-28-07-36-21.png" alt="Sparklers and confetti" loading="lazy"></div>
+      <div class="masonry-item"><video muted loop playsinline preload="none" data-lazy="public/clips/robot-guest-moment-mid.mp4" data-hq="public/clips/robot-guest-moment-hq.mp4"></video></div>
+      <div class="masonry-item"><img src="public/photos/PXL_20260625_090942268.jpg" alt="Styling the robot" loading="lazy"></div>
+      <div class="masonry-item"><video muted loop playsinline preload="none" data-lazy="public/clips/robot-walking-suited-mid.mp4" data-hq="public/clips/robot-walking-suited-hq.mp4"></video></div>
     </div>
   </div>
 </section>
@@ -982,39 +978,59 @@ a:hover { opacity: 0.75; }
     });
   }
 
-  // ── Lazy-load videos: only play when in viewport ──
-  var allVideos = document.querySelectorAll('video');
-  var videoObserver = new IntersectionObserver(function(entries) {
+  // ── Hero: upgrade to HQ after mid plays ──
+  var heroVid = document.querySelector('#hero video');
+  if (heroVid) {
+    var hqHero = heroVid.getAttribute('data-hq');
+    if (hqHero) {
+      heroVid.addEventListener('canplay', function() {
+        var pre = document.createElement('video');
+        pre.preload = 'auto';
+        pre.src = hqHero;
+        pre.addEventListener('canplaythrough', function() {
+          var t = heroVid.currentTime;
+          heroVid.src = hqHero;
+          heroVid.currentTime = t;
+          heroVid.play().catch(function(){});
+        }, { once: true });
+      }, { once: true });
+    }
+  }
+
+  // ── Lazy-load all other videos: load src only when near viewport ──
+  var lazyVideos = document.querySelectorAll('video[data-lazy]');
+  var lazyObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
+      var v = entry.target;
       if (entry.isIntersecting) {
-        entry.target.play().catch(function(){});
+        if (!v.src && v.getAttribute('data-lazy')) {
+          v.src = v.getAttribute('data-lazy');
+          v.removeAttribute('data-lazy');
+          v.load();
+          // After mid loads, upgrade to hq
+          var hq = v.getAttribute('data-hq');
+          if (hq) {
+            v.addEventListener('canplay', function() {
+              var pre = document.createElement('video');
+              pre.preload = 'auto';
+              pre.src = hq;
+              pre.addEventListener('canplaythrough', function() {
+                var t = v.currentTime;
+                v.src = hq;
+                v.currentTime = t;
+                v.play().catch(function(){});
+              }, { once: true });
+            }, { once: true });
+          }
+        }
+        v.play().catch(function(){});
       } else {
-        entry.target.pause();
+        v.pause();
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.1, rootMargin: '200px 0px' });
 
-  allVideos.forEach(function(v) { videoObserver.observe(v); });
-
-  // ── Progressive video upgrade: mid → hq ──
-  var upgradeVideos = document.querySelectorAll('video[data-hq]');
-  upgradeVideos.forEach(function(v) {
-    var hqSrc = v.getAttribute('data-hq');
-    if (!hqSrc) return;
-
-    v.addEventListener('canplay', function onReady() {
-      v.removeEventListener('canplay', onReady);
-      var preHq = document.createElement('video');
-      preHq.preload = 'auto';
-      preHq.src = hqSrc;
-      preHq.addEventListener('canplaythrough', function() {
-        var t = v.currentTime;
-        v.src = hqSrc;
-        v.currentTime = t;
-        v.play().catch(function(){});
-      }, { once: true });
-    }, { once: true });
-  });
+  lazyVideos.forEach(function(v) { lazyObserver.observe(v); });
 })();
 </script>
 </body>
