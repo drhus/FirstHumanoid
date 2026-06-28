@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FirstHumanoid — Video Scripts</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; color: #e8e4dc; font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
+
+  .header { padding: 40px 32px 24px; border-bottom: 1px solid rgba(201,168,76,0.2); margin-bottom: 32px; }
+  .header h1 { font-size: 28px; color: #c9a84c; font-weight: 600; }
+  .header p { color: rgba(240,237,230,0.5); font-size: 14px; margin-top: 4px; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* Footage Gallery */
+  .footage-section { margin-bottom: 48px; }
+  .footage-section h2 { font-size: 18px; color: #c9a84c; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+  .footage-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .footage-item { position: relative; border-radius: 6px; overflow: hidden; background: #141414; }
+  .footage-item video { width: 100%; height: 180px; object-fit: cover; display: block; cursor: pointer; }
+  .footage-item img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  .footage-label { padding: 8px 12px; font-size: 12px; color: rgba(240,237,230,0.6); background: #141414; }
+  .footage-label strong { color: #c9a84c; }
+
+  /* Structure Table */
+  .structure-table { width: 100%; border-collapse: collapse; margin: 16px 0 40px; font-size: 14px; }
+  .structure-table th { text-align: left; padding: 10px 14px; background: rgba(201,168,76,0.1); color: #c9a84c; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; font-size: 11px; }
+  .structure-table td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
+  .structure-table tr:hover td { background: rgba(201,168,76,0.03); }
+  .sec { color: #c9a84c; font-family: monospace; font-size: 13px; white-space: nowrap; }
+
+  /* Script Cards */
+  .script-card { background: #111; border: 1px solid rgba(201,168,76,0.15); border-radius: 8px; margin-bottom: 32px; overflow: hidden; }
+  .script-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; cursor: pointer; user-select: none; }
+  .script-header:hover { background: rgba(201,168,76,0.04); }
+  .script-title { font-size: 20px; font-weight: 600; }
+  .script-angle { font-size: 13px; color: rgba(240,237,230,0.4); margin-top: 2px; }
+  .script-badge { font-size: 11px; padding: 4px 10px; border-radius: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; white-space: nowrap; }
+  .badge-emotional { background: rgba(220,50,80,0.15); color: #e85575; border: 1px solid rgba(220,50,80,0.3); }
+  .badge-maker { background: rgba(50,140,220,0.15); color: #5aa8e8; border: 1px solid rgba(50,140,220,0.3); }
+  .badge-inspirational { background: rgba(180,120,220,0.15); color: #b88ae8; border: 1px solid rgba(180,120,220,0.3); }
+  .badge-wedding { background: rgba(220,170,50,0.15); color: #d4b44a; border: 1px solid rgba(220,170,50,0.3); }
+  .badge-tension { background: rgba(220,140,50,0.15); color: #e8a045; border: 1px solid rgba(220,140,50,0.3); }
+
+  .script-body { padding: 0 24px 24px; display: none; }
+  .script-card.open .script-body { display: block; }
+  .script-card.open .script-header .arrow { transform: rotate(180deg); }
+  .arrow { transition: transform 0.2s; color: #c9a84c; font-size: 18px; }
+
+  .beat { margin-bottom: 20px; padding-left: 16px; border-left: 2px solid rgba(201,168,76,0.2); }
+  .beat-time { font-family: monospace; font-size: 12px; color: #c9a84c; margin-bottom: 4px; letter-spacing: 0.05em; }
+  .beat-footage { font-size: 12px; color: rgba(240,237,230,0.35); margin-bottom: 6px; font-style: italic; }
+  .beat-vo { font-size: 15px; color: rgba(240,237,230,0.85); }
+  .beat-vo em { color: rgba(240,237,230,0.4); font-style: italic; }
+  .beat-direction { font-size: 12px; color: rgba(201,168,76,0.5); margin-top: 4px; }
+
+  .closer { font-size: 14px; color: #c9a84c; margin-top: 12px; font-weight: 500; }
+
+  /* Notes */
+  .notes { background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.12); border-radius: 6px; padding: 20px 24px; margin-top: 40px; }
+  .notes h3 { color: #c9a84c; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .notes ul { padding-left: 18px; font-size: 14px; color: rgba(240,237,230,0.6); }
+  .notes li { margin-bottom: 6px; }
+
+  .pick-label { display: inline-block; margin-top: 16px; padding: 6px 14px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); border-radius: 4px; font-size: 12px; color: #c9a84c; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="container" style="padding-bottom: 0;">
+    <h1>FirstHumanoid Bridal Walk — Video Scripts</h1>
+    <p>5 script options for a 90-second viral video. Click each to expand. Review footage below.</p>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== FOOTAGE REFERENCE ==================== -->
+<div class="footage-section">
+  <h2>Footage Reference</h2>
+  <div class="footage-grid">
+    <div class="footage-item">
+      <video src="public/clips/the-aisle-walk-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#1</strong> The Aisle Walk (money shot)</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/the-handoff-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#2</strong> The Handoff (robot to groom)</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/bride-and-robot-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#3</strong> Bride & Robot</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/prep-ipad-test-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#4</strong> iPad Video Call Test</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/rehearsal-walk-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#5</strong> Rehearsal Walk</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/outdoor-walk-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#6</strong> Outdoor Walk Test</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/robot-walk-test-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#7</strong> Robot Walk Test (raw lab)</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/robot-walking-suited-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#8</strong> Robot Walking Suited (reveal)</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/lab-directing-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#9</strong> Lab Directing (Husam)</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/robot-guest-moment-hq.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#10</strong> Robot Guest Moment</div>
+    </div>
+    <div class="footage-item">
+      <video src="public/clips/coins-printing.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
+      <div class="footage-label"><strong>#11</strong> Coins 3D Printing</div>
+    </div>
+  </div>
+  <p style="font-size: 12px; color: rgba(240,237,230,0.3);">Click any video to play/pause. Photos: sara-styling-boutonniere.jpg, team prep shots, group shots, sparklers.</p>
+</div>
+
+<!-- ==================== UNIVERSAL STRUCTURE ==================== -->
+<h2 style="font-size: 18px; color: #c9a84c; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Universal Edit Structure</h2>
+<table class="structure-table">
+  <tr><th>Seconds</th><th>Beat</th><th>Purpose</th><th>Footage</th></tr>
+  <tr><td class="sec">0–3</td><td>HOOK</td><td>Stop the scroll</td><td>Text on screen + voice</td></tr>
+  <tr><td class="sec">3–8</td><td>Context</td><td>Emotional setup</td><td>Photos, slow zoom</td></tr>
+  <tr><td class="sec">8–15</td><td>The Idea</td><td>Curiosity gap</td><td>#7 robot-walk-test, #9 lab</td></tr>
+  <tr><td class="sec">15–35</td><td>The Build</td><td>Tension + craft</td><td>#4 #5 #6 #7 #8 #9 fast montage</td></tr>
+  <tr><td class="sec">35–45</td><td>The Reveal</td><td>Anticipation peak</td><td>#8 robot-walking-suited</td></tr>
+  <tr><td class="sec">45–70</td><td>The Walk</td><td>Emotional payoff — SLOW</td><td>#1 the-aisle-walk</td></tr>
+  <tr><td class="sec">70–80</td><td>The Handoff</td><td>Tears moment</td><td>#2 the-handoff</td></tr>
+  <tr><td class="sec">80–90</td><td>Resolution + CTA</td><td>Share / follow</td><td>#3, group photo, sparklers</td></tr>
+</table>
+
+<!-- ==================== SCRIPT A ==================== -->
+<div class="script-card open">
+  <div class="script-header" onclick="this.parentElement.classList.toggle('open')">
+    <div>
+      <div class="script-title">A — "The Grandfather Hook"</div>
+      <div class="script-angle">Emotional / Family angle — broadest audience</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="script-badge badge-emotional">Emotional</span>
+      <span class="arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="script-body">
+    <div class="beat">
+      <div class="beat-time">0–3s &middot; HOOK</div>
+      <div class="beat-footage">Black screen, white text, then cut to bride's face</div>
+      <div class="beat-vo">"She asked her grandfather to walk her down the aisle. He said yes. From 10,000 miles away."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">3–8s &middot; CONTEXT</div>
+      <div class="beat-footage">Photo of bride, slow zoom</div>
+      <div class="beat-vo">"Sonia's one wish for her wedding — her grandfather beside her. But he couldn't fly. No one in her family could."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">8–15s &middot; THE IDEA</div>
+      <div class="beat-footage">#7 robot-walk-test</div>
+      <div class="beat-vo">"So we put her grandfather... inside a robot. His face on the screen. His voice in her ear. His hands on the controls."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">15–35s &middot; THE BUILD</div>
+      <div class="beat-footage">#9 lab-directing &rarr; #7 robot-walk-test &rarr; #4 prep-ipad-test &rarr; Sara styling photo &rarr; #6 outdoor-walk &rarr; #5 rehearsal-walk &rarr; #8 robot-walking-suited</div>
+      <div class="beat-vo">"48 hours. No sleep. An Italian stylist flew in to dress a machine. Engineers rewired a humanoid to carry a video call. One chance to get it right."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">35–45s &middot; THE REVEAL</div>
+      <div class="beat-footage">#8 robot-walking-suited — slow reveal, suited robot walking</div>
+      <div class="beat-vo"><em>No voiceover. Just music building.</em></div>
+      <div class="beat-direction">TEXT ON SCREEN: "Wedding day."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">45–70s &middot; THE WALK</div>
+      <div class="beat-footage">#1 the-aisle-walk — FULL, slow, let it breathe</div>
+      <div class="beat-vo">"Her grandfather watched through the robot's eyes. Spoke through its speakers. Walked her — step by step — toward the rest of her life."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">70–80s &middot; THE HANDOFF</div>
+      <div class="beat-footage">#2 the-handoff — robot hands bride to groom</div>
+      <div class="beat-vo"><em>Music peaks. No words. Let the moment land.</em></div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">80–90s &middot; RESOLUTION</div>
+      <div class="beat-footage">Group photo + sparklers + text overlay</div>
+      <div class="beat-vo">"The world's first humanoid bridal walk. Because some promises are stronger than distance."</div>
+      <div class="beat-direction">TEXT: firsthumanoid.xyz</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCRIPT B ==================== -->
+<div class="script-card">
+  <div class="script-header" onclick="this.parentElement.classList.toggle('open')">
+    <div>
+      <div class="script-title">B — "Nobody Was Coming"</div>
+      <div class="script-angle">Tension / Underdog angle</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="script-badge badge-tension">Tension</span>
+      <span class="arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="script-body">
+    <div class="beat">
+      <div class="beat-time">0–3s &middot; HOOK</div>
+      <div class="beat-footage">Tight on bride, pulling back</div>
+      <div class="beat-vo">"Nobody was coming to walk her down the aisle. So we built someone."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">3–8s &middot; CONTEXT</div>
+      <div class="beat-footage">Photos — wedding invitation, venue</div>
+      <div class="beat-vo">"Her parents live across an ocean. Her grandfather couldn't travel. She was going to walk alone."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">8–15s &middot; THE IDEA</div>
+      <div class="beat-footage">#9 lab-directing + #7 robot-walk-test, fast cuts</div>
+      <div class="beat-vo">"We had a different idea. And exactly 48 hours to pull it off."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">15–35s &middot; THE BUILD</div>
+      <div class="beat-footage">Fast chaotic montage — all build clips + raw resource clips for messy lab feel</div>
+      <div class="beat-vo">"Program a humanoid to walk. Mount a live video call. Fly in a stylist from Italy. Dress a robot in a suit. Rehearse an aisle walk with a machine that's never done one."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">35–45s &middot; THE REVEAL</div>
+      <div class="beat-footage">#6 outdoor-walk &rarr; #8 robot-walking-suited, music shift</div>
+      <div class="beat-vo">"And on the other side of the world — her grandfather waiting on a video call. Ready to control every step."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">45–75s &middot; THE WALK</div>
+      <div class="beat-footage">#1 the-aisle-walk, SLOW. Intercut with #3 bride-and-robot</div>
+      <div class="beat-vo"><em>Voiceover drops out. Natural audio from venue. Guests' gasps carry it.</em></div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">75–85s &middot; THE HANDOFF</div>
+      <div class="beat-footage">#2 the-handoff</div>
+      <div class="beat-vo">"A robot walked a bride to her groom. Her grandfather's voice the whole way."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">85–90s &middot; CLOSE</div>
+      <div class="beat-footage">Black screen, gold text</div>
+      <div class="beat-vo"><em>No voiceover.</em></div>
+      <div class="beat-direction">TEXT: "The world's first humanoid bridal walk."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCRIPT C ==================== -->
+<div class="script-card">
+  <div class="script-header" onclick="this.parentElement.classList.toggle('open')">
+    <div>
+      <div class="script-title">C — "48 Hours"</div>
+      <div class="script-angle">Maker / Engineering angle — tech audience</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="script-badge badge-maker">Maker</span>
+      <span class="arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="script-body">
+    <div class="beat">
+      <div class="beat-time">0–3s &middot; HOOK</div>
+      <div class="beat-footage">Fast cuts: lab chaos &rarr; suited robot &rarr; aisle walk</div>
+      <div class="beat-vo">"We had 48 hours to make a robot walk a bride down the aisle. Here's how."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">3–10s &middot; CONTEXT</div>
+      <div class="beat-footage">Bride photo, map graphic showing distance</div>
+      <div class="beat-vo">"A bride. Her grandfather 10,000 miles away. A humanoid robot. And one very stupid idea that might actually work."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">10–35s &middot; THE BUILD</div>
+      <div class="beat-footage">Heavy montage — #7 &rarr; #9 &rarr; #4 &rarr; #6 &rarr; #5. Fast, energetic, show the WORK</div>
+      <div class="beat-vo">"Hour 1: Can the robot even walk straight? Hour 12: Video call mounted, face tracking synced. Hour 24: The stylist lands from Italy. She looks at the robot and says 'I can work with this.' Hour 36: First full rehearsal. It stumbles. We rebuild the gait. Hour 44: Final test. It walks. Smooth."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">35–45s &middot; THE DETAILS</div>
+      <div class="beat-footage">Sara styling photo &rarr; #8 robot-walking-suited &rarr; #11 coins-printing</div>
+      <div class="beat-vo">"Italian boutonniere. Custom suit. Memorial coins 3D-printed for every guest."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">45–70s &middot; THE WALK</div>
+      <div class="beat-footage">#1 the-aisle-walk — full, cinematic</div>
+      <div class="beat-vo">"Hour 48. No more tests. Grandfather connects from across the world. Music starts. The robot walks."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">70–82s &middot; THE HANDOFF</div>
+      <div class="beat-footage">#2 the-handoff &rarr; #3 bride-and-robot &rarr; #10 guest reactions</div>
+      <div class="beat-vo">"It worked. Every single step."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">82–90s &middot; CLOSE</div>
+      <div class="beat-footage">Group photo, sparklers</div>
+      <div class="beat-vo">"Built in 48 hours. Never been done before. The world's first humanoid bridal walk."</div>
+      <div class="beat-direction">TEXT: firsthumanoid.xyz | Full story in bio</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCRIPT D ==================== -->
+<div class="script-card">
+  <div class="script-header" onclick="this.parentElement.classList.toggle('open')">
+    <div>
+      <div class="script-title">D — "What If"</div>
+      <div class="script-angle">Philosophical / Inspirational angle</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="script-badge badge-inspirational">Inspirational</span>
+      <span class="arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="script-body">
+    <div class="beat">
+      <div class="beat-time">0–3s &middot; HOOK</div>
+      <div class="beat-footage">#1 the-aisle-walk — 2 seconds then FREEZE FRAME</div>
+      <div class="beat-vo">"This is real. A robot is walking a bride down the aisle. And her grandfather is controlling it from across the world."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">3–10s &middot; CONTEXT</div>
+      <div class="beat-footage">Rewind effect or photo sequence</div>
+      <div class="beat-vo">"Three days before this wedding, someone asked the bride: 'Who's walking you down the aisle?' She said: 'No one. I wish it could be my grandfather, but he can't be here.'"</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">10–18s &middot; THE IDEA</div>
+      <div class="beat-footage">#9 lab-directing, team photos</div>
+      <div class="beat-vo">"One person heard that and asked: 'What if he could? What if distance didn't matter? What if we could put him... inside a machine?'"</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">18–35s &middot; THE BUILD</div>
+      <div class="beat-footage">Condensed montage — key moments only</div>
+      <div class="beat-vo">"What followed was 48 hours of insanity. A robotics team reprogramming a humanoid. An Italian stylist dressing it for a wedding. Engineers testing a live video feed so a grandfather could see through the robot's eyes and control its walk."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">35–55s &middot; THE WALK</div>
+      <div class="beat-footage">#8 robot-walking-suited &rarr; #1 the-aisle-walk, slow and full</div>
+      <div class="beat-vo">"On June 26, 2026, at 6 PM — the music played. The doors opened. And a grandfather, sitting thousands of miles away, walked his granddaughter toward the love of her life."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">55–75s &middot; THE MOMENT</div>
+      <div class="beat-footage">#2 the-handoff &rarr; #3 bride-and-robot &rarr; #10 robot-guest-moment</div>
+      <div class="beat-vo"><em>Let the visuals do the work. Minimal narration. Natural audio if available.</em></div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">75–90s &middot; CLOSE</div>
+      <div class="beat-footage">Sparklers, group photo, coin detail</div>
+      <div class="beat-vo">"Some people see robots and think of the future. We used one to keep a promise. The world's first humanoid bridal walk."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCRIPT E ==================== -->
+<div class="script-card">
+  <div class="script-header" onclick="this.parentElement.classList.toggle('open')">
+    <div>
+      <div class="script-title">E — "She Was Going to Walk Alone"</div>
+      <div class="script-angle">Pure Emotion — wedding audience</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="script-badge badge-wedding">Wedding</span>
+      <span class="arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="script-body">
+    <div class="beat">
+      <div class="beat-time">0–3s &middot; HOOK</div>
+      <div class="beat-footage">Close-up of bride, soft music, then record scratch / music stop</div>
+      <div class="beat-vo">"She was going to walk down the aisle alone."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">3–6s &middot; THE TURN</div>
+      <div class="beat-footage">Beat of silence. Black frame. Then:</div>
+      <div class="beat-vo">"Until her friends refused to let that happen."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">6–15s &middot; CONTEXT</div>
+      <div class="beat-footage">Photos — team, lab, early robot tests. Warm tone.</div>
+      <div class="beat-vo">"Sonia's parents couldn't travel. Her dream was her grandfather walking beside her. So a group of engineers, a robotics lab, and one Italian stylist decided to make that dream real — with 48 hours and a humanoid robot."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">15–25s &middot; THE BUILD</div>
+      <div class="beat-footage">Warmer montage — Sara styling, team laughing, #6 outdoor-walk</div>
+      <div class="beat-vo">"They programmed it to walk her pace. Dressed it in a suit. Mounted a screen so her grandfather's face would be right there. Connected the controls so he could guide every step — from the other side of the world."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">25–35s &middot; THE REVEAL</div>
+      <div class="beat-footage">#5 rehearsal-walk &rarr; #8 robot-walking-suited</div>
+      <div class="beat-vo"><em>Music building. No voiceover. Just the build.</em></div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">35–65s &middot; THE WALK</div>
+      <div class="beat-footage">#1 THE AISLE WALK — SLOW, FULL, this is the whole point</div>
+      <div class="beat-vo">"And then he walked her. His face on the screen. His voice in her ear. Step by step. All the way down."</div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">65–78s &middot; THE HANDOFF</div>
+      <div class="beat-footage">#2 the-handoff — robot stops, bride goes to groom</div>
+      <div class="beat-vo"><em>Use audio of crying or reactions here. This is the peak.</em></div>
+    </div>
+    <div class="beat">
+      <div class="beat-time">78–90s &middot; CLOSE</div>
+      <div class="beat-footage">#3 bride-and-robot &rarr; group photo &rarr; sparklers &rarr; fade to black</div>
+      <div class="beat-vo">"Love doesn't need a boarding pass. It just needs people crazy enough to build a way."</div>
+      <div class="beat-direction">TEXT: The World's First Humanoid Bridal Walk | firsthumanoid.xyz</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PRODUCTION NOTES ==================== -->
+<div class="notes">
+  <h3>Production Notes</h3>
+  <ul>
+    <li><strong>Format:</strong> 9:16 vertical (TikTok/Reels/Shorts) primary. Also export 16:9 for YouTube/X.</li>
+    <li><strong>Music:</strong> Emotional piano/strings that builds. License from Artlist or Epidemic Sound.</li>
+    <li><strong>Captions:</strong> Mandatory. Use CapCut auto-caption, then clean up. Large bold white text.</li>
+    <li><strong>Key text overlays:</strong> Hook line (first 3s), "48 hours", "10,000 miles away", "firsthumanoid.xyz"</li>
+    <li><strong>Recommendation:</strong> Make TWO versions — one emotional (A or E) for broad reach, one maker (C) for tech Twitter.</li>
+  </ul>
+</div>
+
+<div class="pick-label" style="margin-top: 24px;">Review all 5 &rarr; pick your angle &rarr; let's refine the winner</div>
+
+</div>
+
+</body>
+</html>
