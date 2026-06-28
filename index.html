@@ -593,6 +593,14 @@ a.masonry-item {
   opacity: 1;
 }
 
+.share-btn-native {
+  display: none;
+}
+
+@media (hover: none) {
+  .share-btn-native { display: inline-flex; }
+}
+
 .masonry-item img,
 .masonry-item video {
   width: 100%;
@@ -1145,6 +1153,24 @@ a.masonry-item {
     });
   }, { threshold: 0.1 });
   allVideos.forEach(function(v) { playObserver.observe(v); });
+  // ── Native Share (mobile) — shows IG, TikTok, WhatsApp etc ──
+  if (navigator.share) {
+    document.querySelectorAll('.masonry-video').forEach(function(item) {
+      var overlay = item.querySelector('.share-overlay');
+      var btn = document.createElement('button');
+      btn.className = 'share-btn share-btn-native';
+      btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>Share';
+      btn.onclick = function(e) {
+        e.stopPropagation();
+        navigator.share({
+          title: "The World's First Humanoid Bridal Walk",
+          text: "Her parents couldn\u2019t cross the seas \u2014 so we refused to let distance win. \ud83e\udd0d #HumanoidBridalWalk",
+          url: 'https://firsthumanoid.vercel.app'
+        }).catch(function(){});
+      };
+      overlay.appendChild(btn);
+    });
+  }
 })();
 </script>
 </body>
