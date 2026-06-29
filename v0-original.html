@@ -4,25 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The World's First Humanoid Bridal Walk</title>
-<meta name="description" content="A robot walked her down the aisle. Her brother was inside it. The world's first humanoid bridal walk — 48 hours to build, a lifetime to remember.">
-
-<!-- OG Meta Tags -->
-<meta property="og:title" content="The World's First Humanoid Bridal Walk">
-<meta property="og:description" content="A robot walked her down the aisle. Her brother was inside it. Built in 48 hours at Network School.">
-<meta property="og:image" content="https://firsthumanoid.vercel.app/public/clips/the-aisle-walk-poster.jpg">
-<meta property="og:image:width" content="1920">
-<meta property="og:image:height" content="1080">
-<meta property="og:url" content="https://firsthumanoid.vercel.app">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="FirstHumanoid">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The World's First Humanoid Bridal Walk">
-<meta name="twitter:description" content="A robot walked her down the aisle. Her brother was inside it. Built in 48 hours at Network School.">
-<meta name="twitter:image" content="https://firsthumanoid.vercel.app/public/clips/the-aisle-walk-poster.jpg">
-<meta name="twitter:site" content="@haborh">
-
+<meta name="description" content="Her parents couldn't cross the seas to walk her down the aisle. So we sent a humanoid robot in their place. Genesis Node, Forest City, 26 June 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -61,23 +43,6 @@ a { color: var(--gold); text-decoration: none; transition: opacity 0.3s; }
 a:hover { opacity: 0.75; }
 
 /* ══════════════════════════════════
-   FILM GRAIN OVERLAY
-   ══════════════════════════════════ */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-  mix-blend-mode: overlay;
-}
-
-/* ══════════════════════════════════
    SECTION BASE
    ══════════════════════════════════ */
 .chapter {
@@ -106,16 +71,6 @@ body::after {
   background-size: cover;
   background-position: center;
   background-attachment: scroll;
-}
-
-/* Ken Burns effect for photo backgrounds */
-.ken-burns {
-  animation: kenburns 20s ease-in-out infinite alternate;
-}
-
-@keyframes kenburns {
-  0% { transform: scale(1) translate(0, 0); }
-  100% { transform: scale(1.08) translate(-1%, -0.5%); }
 }
 
 .chapter-overlay {
@@ -191,15 +146,67 @@ body::after {
   margin: 0 auto;
 }
 
+.date-display {
+  font-family: var(--sans);
+  font-size: clamp(12px, 1.6vw, 16px);
+  letter-spacing: 0.5em;
+  color: var(--gold-dim);
+  margin-top: 32px;
+}
+
+.date-flip {
+  margin-top: 32px;
+  cursor: default;
+  perspective: 600px;
+}
+
+.date-flip-inner {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  position: relative;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.date-flip-inner::after {
+  content: attr(data-english);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: rotateX(90deg);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 1em;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+}
+
+.date-flip:hover .date-flip-inner {
+  opacity: 0;
+  transform: rotateX(-90deg);
+}
+
+.date-flip:hover .date-flip-inner::after {
+  opacity: 1;
+  transform: rotateX(0deg);
+}
+
 /* ══════════════════════════════════
    1. HERO
    ══════════════════════════════════ */
 #hero .chapter-overlay {
   background: linear-gradient(
     to bottom,
-    rgba(8,8,8,0.15) 0%,
-    rgba(8,8,8,0.3) 40%,
-    rgba(8,8,8,0.7) 100%
+    rgba(8,8,8,0.4) 0%,
+    rgba(8,8,8,0.6) 50%,
+    rgba(8,8,8,0.85) 100%
   );
 }
 
@@ -224,35 +231,50 @@ body::after {
   50% { transform: translateX(-50%) translateY(12px); opacity: 1; }
 }
 
-.hero-subtitle {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-style: italic;
-  font-size: clamp(16px, 2.5vw, 24px);
-  line-height: 1.6;
-  color: var(--white-soft);
-  max-width: 600px;
-  margin: 0 auto;
-  opacity: 0.85;
-}
-
 /* ══════════════════════════════════
-   2. THE WISH (with merged Idea punchline)
+   2. THE DREAM
    ══════════════════════════════════ */
-#wish .chapter-bg-img {
+#dream .chapter-bg-img {
   background-image: url('public/photos/Screenshot-from-2026-06-28-07-29-19.png');
 }
 
-#wish .chapter-overlay {
+#dream .chapter-overlay {
   background: linear-gradient(
     135deg,
-    rgba(8,8,8,0.7) 0%,
-    rgba(8,8,8,0.5) 100%
+    rgba(8,8,8,0.75) 0%,
+    rgba(8,8,8,0.55) 100%
   );
 }
 
 /* ══════════════════════════════════
-   3. THE BUILD (credits integrated)
+   3. THE DISTANCE
+   ══════════════════════════════════ */
+#distance {
+  background: var(--bg);
+}
+
+#distance .headline-serif {
+  font-size: clamp(30px, 6vw, 80px);
+  max-width: 900px;
+}
+
+/* ══════════════════════════════════
+   4. THE IDEA
+   ══════════════════════════════════ */
+#idea .chapter-bg-img {
+  background-image: url('public/photos/PXL_20260625_083727700.jpg');
+}
+
+#idea .chapter-overlay {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8,8,8,0.5) 0%,
+    rgba(8,8,8,0.8) 100%
+  );
+}
+
+/* ══════════════════════════════════
+   5. THE BUILD
    ══════════════════════════════════ */
 #build {
   min-height: 100vh;
@@ -261,7 +283,7 @@ body::after {
 }
 
 #build .chapter-overlay {
-  background: rgba(8,8,8,0.65);
+  background: rgba(8,8,8,0.75);
 }
 
 .build-photos {
@@ -271,11 +293,9 @@ body::after {
   max-width: 900px;
   overflow-x: auto;
   padding: 0 24px;
-  -webkit-overflow-scrolling: touch;
 }
 
-.build-photos img,
-.build-photos video {
+.build-photos img {
   width: 280px;
   height: 200px;
   object-fit: cover;
@@ -285,8 +305,7 @@ body::after {
   transition: filter 0.4s;
 }
 
-.build-photos img:hover,
-.build-photos video:hover { filter: brightness(1); }
+.build-photos img:hover { filter: brightness(1); }
 
 .credits {
   margin-top: 48px;
@@ -337,8 +356,13 @@ body::after {
   margin-left: 6px;
 }
 
+@media (max-width: 480px) {
+  .credit-role { font-size: 9px; letter-spacing: 0.12em; padding-right: 10px; }
+  .credit-name { font-size: 14px; padding-left: 10px; }
+}
+
 /* ══════════════════════════════════
-   4. THE WALK
+   6. THE WALK
    ══════════════════════════════════ */
 #walk {
   flex-direction: column;
@@ -347,12 +371,12 @@ body::after {
 }
 
 #walk .chapter-overlay {
-  background: rgba(8,8,8,0.35);
+  background: rgba(8,8,8,0.3);
 }
 
 .walk-media {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   max-width: 960px;
   width: 100%;
@@ -368,12 +392,17 @@ body::after {
   border-radius: 4px;
 }
 
+@media (max-width: 640px) {
+  .walk-media { grid-template-columns: 1fr; }
+}
+
 /* ══════════════════════════════════
-   5. THE COIN
+   7. THE COIN
    ══════════════════════════════════ */
 #coin-section {
   flex-direction: column;
   min-height: 100vh;
+  background: var(--bg);
   padding: 60px 0;
 }
 
@@ -386,6 +415,7 @@ body::after {
   margin-top: 40px;
 }
 
+/* 3D Coin */
 .coin-3d-container {
   display: flex;
   flex-direction: column;
@@ -486,10 +516,17 @@ body::after {
   border-radius: 8px;
 }
 
+@media (max-width: 768px) {
+  .coin-showcase { gap: 24px; }
+  .coin-3d { width: 260px; height: 260px; }
+  .coin-right { max-width: 140px; }
+}
+
 /* ══════════════════════════════════
-   6. THE CELEBRATION — MASONRY GALLERY
+   8. THE CELEBRATION — MASONRY GALLERY
    ══════════════════════════════════ */
 #celebration {
+  background: var(--bg);
   min-height: auto;
   padding: 80px 0;
   flex-direction: column;
@@ -579,15 +616,17 @@ a.masonry-item {
   object-fit: cover;
 }
 
-/* ══════════════════════════════════
-   7. GUESTBOOK
-   ══════════════════════════════════ */
-#guestbook {
-  min-height: auto;
-  padding: 80px 0;
-  flex-direction: column;
+@media (max-width: 768px) {
+  .masonry { columns: 2; }
+}
+@media (max-width: 480px) {
+  .masonry { columns: 1; }
 }
 
+/* ══════════════════════════════════
+   GUESTBOOK
+   ══════════════════════════════════ */
+#guestbook { background: var(--bg); min-height: auto; padding: 80px 0; flex-direction: column; }
 .guestbook-form { max-width: 560px; width: 100%; margin: 32px auto 0; padding: 0 24px; display: flex; flex-direction: column; gap: 14px; }
 .guestbook-form input, .guestbook-form textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15); border-radius: 4px; padding: 14px 18px; font-family: var(--serif); font-size: 16px; color: var(--white); outline: none; transition: border-color 0.3s; width: 100%; }
 .guestbook-form textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
@@ -597,6 +636,7 @@ a.masonry-item {
 .guestbook-submit { display: inline-block; padding: 14px 40px; border: 1px solid var(--gold); background: transparent; color: var(--gold); font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: background 0.3s, color 0.3s; align-self: center; }
 .guestbook-submit:hover { background: var(--gold); color: var(--bg); }
 .guestbook-entries { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 800px; width: 100%; padding: 0 24px; margin: 48px auto 0; }
+@media (max-width: 640px) { .guestbook-entries { grid-template-columns: 1fr; } }
 .guestbook-entry { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.08); border-radius: 6px; padding: 24px; transition: transform 0.3s, box-shadow 0.3s; }
 .guestbook-entry:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,168,76,0.1); }
 .guestbook-entry-quote { font-family: var(--serif); font-style: italic; font-size: 17px; font-weight: 300; line-height: 1.6; color: var(--white-soft); margin-bottom: 16px; }
@@ -608,19 +648,12 @@ a.masonry-item {
 .guestbook-entry-time { font-family: var(--sans); font-size: 11px; color: var(--white-faint); }
 
 /* ══════════════════════════════════
-   8. CLOSING + CTA
+   9. CLOSING
    ══════════════════════════════════ */
 #closing {
+  background: var(--bg);
   flex-direction: column;
   min-height: 80vh;
-}
-
-#closing .chapter-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(8,8,8,0.5) 0%,
-    rgba(8,8,8,0.7) 100%
-  );
 }
 
 .closing-names {
@@ -692,68 +725,18 @@ a.masonry-item {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 3px; }
 
-/* Footer */
-
-
-/* ══════════════════════════════════
-   MOBILE — text sections max 50vh,
-   build photos vertical stack
-   ══════════════════════════════════ */
-@media (max-width: 768px) {
-  .text-section {
-    min-height: 50vh !important;
-    max-height: 50vh;
-  }
-
-  .build-photos {
-    flex-direction: column;
-    align-items: center;
-    overflow-x: visible;
-  }
-
-  .build-photos img,
-  .build-photos video {
-    width: 100% !important;
-    max-width: 340px;
-    height: 200px;
-  }
-
-  .walk-media {
-    grid-template-columns: 1fr !important;
-  }
-
-  .walk-media video,
-  .walk-media img {
-    height: 200px;
-  }
-
-  .masonry { columns: 2; }
-
-  .coin-showcase { gap: 24px; }
-  .coin-3d { width: 260px; height: 260px; }
-  .coin-right { max-width: 140px; }
-
-  .guestbook-entries { grid-template-columns: 1fr; }
-
-  .credit-role { font-size: 9px; letter-spacing: 0.12em; padding-right: 10px; }
-  .credit-name { font-size: 14px; padding-left: 10px; }
-}
-
-@media (max-width: 480px) {
-  .masonry { columns: 1; }
-
-  .build-photos img,
-  .build-photos video {
-    width: 100% !important;
-    height: 180px;
-  }
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .build-photos img { width: 220px; height: 160px; }
+  .walk-media video, .walk-media img { height: 200px; }
+  .celebration-grid video, .celebration-grid img { height: 200px; }
 }
 </style>
 </head>
 <body>
 
 <!-- ═══════════════════════════════════
-     1. HERO — video bg, merged quote subtitle
+     1. HERO
      ═══════════════════════════════════ -->
 <section id="hero" class="chapter">
   <video class="chapter-bg-video" autoplay muted loop playsinline preload="auto" poster="public/clips/the-aisle-walk-poster.jpg">
@@ -765,13 +748,8 @@ a.masonry-item {
     <p class="kicker" style="margin: 0; text-align: right;">26 &middot; 6 &middot; 26 &nbsp; 6 PM</p>
   </div>
   <div class="chapter-content" style="margin-top: 10vh;">
-    <h1 class="headline reveal" style="font-size: clamp(28px, 5.5vw, 64px); line-height: 1.1; margin-bottom: 28px;">
-      A robot walked her down the aisle.<br><em style="color: var(--gold); font-style: italic;">Her brother was inside it.</em>
-    </h1>
-    <div class="separator reveal reveal-delay-1"></div>
-    <p class="hero-subtitle reveal reveal-delay-2">
-      He walked beside her through a humanoid &mdash; his face on the screen, his voice in her ear, his blessing on every step down the aisle.
-    </p>
+    <h1 class="headline-serif reveal" style="font-size: clamp(28px, 5.5vw, 72px); margin-bottom: 16px;">Some promises are<br>stronger than distance.</h1>
+    <p class="body-text reveal reveal-delay-1" style="margin-bottom: 24px; max-width: 540px;">When her parents couldn&rsquo;t cross the seas, we refused to let distance win.</p>
   </div>
   <div class="scroll-arrow">
     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
@@ -779,10 +757,21 @@ a.masonry-item {
 </section>
 
 <!-- ═══════════════════════════════════
-     2. THE WISH — photo bg, merged "The Idea" punchline
+     THE QUOTE
      ═══════════════════════════════════ -->
-<section id="wish" class="chapter">
-  <div class="chapter-bg-img ken-burns"></div>
+<section class="chapter" style="background: var(--bg);">
+  <div class="chapter-content">
+    <p class="headline-serif reveal" style="max-width: 700px; color: var(--white-soft); font-size: clamp(22px, 4vw, 42px);">
+      He walked beside her through a humanoid &mdash; his face on the screen, his voice in her ear, his blessing on every step down the aisle.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     2. THE WISH
+     ═══════════════════════════════════ -->
+<section id="dream" class="chapter">
+  <div class="chapter-bg-img"></div>
   <div class="chapter-overlay"></div>
   <div class="chapter-content">
     <p class="kicker reveal">The Wish</p>
@@ -793,14 +782,23 @@ a.masonry-item {
     <p class="body-text reveal reveal-delay-3">
       Sonia always imagined her parents walking her toward the rest of her life. But the years, and an ocean, stood in the way. So we asked: <em style="color: var(--gold);">what if presence didn&rsquo;t require a plane?</em>
     </p>
-    <p class="headline-serif reveal reveal-delay-4" style="font-size: clamp(22px, 4vw, 48px); margin-top: 48px; color: var(--white);">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     THE IDEA
+     ═══════════════════════════════════ -->
+<section class="chapter" style="background: var(--bg);">
+  <div class="chapter-content">
+    <p class="kicker reveal">The Idea</p>
+    <p class="headline-serif reveal reveal-delay-1" style="font-size: clamp(28px, 5.5vw, 72px);">
       Not a screen. Not a recording.<br>A presence.
     </p>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════
-     3. THE BUILD — video bg, credits integrated
+     5. THE BUILD
      ═══════════════════════════════════ -->
 <section id="build" class="chapter">
   <video class="chapter-bg-video" muted loop playsinline preload="none" poster="public/clips/prep-ipad-test-poster.jpg" data-lazy="public/clips/prep-ipad-test-mid.mp4" data-hq="public/clips/prep-ipad-test-hq.mp4">
@@ -843,19 +841,19 @@ a.masonry-item {
       </div>
       <div class="credit-item">
         <div class="credit-role">Memorial Coin</div>
-        <div class="credit-name"><a href="https://ns.com/vinayvancheeswa" target="_blank">Vinayak Vancheeswaran</a>, <a href="https://ns.com/jarrett" target="_blank">Jarrett</a></div>
+        <div class="credit-name"><a href="https://ns.com/vinayvancheeswa" target="_blank">Vinayak Vancheeswaran</a></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════
-     4. THE WALK — video bg
+     6. THE WALK
      ═══════════════════════════════════ -->
 <section id="walk" class="chapter">
-  <video class="chapter-bg-video" muted loop playsinline preload="none" style="opacity: 0.3;" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
+  <video class="chapter-bg-video" muted loop playsinline preload="none" style="opacity: 0.25;" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
   </video>
-  <div class="chapter-overlay"></div>
+  <div class="chapter-overlay" style="background: rgba(8,8,8,0.6);"></div>
   <div class="chapter-content" style="max-width: 1100px;">
     <p class="kicker reveal">The Walk</p>
     <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(32px, 6vw, 72px);">
@@ -864,7 +862,7 @@ a.masonry-item {
     <p class="body-text reveal reveal-delay-2" style="margin-bottom: 32px;">
       A humanoid robot walked Sonia down the aisle &mdash; carrying her brother&rsquo;s voice, her parents&rsquo; love, and forty-eight hours of belief.
     </p>
-    <div class="walk-media reveal reveal-delay-3">
+    <div class="walk-media reveal reveal-delay-3" style="grid-template-columns: 1fr 1fr 1fr;">
       <video muted loop playsinline preload="none" poster="public/clips/the-aisle-walk-poster.jpg" data-lazy="public/clips/the-aisle-walk-mid.mp4" data-hq="public/clips/the-aisle-walk-hq.mp4">
       </video>
       <video muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4">
@@ -880,9 +878,9 @@ a.masonry-item {
 </section>
 
 <!-- ═══════════════════════════════════
-     5. THE COIN — gradient bg with photo texture
+     7. THE COIN
      ═══════════════════════════════════ -->
-<section id="coin-section" class="chapter" style="background: linear-gradient(160deg, #0a0a0a 0%, #12100c 40%, #0d0b08 100%);">
+<section id="coin-section" class="chapter">
   <div class="chapter-content" style="max-width: 1100px;">
     <p class="kicker reveal">The Coin</p>
     <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(24px, 4vw, 48px); margin-bottom: 8px;">
@@ -893,6 +891,7 @@ a.masonry-item {
     </p>
 
     <div class="coin-showcase reveal reveal-delay-3">
+      <!-- 3D Interactive Coin -->
       <div>
         <div class="coin-3d-container" id="coin3d-container">
           <div class="coin-3d" id="coin3d" onclick="flipCoin()" tabindex="0" role="button" aria-label="Flip coin">
@@ -910,6 +909,7 @@ a.masonry-item {
         <p class="coin-3d-label" id="coin3d-flip-label" style="color: var(--gold-dim); margin-top: 6px;">Click to flip</p>
       </div>
 
+      <!-- Coin photo below -->
       <div class="coin-right">
         <img src="public/photos/PXL_20260626_094810823.PORTRAIT.jpg" alt="Coin in hand" loading="lazy" decoding="async">
       </div>
@@ -918,9 +918,9 @@ a.masonry-item {
 </section>
 
 <!-- ═══════════════════════════════════
-     6. THE CELEBRATION — photo bg masonry
+     8. THE CELEBRATION
      ═══════════════════════════════════ -->
-<section id="celebration" class="chapter" style="background: linear-gradient(180deg, #0c0a08 0%, #080808 50%, #0a0908 100%);">
+<section id="celebration" class="chapter">
   <div class="chapter-content" style="max-width: 1100px;">
     <p class="kicker reveal">The Celebration</p>
     <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px);">
@@ -945,9 +945,9 @@ a.masonry-item {
 </section>
 
 <!-- ═══════════════════════════════════
-     7. GUESTBOOK — sparklers photo bg
+     THE GUESTBOOK
      ═══════════════════════════════════ -->
-<section id="guestbook" class="chapter" style="background: linear-gradient(180deg, #090807 0%, #0b0a08 50%, #080808 100%);">
+<section id="guestbook" class="chapter">
   <div class="chapter-content" style="max-width: 1100px;">
     <p class="kicker reveal">Witness Reactions</p>
     <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px);">
@@ -968,46 +968,45 @@ a.masonry-item {
 </section>
 
 <!-- ═══════════════════════════════════
-     8. CLOSING — video bg, CTA merged in
+     9. CLOSING
      ═══════════════════════════════════ -->
 <section id="closing" class="chapter">
-  <video class="chapter-bg-video" muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4">
-  </video>
-  <div class="chapter-overlay"></div>
   <div class="chapter-content">
-    <p class="kicker reveal">The World&rsquo;s First Humanoid Bridal Walk</p>
+    <p class="kicker reveal">The Couple</p>
     <p class="closing-names reveal reveal-delay-1">Kris &amp; Sonia</p>
     <p class="closing-link reveal reveal-delay-2">
       <a href="https://krisandsonia.com" target="_blank">krisandsonia.com</a>
     </p>
-    <div class="separator reveal reveal-delay-2" style="margin: 32px auto;"></div>
-    <p class="body-text reveal reveal-delay-3" style="margin-bottom: 16px; font-size: clamp(17px, 2vw, 22px); color: var(--white-soft);">
-      When Sonia&rsquo;s family couldn&rsquo;t cross the distance to walk beside her,<br>
-      her friends built a new kind of presence &mdash; <em style="color: var(--gold);">in just 48 hours.</em>
-    </p>
-    <p class="body-text reveal reveal-delay-3" style="margin-bottom: 40px; font-size: clamp(15px, 1.6vw, 18px); color: var(--white-faint);">
-      A humanoid robot. A live video call across the ocean. A brother controlling every step.
-      <br>Some promises are stronger than distance.
-    </p>
+  </div>
+</section>
 
-    <!-- Share buttons -->
-    <div class="reveal reveal-delay-4" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px;">
-      <a href="https://twitter.com/intent/tweet?text=A%20robot%20walked%20her%20down%20the%20aisle.%20Her%20brother%20was%20inside%20it.%20%F0%9F%A4%8D%0Ahttps%3A%2F%2Ffirsthumanoid.vercel.app%0A%23HumanoidBridalWalk" target="_blank" class="cta-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        Share on X
-      </a>
-      <a href="https://wa.me/?text=A%20robot%20walked%20her%20down%20the%20aisle.%20Her%20brother%20was%20inside%20it.%20%E2%80%94%20https%3A%2F%2Ffirsthumanoid.vercel.app" target="_blank" class="cta-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
-      </a>
-      <button onclick="copyLink()" class="cta-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; cursor: pointer;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-        Copy Link
-      </button>
-    </div>
+<!-- ═══════════════════════════════════
+     THE VENUE
+     ═══════════════════════════════════ -->
+<section class="chapter" style="background: var(--bg);">
+  <div class="chapter-content">
+    <p class="kicker reveal">The Venue</p>
+    <h2 class="headline reveal reveal-delay-1" style="font-size: clamp(28px, 5vw, 56px); margin-bottom: 16px;">Network School</h2>
+    <p class="body-text reveal reveal-delay-2">
+      A community where people build things that don&rsquo;t exist yet &mdash; and sometimes, something extraordinary does.
+    </p>
+  </div>
+</section>
 
-    <a href="https://ns.com" target="_blank" class="reveal reveal-delay-4" style="font-family: var(--sans); font-size: 12px; letter-spacing: 0.15em; color: var(--white-faint); text-transform: uppercase;">
-      Built at Network School
+<!-- ═══════════════════════════════════
+     JOIN
+     ═══════════════════════════════════ -->
+<section class="chapter">
+  <video class="chapter-bg-video" muted loop playsinline preload="none" poster="public/clips/the-handoff-poster.jpg" data-lazy="public/clips/the-handoff-mid.mp4" data-hq="public/clips/the-handoff-hq.mp4">
+  </video>
+  <div class="chapter-overlay" style="background: rgba(8,8,8,0.65);"></div>
+  <div class="chapter-content">
+    <h2 class="headline reveal" style="font-size: clamp(28px, 5vw, 56px); margin-bottom: 16px;">Want to build the next first?</h2>
+    <p class="body-text reveal reveal-delay-1" style="margin-bottom: 32px;">
+      This happened because a group of builders lived together, cared about each other, and refused to say it couldn&rsquo;t be done.
+    </p>
+    <a href="https://ns.com" target="_blank" class="cta-btn reveal reveal-delay-2" style="margin-bottom: 0;">
+      Come Join Them
     </a>
   </div>
 </section>
@@ -1015,10 +1014,13 @@ a.masonry-item {
 <!-- ═══════════════════════════════════
      FOOTER
      ═══════════════════════════════════ -->
-<section style="background: linear-gradient(180deg, #0a0908 0%, #060606 100%); padding: 40px 24px; text-align: center;">
+<section style="background: var(--bg); padding: 60px 24px; text-align: center;">
   <div>
-    <p style="font-family: var(--sans); font-size: 12px; color: var(--white-faint); letter-spacing: 0.1em;">
-      FirstHumanoid &mdash; built with &#10084;&#65039; by <a href="https://instagram.com/hus" target="_blank">@Hus</a> at <a href="https://ns.com/hus" target="_blank">Network School</a>
+    <p class="closing-location">
+      Genesis Node &middot; First Wedding &middot; XXVI&middot;VI&middot;XXVI &middot; First Humanoid Bridal Walk
+    </p>
+    <p style="margin-top: 48px; font-family: var(--sans); font-size: 12px; color: var(--white-faint); letter-spacing: 0.1em;">
+      FirstHumanoid &mdash; built with &#10084;&#65039; by <a href="https://instagram.com/hus" target="_blank">@Hus</a> at <a href="https://ns.com/hus" target="_blank">Network School</a> &#127987;&#65039;
     </p>
   </div>
 </section>
@@ -1159,7 +1161,7 @@ a.masonry-item {
     });
   }
 
-  // ── Upgrade any video from mid to hq ──
+  // ── Upgrade any video from mid → hq ──
   function upgradeToHq(v) {
     var hq = v.getAttribute('data-hq');
     if (!hq) return;
@@ -1173,6 +1175,8 @@ a.masonry-item {
       v.play().catch(function(){});
     }, { once: true });
   }
+
+  // Hero loads HQ directly — no upgrade needed
 
   // ── Lazy videos: load when 1 screen away, play/pause on visibility ──
   var lazyVideos = document.querySelectorAll('video[data-lazy]');
@@ -1190,7 +1194,7 @@ a.masonry-item {
       }, { once: true });
       loadObserver.unobserve(v);
     });
-  }, { rootMargin: '100% 0px' });
+  }, { rootMargin: '100% 0px' }); // load 1 full viewport ahead
 
   lazyVideos.forEach(function(v) { loadObserver.observe(v); });
 
@@ -1206,7 +1210,6 @@ a.masonry-item {
     });
   }, { threshold: 0.1 });
   allVideos.forEach(function(v) { playObserver.observe(v); });
-
   // ── GUESTBOOK — API-backed ──
   var GB_API = '/api/guestbook';
 
@@ -1262,7 +1265,7 @@ a.masonry-item {
   };
   loadEntries();
 
-  // ── Native Share (mobile) ──
+  // ── Native Share (mobile) — shows IG, TikTok, WhatsApp etc ──
   if (navigator.share) {
     document.querySelectorAll('.masonry-video').forEach(function(item) {
       var overlay = item.querySelector('.share-overlay');
@@ -1279,46 +1282,6 @@ a.masonry-item {
       };
       overlay.appendChild(btn);
     });
-  }
-
-  // ── Subtle parallax on scroll for Ken Burns sections ──
-  var kenBurnsEls = document.querySelectorAll('.ken-burns');
-  if (kenBurnsEls.length > 0 && !isTouchDevice) {
-    window.addEventListener('scroll', function() {
-      kenBurnsEls.forEach(function(el) {
-        var rect = el.parentElement.getBoundingClientRect();
-        var pct = -rect.top / window.innerHeight;
-        var shift = Math.max(-3, Math.min(3, pct * 6));
-        el.style.transform = 'scale(1.04) translateY(' + shift + '%)';
-      });
-    }, { passive: true });
-  }
-  // ── Share utilities ──
-  window.copyLink = function() {
-    navigator.clipboard.writeText('https://firsthumanoid.vercel.app').then(function() {
-      var btns = document.querySelectorAll('.floating-share button');
-      btns.forEach(function(b) {
-        if (b.getAttribute('title') === 'Copy link') {
-          b.style.borderColor = 'var(--gold)';
-          setTimeout(function() { b.style.borderColor = ''; }, 1200);
-        }
-      });
-    });
-  };
-
-  window.nativeShare = function() {
-    if (navigator.share) {
-      navigator.share({
-        title: "The World's First Humanoid Bridal Walk",
-        text: "Her brother couldn\u2019t attend \u2014 so engineers built a robot he could control remotely to walk her down the aisle.",
-        url: 'https://firsthumanoid.vercel.app'
-      }).catch(function(){});
-    }
-  };
-
-  if (navigator.share) {
-    var nsBtn = document.getElementById('native-share-btn');
-    if (nsBtn) nsBtn.style.display = 'flex';
   }
 })();
 </script>
