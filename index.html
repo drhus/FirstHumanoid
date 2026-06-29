@@ -475,15 +475,23 @@ body::after {
   user-select: none;
 }
 
-.coin-right {
-  max-width: 180px;
+.coin-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 600px;
+  width: 100%;
 }
 
-.coin-right img {
+.coin-photos img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
+}
+
+@media (max-width: 480px) {
+  .coin-photos { gap: 8px; max-width: 100%; }
 }
 
 /* ══════════════════════════════════
@@ -731,7 +739,7 @@ a.masonry-item {
 
   .coin-showcase { gap: 24px; }
   .coin-3d { width: 260px; height: 260px; }
-  .coin-right { max-width: 140px; }
+  .coin-photos { gap: 6px; }
 
   .guestbook-entries { grid-template-columns: 1fr; }
 
@@ -910,8 +918,10 @@ a.masonry-item {
         <p class="coin-3d-label" id="coin3d-flip-label" style="color: var(--gold-dim); margin-top: 6px;">Click to flip</p>
       </div>
 
-      <div class="coin-right">
+      <div class="coin-photos">
         <img src="public/photos/PXL_20260626_094810823.PORTRAIT.jpg" alt="Coin in hand" loading="lazy" decoding="async">
+        <img src="public/photos/coin-front.jpg" alt="Coin front" loading="lazy" decoding="async">
+        <img src="public/photos/coin-back.jpg" alt="Coin back" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
