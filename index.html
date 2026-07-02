@@ -964,6 +964,14 @@ a.masonry-item {
     <p style="margin-top: 24px; font-family: var(--sans); font-size: 12px; color: var(--white-faint); letter-spacing: 0.06em;">
       Were you there? Share your photos &amp; videos with <span style="color: var(--gold);">#HumanoidBridalWalk</span> <span style="color: var(--gold);">#KrisAndSonia</span> <span style="color: var(--gold);">#NetworkSchool</span>
     </p>
+    <!-- Community Instagram Feed — only shows when posts exist -->
+    <div id="ig-community" style="display: none; margin-top: 48px;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="var(--gold)" stroke="none"/></svg>
+        <p style="font-family: var(--sans); font-size: 13px; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;">#HumanoidBridalWalk</p>
+      </div>
+      <div id="ig-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;"></div>
+    </div>
   </div>
 </section>
 
@@ -1339,6 +1347,43 @@ a.masonry-item {
     var nsBtn = document.getElementById('native-share-btn');
     if (nsBtn) nsBtn.style.display = 'flex';
   }
+
+  // ── Instagram community feed ──
+  (function loadIGFeed() {
+    fetch('/api/instagram-feed')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.posts || data.posts.length === 0) return;
+        var container = document.getElementById('ig-community');
+        var grid = document.getElementById('ig-grid');
+        if (!container || !grid) return;
+
+        data.posts.forEach(function(post) {
+          if (!post.image) return;
+          var a = document.createElement('a');
+          a.href = post.url;
+          a.target = '_blank';
+          a.style.cssText = 'display:block;border-radius:6px;overflow:hidden;aspect-ratio:1;position:relative;';
+          var img = document.createElement('img');
+          img.src = post.image;
+          img.alt = post.caption || '#HumanoidBridalWalk';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+          a.appendChild(img);
+          if (post.type === 'VIDEO') {
+            var badge = document.createElement('div');
+            badge.style.cssText = 'position:absolute;top:6px;right:6px;';
+            badge.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="white" opacity="0.8"><polygon points="5 3 19 12 5 21"/></svg>';
+            a.appendChild(badge);
+          }
+          grid.appendChild(a);
+        });
+
+        container.style.display = 'block';
+      })
+      .catch(function() {});
+  })();
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
